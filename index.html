@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Gurnit Chopra - Computer Engineering (Co-op) student at McMaster University. Embedded systems, hardware and edge AI portfolio.">
+<meta property="og:title" content="Gurnit Chopra - Engineering Portfolio">
+<meta property="og:description" content="Embedded systems, hardware and edge AI projects from a McMaster Computer Engineering student.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A0C0F">
+<title>Gurnit Chopra — Pit Wall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+/* ============================================================
+   TOKENS — single committed dark "telemetry screen" identity
+   ============================================================ */
+:root{
+  --asphalt:#0A0C0F; --panel:#12161B; --panel-2:#171C23;
+  --line:#222A33; --line-hot:#2E3946;
+  --ink:#E8EDF2; --ink-2:#9FAEBC; --ink-3:#66757F;
+  --maroon:#9E0E48; --maroon-hot:#D6215F; --amber:#F2A900; --coolant:#33C3D6;
+  --grid:rgba(255,255,255,.035);
+  --tarmac:#101316; --paint:rgba(236,240,244,.78);
+  --lamp-off:#1A0709; --lamp-on:#FF2B2B;
+  --led-g:#2ED573; --led-r:#FF3B3B; --led-b:#4DA3FF;
+
+  --display:"Chakra Petch",'Trebuchet MS',system-ui,sans-serif;
+  --body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+  --gut:clamp(16px,4vw,56px);
+  --maxw:1180px;
+  --r:3px;
+}
+:root[data-livery="gulf"]{
+  --asphalt:#070C11; --panel:#0F1720; --panel-2:#131C26; --line:#1E2C38; --line-hot:#2B3F50;
+  --ink:#E9F2F8; --ink-2:#9DB4C4; --ink-3:#627585;
+  --maroon:#1B7FA8; --maroon-hot:#4FB3D9; --amber:#F26B21; --coolant:#6FD8F2;
+  --grid:rgba(120,200,235,.045); --tarmac:#0C1218;
+}
+:root[data-livery="night"]{
+  --asphalt:#070B09; --panel:#0F1713; --panel-2:#131D18; --line:#1D2C24; --line-hot:#2A3F33;
+  --ink:#E8F3EC; --ink-2:#9BB5A6; --ink-3:#5F7A6B;
+  --maroon:#1F6F46; --maroon-hot:#31A567; --amber:#EFC65B; --coolant:#74D6A6;
+  --grid:rgba(140,235,185,.04); --tarmac:#0C1310;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--asphalt);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(var(--grid) 1px,transparent 1px) 0 0/100% 46px,
+             linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/46px 100%;
+  mask-image:radial-gradient(120% 80% at 50% 0%,#000 25%,transparent 78%)}
+main{overflow-x:clip}
+img{max-width:100%}
+a{color:var(--coolant);text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---------- progress ---------- */
+#prog{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--maroon),var(--maroon-hot) 60%,var(--amber));z-index:90}
+
+/* ---------- top bar ---------- */
+header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:80;background:rgba(10,12,15,.84);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar-in{display:flex;align-items:center;gap:20px;justify-content:space-between;max-width:var(--maxw);margin:0 auto;padding:10px var(--gut)}
+.marque{font-family:var(--display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;display:flex;align-items:center;gap:9px}
+.marque .dot{width:8px;height:8px;background:var(--maroon-hot);border-radius:50%;animation:pulse 2.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(214,33,95,.7)}70%{box-shadow:0 0 0 9px rgba(214,33,95,0)}100%{box-shadow:0 0 0 0 rgba(214,33,95,0)}}
+nav.links{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+nav.links a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+  padding:7px 10px;border:1px solid transparent;border-radius:var(--r);transition:color .18s,border-color .18s,background .18s}
+nav.links a:hover{color:var(--ink);border-color:var(--line-hot);background:var(--panel)}
+nav.links a.on{color:var(--amber);border-color:rgba(242,169,0,.35)}
+.livery{display:flex;align-items:center;gap:7px;padding-left:14px;border-left:1px solid var(--line)}
+.livery .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--ink-3);text-transform:uppercase}
+.paint{width:19px;height:19px;border-radius:50%;border:1px solid var(--line-hot);cursor:pointer;padding:0;transition:transform .18s,border-color .18s}
+.paint:hover{transform:scale(1.15)}
+.paint[aria-pressed="true"]{border-color:var(--ink);transform:scale(1.15)}
+.paint.p-mac{background:linear-gradient(135deg,#9E0E48 52%,#F2A900 52%)}
+.paint.p-gulf{background:linear-gradient(135deg,#4FB3D9 52%,#F26B21 52%)}
+.paint.p-night{background:linear-gradient(135deg,#31A567 52%,#EFC65B 52%)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;z-index:1;padding-block:clamp(48px,9vw,104px) clamp(36px,6vw,64px);overflow:hidden}
+.hero canvas{position:absolute;inset:auto 0 0 0;width:100%;height:210px;opacity:.5;z-index:-1}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);
+  display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.eyebrow::after{content:"";height:1px;flex:1;max-width:220px;background:linear-gradient(90deg,rgba(242,169,0,.55),transparent)}
+h1{font-size:clamp(42px,9.2vw,96px);font-weight:700;letter-spacing:-.015em;text-transform:uppercase}
+h1 .ln{display:block;overflow:hidden}
+h1 .ln span{display:block}
+.js-anim h1 .ln span{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+.js-anim h1 .ln:nth-child(2) span{animation-delay:.08s}
+@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+.thin{display:block;color:var(--ink-2);font-weight:500;font-family:var(--body);font-size:clamp(17px,2.4vw,24px);
+  letter-spacing:.01em;margin-top:16px;max-width:46ch;line-height:1.45}
+.hero .rule{height:1px;background:linear-gradient(90deg,var(--maroon-hot),var(--line) 55%,transparent);margin:26px 0;transform-origin:left}
+.js-anim .hero .rule{animation:draw 1.1s .25s cubic-bezier(.2,.8,.2,1) both}
+@keyframes draw{from{transform:scaleX(0)}to{transform:none}}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.btn{font-family:var(--mono);font-size:12px;letter-spacing:.11em;text-transform:uppercase;padding:11px 16px;
+  border:1px solid var(--line-hot);border-radius:var(--r);color:var(--ink);background:var(--panel);display:inline-flex;align-items:center;gap:8px;
+  transition:transform .16s,border-color .16s,background .16s;cursor:pointer}
+.btn:hover{transform:translateY(-2px);border-color:var(--maroon-hot)}
+.btn.primary{background:var(--maroon);border-color:var(--maroon);color:#fff}
+.btn.primary:hover{background:var(--maroon-hot);border-color:var(--maroon-hot)}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);margin-top:38px;overflow:hidden}
+.stat{background:var(--panel);padding:16px 18px}
+.stat b{display:block;font-family:var(--display);font-size:clamp(24px,4vw,34px);font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.stat span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:8px}
+
+/* ---------- sections ---------- */
+section{position:relative;z-index:1;padding-block:clamp(46px,6.5vw,74px);scroll-margin-top:72px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line);
+  padding-bottom:14px;margin-bottom:30px;position:relative}
+.sec-head::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:90px;background:var(--maroon-hot)}
+.sec-head h2{font-size:clamp(23px,3.6vw,34px);font-weight:600;letter-spacing:.01em;text-transform:uppercase}
+.sec-head .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+
+/* ============================================================
+   STARTING GRID
+   ============================================================ */
+.gantry-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:22px}
+.gantry{display:flex;gap:clamp(6px,1.4vw,12px);padding:10px clamp(10px,2vw,16px);background:#06080A;border:1px solid var(--line);
+  border-radius:6px;box-shadow:0 10px 30px -18px #000}
+.lamp{display:flex;flex-direction:column;gap:6px;padding:6px;background:#0D1014;border-radius:5px;border:1px solid #181C22}
+.lamp i{display:block;width:clamp(14px,2.6vw,22px);height:clamp(14px,2.6vw,22px);border-radius:50%;background:var(--lamp-off);
+  box-shadow:inset 0 0 0 2px #2A0B0F;transition:background .08s,box-shadow .08s}
+.lamp.on i{background:var(--lamp-on);box-shadow:0 0 16px 3px rgba(255,43,43,.65),inset 0 0 0 2px #FF7B7B}
+.lights-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center}
+#lightsTxt{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);min-width:13ch;text-align:center}
+#lightsTxt.go{color:var(--amber)}
+.mini{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:6px 11px;border:1px solid var(--line-hot);
+  background:transparent;color:var(--ink-2);border-radius:var(--r);cursor:pointer;transition:all .18s}
+.mini:hover{color:#fff;border-color:var(--maroon-hot)}
+
+.tarmac{position:relative;background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 2px,transparent 2px 5px),
+    radial-gradient(120% 70% at 50% 0%,rgba(255,255,255,.04),transparent 60%),
+    var(--tarmac);
+  border:1px solid var(--line);border-radius:6px;overflow:hidden;padding:0 clamp(22px,4vw,44px)}
+/* kerbs down both sides */
+.tarmac::before,.tarmac::after{content:"";position:absolute;top:0;bottom:0;width:clamp(8px,1.4vw,12px);
+  background:repeating-linear-gradient(180deg,var(--maroon-hot) 0 22px,#E9ECEF 22px 44px);opacity:.85}
+.tarmac::before{left:0}.tarmac::after{right:0}
+.startline{height:14px;margin:0 calc(-1 * clamp(22px,4vw,44px));
+  background:repeating-conic-gradient(#EDEFF2 0 25%,#0B0D10 0 50%) 0 0/14px 14px;opacity:.9}
+.pitlane{position:absolute;left:50%;top:14px;bottom:0;width:0;border-left:2px dashed rgba(236,240,244,.12)}
+.slots{list-style:none;margin:0;padding:26px 0 96px;display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(16px,6vw,96px);row-gap:18px;position:relative}
+.slot:nth-child(even){transform:translateY(78px)}
+.slot-btn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:flex-start;gap:clamp(10px,2vw,18px);width:100%;
+  padding:6px;border-radius:6px;transition:background .2s}
+.slot-btn:hover,.slot-btn:focus-visible{background:rgba(255,255,255,.03)}
+.slot-btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.box{position:relative;flex:0 0 auto;padding:10px 7px 4px}
+.box::before{content:"";position:absolute;left:0;right:0;top:0;height:34px;border:3px solid var(--paint);border-bottom:0}
+.car{display:block;width:clamp(44px,6.4vw,62px);height:auto;color:var(--maroon);transition:transform .35s cubic-bezier(.2,.8,.2,1),filter .3s}
+.slot-btn:hover .car,.slot-btn:focus-visible .car{transform:translateY(-6px);filter:drop-shadow(0 0 10px rgba(214,33,95,.45))}
+.car .body{fill:currentColor}
+.car .acc{fill:var(--amber)}
+.car .tyre{fill:#0B0C0E}
+.car .wall{fill:none;stroke:var(--amber);stroke-width:1.2;opacity:.8}
+.car .dark{fill:#07080A}
+.car .num{fill:#fff;font-family:var(--display);font-weight:700;font-size:13px}
+.car.fly{animation:fly 3.2s both}
+@keyframes fly{
+  0%  {transform:none;opacity:1;animation-timing-function:cubic-bezier(.55,0,.9,.35)}
+  6%  {transform:translateY(4px) scaleY(.97);opacity:1;animation-timing-function:cubic-bezier(.5,0,1,.6)}
+  30% {transform:translateY(-1200px) scaleY(1.25);opacity:.2}
+  31% {transform:translateY(90px);opacity:0;animation-timing-function:cubic-bezier(.15,.7,.25,1)}
+  100%{transform:none;opacity:1}
+}
+.gantry{cursor:pointer;transition:border-color .2s}
+.gantry:hover{border-color:var(--line-hot)}
+.plate{padding-top:8px;min-width:0;display:block}
+.plate .pos,.plate .nm,.plate .meta{display:block}
+.plate .pos{font-family:var(--display);font-weight:700;font-size:clamp(22px,3vw,30px);line-height:1;color:var(--amber);letter-spacing:.02em}
+.plate .nm{font-family:var(--display);font-weight:600;font-size:clamp(14px,1.7vw,17px);line-height:1.2;margin-top:6px;color:var(--ink)}
+.plate .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-3);margin-top:6px;text-transform:uppercase}
+.plate .open{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-2);border-bottom:1px solid var(--line-hot);padding-bottom:2px;transition:color .2s,border-color .2s}
+.slot-btn:hover .open{color:var(--amber);border-color:var(--amber)}
+.hint{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);text-align:center;margin:16px 0 0}
+
+/* ---------- pit board (project drawer) ---------- */
+.pit{position:fixed;inset:0;z-index:120}
+.pit-scrim{position:absolute;inset:0;background:rgba(3,4,6,.66);backdrop-filter:blur(3px);opacity:0;transition:opacity .3s}
+.pit-panel{position:absolute;top:0;right:0;height:100%;width:min(540px,100%);background:var(--panel);border-left:1px solid var(--line-hot);
+  display:flex;flex-direction:column;transform:translateX(104%);transition:transform .42s cubic-bezier(.2,.8,.2,1);
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.pit.open .pit-scrim{opacity:1}
+.pit.open .pit-panel{transform:none}
+.pit-top{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--line);
+  background:repeating-linear-gradient(90deg,transparent 0 10px,rgba(255,255,255,.02) 10px 11px),var(--panel-2)}
+.pit-top .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.x{all:unset;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);
+  border:1px solid var(--line-hot);padding:6px 10px;border-radius:var(--r)}
+.x:hover{color:#fff;border-color:var(--maroon-hot)}
+.x:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.pit-body{overflow-y:auto;padding:24px 22px 28px;flex:1}
+.pit-hd{display:flex;gap:18px;align-items:flex-start}
+.pit-hd .big{font-family:var(--display);font-weight:700;font-size:56px;line-height:.85;color:var(--amber)}
+.pit-hd h3{font-size:26px;font-weight:600}
+.pit-hd .yr{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.08em;margin-top:8px}
+.tagrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.tagrow span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--line-hot);padding:4px 8px;border-radius:99px}
+.pit-sum{color:var(--ink-2);font-size:15.5px;margin:20px 0 22px;max-width:60ch}
+.pit-specs{display:grid;grid-template-columns:auto 1fr;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:0 0 22px}
+.pit-specs dt,.pit-specs dd{margin:0;padding:10px 13px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px}
+.pit-specs dt{color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;font-size:10.5px;background:var(--panel-2)}
+.pit-specs dd{color:var(--ink)}
+.pit-specs dt:nth-last-of-type(1),.pit-specs dd:nth-last-of-type(1){border-bottom:0}
+.pit-notes h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin:0 0 10px}
+.pit-notes ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:14.5px}
+.pit-notes li{margin-bottom:8px}
+.pit-foot{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:14px 22px;border-top:1px solid var(--line);flex-wrap:wrap}
+.pit-nav{display:flex;gap:8px}
+
+/* ---------- experience ---------- */
+.laps{display:flex;flex-direction:column}
+.lap{display:grid;grid-template-columns:150px 1fr;gap:26px;padding:24px 0;border-top:1px solid var(--line)}
+.lap:last-child{border-bottom:1px solid var(--line)}
+.lap .when{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.06em;padding-top:3px}
+.status{display:flex;align-items:center;gap:8px;color:var(--amber);margin-bottom:6px}
+.status.done{color:var(--ink-2)}
+.tyre-ic{width:18px;height:18px;border-radius:50%;background:#0B0C0E;box-shadow:inset 0 0 0 2.5px currentColor,inset 0 0 0 5px #0B0C0E,inset 0 0 0 6px rgba(255,255,255,.14);flex:0 0 auto}
+.status.live .tyre-ic{animation:spin 2.8s linear infinite;background:conic-gradient(from 0deg,#0B0C0E 0 85%,rgba(255,255,255,.22) 85% 90%,#0B0C0E 90%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lap h3{font-size:19px;font-weight:600}
+.lap .org{font-family:var(--mono);font-size:12.5px;color:var(--maroon-hot);margin:6px 0 12px;letter-spacing:.04em}
+.lap ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:14.5px}
+.lap ul li{margin-bottom:6px}
+
+/* ---------- skills ---------- */
+.rig{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.bay{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.bay h3{font-family:var(--mono);font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tags span{font-size:13px;font-family:var(--mono);color:var(--ink-2);background:#0E1217;border:1px solid var(--line);padding:5px 10px;border-radius:var(--r)}
+.tags span.hot{color:var(--ink);border-color:var(--line-hot)}
+
+/* ---------- off track ---------- */
+.two{display:grid;grid-template-columns:1.25fr .75fr;gap:34px;align-items:start}
+.prose p{color:var(--ink-2);font-size:16px;max-width:62ch}
+.prose p strong{color:var(--ink);font-weight:600}
+.dash{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.dash .row{display:flex;justify-content:space-between;gap:16px;padding:13px 17px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px}
+.dash .row:last-child{border-bottom:0}
+.dash .row span:first-child{color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;font-size:10.5px;padding-top:2px}
+.dash .row span:last-child{color:var(--ink);text-align:right}
+
+/* ---------- contact ---------- */
+.finish{border:1px solid var(--line);border-radius:var(--r);padding:clamp(26px,5vw,44px);position:relative;overflow:hidden;background:var(--panel)}
+.finish::before{content:"";position:absolute;right:-40px;top:-40px;width:260px;height:260px;opacity:.12;
+  background:repeating-conic-gradient(#fff 0 25%,transparent 0 50%) 0 0/26px 26px;transform:rotate(12deg)}
+.radio{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.bars{display:flex;gap:3px;align-items:flex-end;height:14px}
+.bars i{width:3px;background:var(--amber);height:30%;animation:eq 1.1s ease-in-out infinite}
+.bars i:nth-child(2){animation-delay:.15s}.bars i:nth-child(3){animation-delay:.3s}.bars i:nth-child(4){animation-delay:.45s}
+@keyframes eq{0%,100%{height:25%}50%{height:100%}}
+.finish h2{font-size:clamp(26px,5vw,44px);text-transform:uppercase;margin-bottom:12px;position:relative}
+.finish p{color:var(--ink-2);max-width:54ch;margin:0 0 24px;position:relative}
+footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
+.foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.08em}
+
+/* ---------- track map ---------- */
+#track{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;background:rgba(14,18,23,.9);
+  border:1px solid var(--line-hot);border-radius:var(--r);padding:11px 12px 9px;backdrop-filter:blur(8px);width:196px}
+#track .tl{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+#track .tl b{color:var(--amber);font-weight:500;letter-spacing:.1em}
+#track svg{display:block;width:100%;height:auto;overflow:visible}
+#track .circuit{fill:none;stroke:var(--line-hot);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+#track .driven{fill:none;stroke:var(--maroon-hot);stroke-width:3.2;stroke-linecap:round}
+#track .mk{fill:var(--panel);stroke:var(--line-hot);stroke-width:1.6;cursor:pointer;transition:fill .2s,stroke .2s}
+#track .mk:hover{fill:var(--ink-3)}
+#track .mk.on{fill:var(--amber);stroke:var(--amber)}
+#track .cardot{fill:var(--ink)}
+#track .sf{stroke:var(--ink-2);stroke-width:2;stroke-dasharray:2 2}
+
+/* ---------- HUD with shift lights ---------- */
+#hud{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;background:rgba(14,18,23,.9);
+  border:1px solid var(--line-hot);border-radius:var(--r);padding:10px 12px;font-family:var(--mono);backdrop-filter:blur(8px);min-width:150px}
+.leds{display:flex;gap:4px;margin-bottom:9px}
+.leds i{flex:1;height:7px;border-radius:2px;background:#1A1E24;transition:background .08s,box-shadow .08s}
+.leds i.on.g{background:var(--led-g);box-shadow:0 0 6px var(--led-g)}
+.leds i.on.r{background:var(--led-r);box-shadow:0 0 6px var(--led-r)}
+.leds i.on.b{background:var(--led-b);box-shadow:0 0 6px var(--led-b)}
+#hud .gear{font-family:var(--display);font-size:27px;font-weight:700;color:var(--amber);line-height:1;display:flex;align-items:baseline;justify-content:space-between}
+#hud .gear small{font-size:10px;color:var(--ink-3);letter-spacing:.14em}
+.ign #gear{color:var(--coolant)}
+#hud .spd{font-size:10px;color:var(--ink-3);letter-spacing:.12em;margin-top:8px;display:flex;justify-content:space-between}
+#hud .spd b{color:var(--ink);font-weight:500}
+
+/* ---------- scroll shift: things drive in and out ---------- */
+.sx{will-change:transform,opacity}
+
+@media (max-width:1080px){#track{display:none}}
+@media (max-width:820px){
+  .two{grid-template-columns:1fr}
+  .lap{grid-template-columns:1fr;gap:10px}
+  .strip{grid-template-columns:repeat(2,1fr)}
+  #hud{display:none}
+  .livery{border-left:0;padding-left:0}
+  .slot-btn{flex-direction:column;align-items:flex-start}
+  .slot:nth-child(even){transform:translateY(60px)}
+  .slots{padding-bottom:76px}
+  .sec-head{flex-wrap:wrap}
+  .sec-head .tag{white-space:normal}
+}
+@media (max-width:620px){
+  nav.links a{display:none}
+  .livery{padding-left:0}
+}
+/* calm mode: set when the visitor turns motion off (defaults to their OS setting) */
+.calm *{animation:none!important;transition:none!important}
+.calm .sx{transform:none!important;opacity:1!important}
+.calm .lamp i{transition:none!important}
+#fx{margin-left:6px}
+#fx[aria-pressed="true"]{color:var(--amber);border-color:rgba(242,169,0,.45)}
+</style>
+
+</head>
+<body>
+<div id="prog"></div>
+
+<header class="bar">
+  <div class="bar-in">
+    <div class="marque"><span class="dot"></span>Gurnit Chopra</div>
+    <nav class="links">
+      <a href="#grid">Grid</a>
+      <a href="#history">History</a>
+      <a href="#setup">Setup</a>
+      <a href="#offtrack">Off Track</a>
+      <a href="#contact">Radio</a>
+      <span class="livery">
+        <span class="lbl">Livery</span>
+        <button class="paint p-mac" data-livery="mac" aria-pressed="true" title="McMaster maroon" aria-label="McMaster maroon livery"></button>
+        <button class="paint p-gulf" data-livery="gulf" aria-pressed="false" title="Gulf blue" aria-label="Gulf blue livery"></button>
+        <button class="paint p-night" data-livery="night" aria-pressed="false" title="Night stage green" aria-label="Night stage green livery"></button>
+        <button class="mini" id="fx" type="button" aria-pressed="true" title="Turn page animations on or off">Motion on</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <canvas id="trace" aria-hidden="true"></canvas>
+  <div class="wrap" id="heroWrap">
+    <div class="eyebrow">Hamilton, ON &nbsp;//&nbsp; Computer Engineering Co-op &nbsp;//&nbsp; Open to Summer 2027</div>
+    <h1><span class="ln"><span>Gurnit</span></span><span class="ln"><span>Chopra</span></span></h1>
+    <span class="thin">Second-year Computer Engineering (Co-op) at McMaster, building embedded systems and edge AI. I like the layer where sensors, silicon and firmware have to agree with each other.</span>
+    <div class="rule"></div>
+    <div class="cta">
+      <a class="btn primary" href="#grid">Go to the grid</a>
+      <a class="btn" href="https://github.com/Burnitt" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/gurnit-chopra-295639273/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="mailto:cgurnit@gmail.com">Email</a>
+    </div>
+    <div class="strip">
+      <div class="stat"><b data-count="11.9" data-dec="1">11.9</b><span>GPA / 12.0</span></div>
+      <div class="stat"><b data-count="70">70</b><span>% CV track accuracy</span></div>
+      <div class="stat"><b data-count="100">100</b><span>ms vision latency cap</span></div>
+      <div class="stat"><b data-count="15">15</b><span>Equipment categories authored</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== STARTING GRID ===================== -->
+<section id="grid">
+  <div class="wrap">
+    <div class="sec-head sx">
+      <h2>Starting Grid</h2>
+      <div class="tag">7 on the grid // P1 = latest</div>
+    </div>
+
+    <div class="gantry-wrap">
+      <div class="gantry" id="gantry" role="button" tabindex="0" aria-label="Start the lights">
+        <div class="lamp"><i></i><i></i></div><div class="lamp"><i></i><i></i></div><div class="lamp"><i></i><i></i></div>
+        <div class="lamp"><i></i><i></i></div><div class="lamp"><i></i><i></i></div>
+      </div>
+      <div class="lights-bar">
+        <span id="lightsTxt" aria-live="polite">Grid forming</span>
+        <button class="mini" id="relight" type="button">Restart lights</button>
+      </div>
+    </div>
+
+    <div class="tarmac">
+      <div class="startline"></div>
+      <div class="pitlane" aria-hidden="true"></div>
+      <ol class="slots" id="slots" aria-label="Projects, ordered by grid position"></ol>
+    </div>
+    <p class="hint">Pick a car to open its pit board</p>
+  </div>
+</section>
+
+<!-- ===================== EXPERIENCE ===================== -->
+<section id="history">
+  <div class="wrap">
+    <div class="sec-head sx">
+      <h2>Race History</h2>
+      <div class="tag">Stints // 2023 – present</div>
+    </div>
+    <div class="laps">
+      <article class="lap sx">
+        <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>June 2026 →</div>
+        <div>
+          <h3>Technical Training Developer</h3>
+          <div class="org">ICC Evaluation Service — Electrical Division (Remote)</div>
+          <ul>
+            <li>Authoring field evaluation training modules across 15+ electrical equipment categories: battery energy storage, power conversion equipment, transformers, panelboards, hazardous location equipment.</li>
+            <li>Mapping UL, CSA C22.2, NFPA 70/790/791 and CEC requirements to component-level inspection criteria covering wiring, markings, construction and testing.</li>
+            <li>Each module is a fully scripted deck built around what an inspector actually has to decide on site.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="lap sx" data-dir="-1">
+        <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>Sep 2025 →</div>
+        <div>
+          <h3>Computer Vision Subteam</h3>
+          <div class="org">McMaster RoboMaster</div>
+          <ul>
+            <li>Building real-time tracking and trajectory prediction in Python and OpenCV with a 10-person subteam, holding 70% accuracy under a 100 ms latency budget.</li>
+            <li>Validated against recorded match footage rather than assumptions, improving detection consistency by roughly 20%.</li>
+            <li>Integrating vision output into the wider electromechanical system for live test runs.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="lap sx">
+        <div class="when"><div class="status done"><span class="tyre-ic"></span>Chequered</div>May – Aug 2026</div>
+        <div>
+          <h3>Software Engineering Intern</h3>
+          <div class="org">Hermes AI (Atticus.AI)</div>
+          <ul>
+            <li>Shipped production features to a legal AI platform with real clients: a vertical sidebar navigation migration, a Clear Chat feature, and chat-history scoping fixes across frontend and backend.</li>
+            <li>Worked in Python, FastAPI, React and TypeScript inside a real Git/GitHub review loop.</li>
+            <li>Learned to root-cause across a stack boundary, which is the same instinct hardware bring-up needs.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="lap sx" data-dir="-1">
+        <div class="when"><div class="status done"><span class="tyre-ic"></span>Chequered</div>Nov 2023 – Sep 2025</div>
+        <div>
+          <h3>Technical Curriculum Developer</h3>
+          <div class="org">Youthtech Visionaries</div>
+          <ul>
+            <li>Designed hands-on Arduino and circuit design demos, then taught them to people who had never opened a breadboard.</li>
+            <li>Partnered with educators across 3 school boards to put technical resources into 20+ schools, reaching 500+ students.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="lap sx">
+        <div class="when"><div class="status done"><span class="tyre-ic"></span>Chequered</div>Sep 2023 – Jun 2025</div>
+        <div>
+          <h3>Cofounder &amp; Vice President</h3>
+          <div class="org">Mayfield SS Engineering Club</div>
+          <ul>
+            <li>Started the club from nothing and grew it to 30+ members across 50+ meetings.</li>
+            <li>Ran 10+ robotics and Arduino workshops and 5+ team engineering projects.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section id="setup">
+  <div class="wrap">
+    <div class="sec-head sx">
+      <h2>Setup Sheet</h2>
+      <div class="tag">What's actually in the box</div>
+    </div>
+    <div class="rig">
+      <div class="bay sx"><h3>Hardware &amp; Prototyping</h3><div class="tags">
+        <span class="hot">ESP32</span><span class="hot">Arduino</span><span>Raspberry Pi</span><span>Breadboarding</span>
+        <span>Control circuit design</span><span>Motor driver circuits</span><span>Servo actuation</span><span>Ultrasonic sensing</span><span>3D printing</span></div></div>
+      <div class="bay sx" data-dir="-1"><h3>Interfaces</h3><div class="tags">
+        <span class="hot">I2C</span><span>UART / serial</span><span>PWM</span><span>GPIO</span><span>Analog sensor interfacing</span></div></div>
+      <div class="bay sx"><h3>Test &amp; Debug</h3><div class="tags">
+        <span class="hot">Analog Discovery 3</span><span>Oscilloscope</span><span>Logic analyzer</span><span>Multimeter</span><span>Serial instrumentation</span></div></div>
+      <div class="bay sx" data-dir="-1"><h3>Languages</h3><div class="tags">
+        <span class="hot">C / C++</span><span class="hot">Python</span><span>Java</span><span>JavaScript</span></div></div>
+      <div class="bay sx"><h3>Frameworks &amp; APIs</h3><div class="tags">
+        <span class="hot">OpenCV</span><span>FastAPI</span><span>React</span><span>Supabase</span><span>REST APIs</span><span>LLM APIs</span></div></div>
+      <div class="bay sx" data-dir="-1"><h3>Design Tools &amp; Standards</h3><div class="tags">
+        <span class="hot">Altium Designer <em style="font-style:normal;color:var(--amber)">· in progress</em></span>
+        <span>Autodesk Inventor</span><span>Git / GitHub</span><span>NFPA 70 / 790 / 791</span><span>UL</span><span>CSA C22.2</span><span>CEC</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OFF TRACK ===================== -->
+<section id="offtrack">
+  <div class="wrap">
+    <div class="sec-head sx">
+      <h2>Off Track</h2>
+      <div class="tag">Driver profile</div>
+    </div>
+    <div class="two">
+      <div class="prose sx">
+        <p>I got into engineering the way a lot of people get into cars: by wanting to know what was happening underneath. <strong>Formula 1</strong> is the version of that obsession I never grew out of, because it's a sport where the engineering is the story. A tenth of a second is a design decision someone made months earlier.</p>
+        <p>That's roughly why I like <strong>embedded systems</strong>. A race car and an avionics bay have the same shape of problem: a hard latency budget, sensors that lie to you, and a system that has to keep working when a subsystem doesn't. The ESP32 radar and the RoboMaster vision pipeline are both small versions of that.</p>
+        <p>When I'm not building, I'm usually in <strong>Forza Horizon</strong> or <strong>Forza Motorsport</strong> tuning something that doesn't need tuning, watching a race, or reading about <strong>CUDA and GPU-accelerated computing</strong>, which is where I want to take the edge AI work next.</p>
+      </div>
+      <div class="dash sx" data-dir="-1" aria-label="Quick facts">
+        <div class="row"><span>Discipline</span><span>Computer Engineering (Co-op)</span></div>
+        <div class="row"><span>School</span><span>McMaster University</span></div>
+        <div class="row"><span>Year</span><span>Second year</span></div>
+        <div class="row"><span>Base</span><span>Hamilton, Ontario</span></div>
+        <div class="row"><span>Targeting</span><span>Embedded systems · Edge AI</span></div>
+        <div class="row"><span>Learning now</span><span>Altium PCB design</span></div>
+        <div class="row"><span>Award</span><span>EFC Doug Baldwin Scholarship</span></div>
+        <div class="row"><span>Watching</span><span>Formula 1</span></div>
+        <div class="row"><span>Playing</span><span>Forza Horizon / Motorsport</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact">
+  <div class="wrap">
+    <div class="finish sx">
+      <div class="radio"><span class="bars"><i></i><i></i><i></i><i></i></span>Team radio</div>
+      <h2>Radio the pit wall</h2>
+      <p>Open to Summer 2027 co-op terms in embedded systems, hardware and edge AI, and always up for a good hardware problem in the meantime.</p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:cgurnit@gmail.com">cgurnit@gmail.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/gurnit-chopra-295639273/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/Burnitt" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://app.notion.com/p/Gurnit-Chopra-2da3afb3d1d5811a98fceb3b4eadf8c7" target="_blank" rel="noopener">Notion Portfolio</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Gurnit Chopra</span>
+    <span>Chassis GC-26 // Hamilton, Ontario</span>
+    <span>Built from scratch, no template</span>
+  </div>
+</footer>
+
+<!-- pit board -->
+<div class="pit" id="pit" hidden>
+  <div class="pit-scrim" data-close></div>
+  <aside class="pit-panel" role="dialog" aria-modal="true" aria-labelledby="pitTitle">
+    <div class="pit-top"><span class="lbl" id="pitLbl">Pit board</span><button class="x" id="pitClose" type="button">Close ✕</button></div>
+    <div class="pit-body">
+      <div class="pit-hd"><div class="big" id="pitPos">P1</div><div><h3 id="pitTitle"></h3><div class="yr" id="pitYr"></div><div class="tagrow" id="pitTags"></div></div></div>
+      <p class="pit-sum" id="pitSum"></p>
+      <dl class="pit-specs" id="pitSpecs"></dl>
+      <div class="pit-notes"><h4>Engineer's notes</h4><ul id="pitNotes"></ul></div>
+    </div>
+    <div class="pit-foot">
+      <a class="btn primary" id="pitRepo" href="#" target="_blank" rel="noopener">View repo</a>
+      <div class="pit-nav"><button class="mini" id="pitPrev" type="button">← Car ahead</button><button class="mini" id="pitNext" type="button">Car behind →</button></div>
+    </div>
+  </aside>
+</div>
+
+<div id="track" aria-hidden="true">
+  <div class="tl"><span>Circuit</span><b id="tsec">Grid</b></div>
+  <svg viewBox="-6 -6 212 116">
+    <path id="circuit" class="circuit" d="M30,90 C10,90 10,58 30,58 L58,58 C80,58 80,24 58,24 L98,24 C138,24 146,46 124,58 L102,70 C86,79 92,90 110,90 Z"></path>
+    <path id="driven" class="driven" d="M30,90 C10,90 10,58 30,58 L58,58 C80,58 80,24 58,24 L98,24 C138,24 146,46 124,58 L102,70 C86,79 92,90 110,90 Z"></path>
+    <line class="sf" x1="30" y1="84" x2="30" y2="96"></line>
+    <g id="marks"></g>
+    <circle id="cardot" class="cardot" r="3.6" cx="30" cy="90"></circle>
+  </svg>
+</div>
+
+<div id="hud" aria-hidden="true">
+  <div class="leds" id="leds"><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="b"></i><i class="b"></i><i class="b"></i></div>
+  <div class="gear"><span id="gear">N</span><small>GEAR</small></div>
+  <div class="spd"><span>LAP</span><b id="spd">0%</b></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  /* Motion follows the OS "reduce motion" setting by default, but the visitor can override it */
+  var osReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var pref = null;
+  try{ pref = localStorage.getItem("motion"); }catch(e){}
+  var reduced = pref === "on" ? false : pref === "off" ? true : osReduced;
+  root.classList.toggle("calm", reduced);
+  if(!reduced) root.classList.add("js-anim");
+  var fxBtn = document.getElementById("fx");
+  fxBtn.setAttribute("aria-pressed", String(!reduced));
+  fxBtn.textContent = reduced ? "Motion off" : "Motion on";
+  fxBtn.addEventListener("click", function(){
+    reduced = !reduced;
+    try{ localStorage.setItem("motion", reduced ? "off" : "on"); }catch(e){}
+    root.classList.toggle("calm", reduced);
+    root.classList.toggle("js-anim", !reduced);
+    fxBtn.setAttribute("aria-pressed", String(!reduced));
+    fxBtn.textContent = reduced ? "Motion off" : "Motion on";
+    if(reduced){
+      document.querySelectorAll(".sx").forEach(function(el){ el.style.transform = ""; el.style.opacity = ""; });
+      var hw = document.getElementById("heroWrap"); hw.style.transform = ""; hw.style.opacity = "";
+    } else if(window.__startTrace){ window.__startTrace(); }
+    if(window.__frame) window.__frame();
+  });
+
+  /* ============ PROJECT DATA (P1 = most recent / most important) ============ */
+  var PROFILE = "https://github.com/Burnitt";
+  var CARS = [
+    {name:"ESP32 Ultrasonic Radar", yr:"June 2026", tags:["Embedded","Hardware","C++"],
+     repo:"https://github.com/Burnitt/ESP32-Ultrasonic-Radar",
+     sum:"A self-contained radar on an ESP32. An HC-SR04 sweeps from 15° to 165° on an SG90 servo while C++ firmware draws range rings, a live sweep line and persistent detections on a 128×64 SSD1306 OLED. No PC in the loop.",
+     specs:[["Stack","ESP32 · C++ · I²C · PWM"],["Sensing","Ultrasonic time-of-flight, 40 cm window"],["Display","SSD1306 over I²C on GPIO 32 / 33"],["Hard part","Timer conflict, strapping pins, I²C remap"]],
+     notes:["Servo and display worked alone but failed together. Isolated each in a minimal sketch, then reintroduced them one at a time, which surfaced three separate faults.","Moved every signal off the ESP32 strapping pins after finding they were changing the boot mode.","Fixed a silent display by remapping I²C explicitly with Wire.begin(32, 33).","Next: bound the echo wait with a timeout and move to a timer-driven, non-blocking loop."]},
+    {name:"Surface Defect Detection", yr:"2026 · in progress", tags:["Vision & AI","Edge"],
+     sum:"YOLOv8-nano fine-tuned on RDD2022 for pavement and sidewalk cracks, built to run on a Raspberry Pi 5 rather than a workstation.",
+     specs:[["Stack","Python · YOLOv8 · OpenCV"],["Target","Raspberry Pi 5"],["Dataset","RDD2022"],["Next","ROS 2 perception node"]],
+     notes:["Edge inference is the constraint that shapes every choice, from model size to input resolution.","Planned as the perception layer of an autonomous defect inspection pipeline."]},
+    {name:"Robotic End Effector", repo:"https://github.com/Burnitt/Robotic-End-Effector", yr:"Sep 2025 – Jan 2026", tags:["CAD","Mechatronics"],
+     sum:"A servo-driven rack-and-pinion gripper for a warehouse arm, taken from gear geometry to dimensioned drawings to printed, tested parts on a Raspberry Pi 4 controlled Q-arm.",
+     specs:[["Stack","Autodesk Inventor · 3D printing · Python"],["Team","McMaster 1P13 design project"],["Owned","Gear CAD, drawings, sign_up(), pack_products()"]],
+     notes:["Iterated through printed prototypes to validate grip on the physical arm.","Cut manual handling effort by roughly 95% in the project scenario."]},
+    {name:"Lumi AI", repo:"https://github.com/Burnitt/Lumi-AI", yr:"June 2026 – present", tags:["Software","Full stack"],
+     sum:"Marketing automation for small businesses, co-built with a friend. Three agents (campaign, email, media) behind a FastAPI backend, with a React/Vite frontend scaffolded from scratch.",
+     specs:[["Stack","Python · FastAPI · React/Vite · GPT-4o"],["Role","Co-builder"],["Caught","Client created before load_dotenv() ran"]],
+     notes:["Moved client construction into the constructor so configuration loads before anything reads it."]},
+    {name:"UFC Fight Prediction", yr:"2026", tags:["Data","Software"],
+     sum:"A two-source ML pipeline: a Kaggle dataset trains the model, live ufcstats.com scrapes feed prediction.",
+     specs:[["Stack","Python · Supabase · scikit-learn"],["Pipeline","Scraper, schema, loader, model"],["Fixed","Target leak, NaN from zero-variance columns"]],
+     notes:["Caught a circular prediction target that made early accuracy look far better than it was."]},
+    {name:"Autonomous Driveway Gate", repo:"https://github.com/Burnitt/Autonomous-Driveway-Gate", yr:"2023", tags:["Arduino","Hardware"],
+     sum:"A Parallax PING sensor watching for a car, a servo doing the work, and a stepped sweep with threshold logic to avoid false triggers.",
+     specs:[["Stack","Arduino · C++ · ultrasonic sensing"],["Note","First thing I built that ran unattended"]],
+     notes:["Threshold logic mattered more than the sensor: most of the tuning went into ignoring things that weren't cars."]},
+    {name:"Bumper-Guided Maze Navigator", repo:"https://github.com/Burnitt/Bumper-Guided-Maze-Navigator", yr:"2023", tags:["Arduino","Robotics"],
+     sum:"Aluminum foil contact bumpers, continuous rotation servos, and a state machine that reroutes on contact.",
+     specs:[["Stack","Arduino · C++ · contact sensing"],["Note","State machines, before a course taught them"]],
+     notes:["Crude sensing, honest logic. Taught me to design the states before writing the code."]}
+  ];
+
+  /* ============ top-down open-wheel car (original drawing) ============ */
+  function carSVG(n){
+    return '<svg class="car" viewBox="0 0 60 150" aria-hidden="true">' +
+      /* front wing */
+      '<rect class="acc" x="3" y="4" width="54" height="6" rx="1.5"/>' +
+      '<rect class="body" x="3" y="3" width="3" height="11" rx="1"/><rect class="body" x="54" y="3" width="3" height="11" rx="1"/>' +
+      /* front suspension */
+      '<path d="M30 30 L10 28 M30 36 L10 36 M30 30 L50 28 M30 36 L50 36" stroke="#2A2F36" stroke-width="1.6"/>' +
+      /* front tyres */
+      '<rect class="tyre" x="1" y="20" width="12" height="22" rx="3.5"/><rect class="tyre" x="47" y="20" width="12" height="22" rx="3.5"/>' +
+      '<rect class="wall" x="3" y="22" width="8" height="18" rx="2.5"/><rect class="wall" x="49" y="22" width="8" height="18" rx="2.5"/>' +
+      /* nose */
+      '<path class="body" d="M27.5 8 H32.5 L35 46 H25 Z"/>' +
+      /* sidepods + chassis */
+      '<path class="body" d="M22 46 H38 C44 50 47 60 47 72 C47 88 42 104 38 112 H22 C18 104 13 88 13 72 C13 60 16 50 22 46 Z"/>' +
+      '<path class="acc" d="M13.6 70 C14 62 17 55 21 51 L22 60 C19 63 17 67 17 72 Z"/><path class="acc" d="M46.4 70 C46 62 43 55 39 51 L38 60 C41 63 43 67 43 72 Z"/>' +
+      /* cockpit + halo */
+      '<ellipse class="dark" cx="30" cy="62" rx="5.2" ry="9"/>' +
+      '<path d="M24.5 57 Q30 49 35.5 57" fill="none" stroke="#2A2F36" stroke-width="2.2"/>' +
+      '<circle cx="30" cy="62" r="2.6" fill="var(--amber)"/>' +
+      /* engine cover + number */
+      '<path class="dark" d="M27 76 H33 L32 110 H28 Z" opacity=".35"/>' +
+      '<text class="num" x="30" y="97" text-anchor="middle">' + n + '</text>' +
+      /* rear suspension + tyres */
+      '<path d="M30 116 L12 118 M30 122 L12 124 M30 116 L48 118 M30 122 L48 124" stroke="#2A2F36" stroke-width="1.6"/>' +
+      '<rect class="tyre" x="0" y="108" width="14" height="25" rx="4"/><rect class="tyre" x="46" y="108" width="14" height="25" rx="4"/>' +
+      '<rect class="wall" x="2" y="110" width="10" height="21" rx="3"/><rect class="wall" x="48" y="110" width="10" height="21" rx="3"/>' +
+      /* rear wing */
+      '<rect class="body" x="11" y="134" width="38" height="8" rx="1.5"/>' +
+      '<rect class="acc" x="11" y="134" width="38" height="2.4"/>' +
+      '<rect class="body" x="9" y="130" width="3" height="15" rx="1"/><rect class="body" x="48" y="130" width="3" height="15" rx="1"/>' +
+    '</svg>';
+  }
+
+  /* ============ build the grid ============ */
+  var slotsEl = document.getElementById("slots");
+  var slotBtns = [];
+  CARS.forEach(function(c, i){
+    var li = document.createElement("li");
+    li.className = "slot";
+    li.innerHTML =
+      '<button class="slot-btn" type="button" aria-label="P' + (i+1) + ', ' + c.name + '. Open pit board">' +
+        '<span class="box">' + carSVG(i+1) + '</span>' +
+        '<span class="plate"><span class="pos">P' + (i+1) + '</span><span class="nm">' + c.name + '</span>' +
+        '<span class="meta">' + c.yr + '</span><span class="open">Pit board</span></span>' +
+      '</button>';
+    slotsEl.appendChild(li);
+    var btn = li.querySelector(".slot-btn");
+    btn.addEventListener("click", function(){ openPit(i, btn); });
+    slotBtns.push(btn);
+  });
+
+  /* ============ pit board ============ */
+  var pit = document.getElementById("pit"), lastFocus = null, current = 0;
+  var $ = function(id){ return document.getElementById(id); };
+  function fillPit(i){
+    var c = CARS[i]; current = i;
+    $("pitLbl").textContent = "Pit board  //  car " + (i+1) + " of " + CARS.length;
+    $("pitPos").textContent = "P" + (i+1);
+    $("pitTitle").textContent = c.name;
+    $("pitYr").textContent = c.yr;
+    $("pitTags").innerHTML = c.tags.map(function(t){ return "<span>" + t + "</span>"; }).join("");
+    $("pitSum").textContent = c.sum;
+    $("pitSpecs").innerHTML = c.specs.map(function(s){ return "<dt>" + s[0] + "</dt><dd>" + s[1] + "</dd>"; }).join("");
+    $("pitNotes").innerHTML = c.notes.map(function(n){ return "<li>" + n + "</li>"; }).join("");
+    var repo = $("pitRepo");
+    repo.href = c.repo || PROFILE;
+    repo.textContent = c.repo ? "View repo" : "GitHub profile";
+    $("pitPrev").disabled = i === 0; $("pitNext").disabled = i === CARS.length - 1;
+    $("pitPrev").style.opacity = i === 0 ? .35 : 1; $("pitNext").style.opacity = i === CARS.length - 1 ? .35 : 1;
+  }
+  function openPit(i, from){
+    lastFocus = from || document.activeElement;
+    fillPit(i);
+    pit.hidden = false;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ pit.classList.add("open"); }); });
+    document.body.style.overflow = "hidden";
+    setTimeout(function(){ $("pitClose").focus(); }, 60);
+  }
+  function closePit(){
+    pit.classList.remove("open");
+    document.body.style.overflow = "";
+    setTimeout(function(){ pit.hidden = true; if(lastFocus) lastFocus.focus(); }, reduced ? 0 : 380);
+  }
+  $("pitClose").addEventListener("click", closePit);
+  pit.querySelector("[data-close]").addEventListener("click", closePit);
+  $("pitPrev").addEventListener("click", function(){ if(current > 0) fillPit(current - 1); });
+  $("pitNext").addEventListener("click", function(){ if(current < CARS.length - 1) fillPit(current + 1); });
+  document.addEventListener("keydown", function(e){
+    if(pit.hidden) return;
+    if(e.key === "Escape") closePit();
+    if(e.key === "ArrowRight" && current < CARS.length - 1) fillPit(current + 1);
+    if(e.key === "ArrowLeft" && current > 0) fillPit(current - 1);
+    if(e.key === "Tab"){ /* keep focus inside the panel */
+      var f = pit.querySelectorAll("button:not([disabled]),a[href]");
+      if(!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+  });
+
+  /* ============ start lights ============ */
+  var lamps = Array.prototype.slice.call(document.querySelectorAll("#gantry .lamp"));
+  var lightsTxt = $("lightsTxt"), lightTimers = [], running = false;
+  function clearLights(){ lightTimers.forEach(clearTimeout); lightTimers = []; lamps.forEach(function(l){ l.classList.remove("on"); }); }
+  function startLights(){
+    clearLights(); running = true;
+    lightsTxt.classList.remove("go"); lightsTxt.textContent = "Grid forming";
+    lamps.forEach(function(l, k){
+      lightTimers.push(setTimeout(function(){ l.classList.add("on"); lightsTxt.textContent = "Light " + (k+1) + " of 5"; }, 450 + k * 700));
+    });
+    var hold = 450 + 4 * 700 + 700 + Math.random() * 900;
+    lightTimers.push(setTimeout(function(){
+      lamps.forEach(function(l){ l.classList.remove("on"); });
+      lightsTxt.textContent = "Lights out"; lightsTxt.classList.add("go");
+      launchCars();
+      running = false;
+    }, hold));
+  }
+
+  /* cars fly off the top of the grid, then roll back up into their boxes from below */
+  var flying = false;
+  function launchCars(){
+    if(reduced || flying) return;
+    flying = true;
+    slotBtns.forEach(function(b, k){
+      var car = b.querySelector(".car");
+      car.classList.remove("fly"); void car.offsetWidth;
+      /* P1 goes first, the grid behind follows in order */
+      car.style.animationDelay = (k * 0.09).toFixed(2) + "s";
+      car.classList.add("fly");
+    });
+    setTimeout(function(){
+      flying = false;
+      slotBtns.forEach(function(b){ var c = b.querySelector(".car"); c.classList.remove("fly"); c.style.animationDelay = ""; });
+    }, 3200 + slotBtns.length * 90 + 100);
+  }
+
+  $("relight").addEventListener("click", function(){ if(!running) startLights(); });
+  var gantry = $("gantry");
+  gantry.addEventListener("click", function(){ if(!running) startLights(); });
+  gantry.addEventListener("keydown", function(e){ if((e.key === "Enter" || e.key === " ") && !running){ e.preventDefault(); startLights(); } });
+
+  /* scrolling away from the grid sends the cars off too; re-arms once the grid is back in view */
+  var tarmac = document.querySelector(".tarmac"), gridArmed = false;
+  function checkGridExit(){
+    if(reduced || !tarmac) return;
+    var tr = tarmac.getBoundingClientRect(), vh = window.innerHeight;
+    /* armed while the grid sits across the middle of the screen */
+    if(tr.top < vh * 0.6 && tr.bottom > vh * 0.4){ gridArmed = true; return; }
+    /* leaving in either direction, while the cars are still in view */
+    if(gridArmed && !running){ gridArmed = false; launchCars(); }
+  }
+  if(!("IntersectionObserver" in window)){ setTimeout(startLights, 800); }
+  else {
+    var lio = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ startLights(); lio.disconnect(); } });
+    }, {threshold:.5, rootMargin:"0px 0px -15% 0px"});
+    lio.observe(gantry);
+  }
+
+  /* ============ livery ============ */
+  var paints = Array.prototype.slice.call(document.querySelectorAll(".paint"));
+  var paintCache = {};
+  function refreshPaint(){
+    var cs = getComputedStyle(root);
+    paintCache.a = cs.getPropertyValue("--maroon").trim() || "#9E0E48";
+    paintCache.b = cs.getPropertyValue("--amber").trim() || "#F2A900";
+    paintCache.c = cs.getPropertyValue("--coolant").trim() || "#33C3D6";
+  }
+  function setLivery(name, save){
+    if(name === "mac") root.removeAttribute("data-livery"); else root.setAttribute("data-livery", name);
+    paints.forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-livery") === name)); });
+    if(save){ try{ localStorage.setItem("livery", name); }catch(e){} }
+    refreshPaint();
+  }
+  paints.forEach(function(b){ b.addEventListener("click", function(){ setLivery(b.getAttribute("data-livery"), true); }); });
+  refreshPaint();
+  try{ var saved = localStorage.getItem("livery"); if(saved === "gulf" || saved === "night") setLivery(saved, false); }catch(e){}
+
+  /* ============ counters ============ */
+  var counted = false;
+  function runCounters(){
+    if(counted) return; counted = true;
+    document.querySelectorAll("[data-count]").forEach(function(el){
+      var target = parseFloat(el.getAttribute("data-count")), dec = parseInt(el.getAttribute("data-dec") || "0", 10);
+      if(reduced){ el.textContent = target.toFixed(dec); return; }
+      var t0 = null;
+      (function step(ts){ if(!t0) t0 = ts; var p = Math.min((ts - t0) / 1100, 1);
+        el.textContent = (target * (1 - Math.pow(1 - p, 3))).toFixed(dec); if(p < 1) requestAnimationFrame(step); })(performance.now());
+    });
+  }
+
+  /* ============ shift lights ============ */
+  var leds = Array.prototype.slice.call(document.querySelectorAll("#leds i"));
+  function setLeds(n){ leds.forEach(function(l, k){ l.classList.toggle("on", k < n); }); }
+
+  /* ============ ignition self-test ============ */
+  var gearEl = $("gear"), spdEl = $("spd"), igniting = false;
+  if(reduced){ runCounters(); }
+  else {
+    igniting = true; root.classList.add("ign"); gearEl.textContent = "IGN";
+    var i0 = null;
+    (function ignite(ts){
+      if(!i0) i0 = ts;
+      var p = Math.min((ts - i0) / 1300, 1);
+      var v = p < .45 ? p / .45 : (p < .62 ? 1 : 1 - (p - .62) / .38);
+      setLeds(Math.round(Math.max(0, v) * 10));
+      if(p < 1) requestAnimationFrame(ignite);
+      else { igniting = false; root.classList.remove("ign"); gearEl.textContent = window.scrollY < 40 ? "N" : "1"; setLeds(0); runCounters(); }
+    })(performance.now());
+    setTimeout(function(){ if(igniting){ igniting = false; root.classList.remove("ign"); setLeds(0); } runCounters(); }, 2400);
+  }
+
+  /* ============ scroll: progress, HUD, hero parallax, drive-in/out ============ */
+  var prog = $("prog"), heroWrap = $("heroWrap");
+  var sx = Array.prototype.slice.call(document.querySelectorAll(".sx"));
+  var lastY = window.scrollY, vel = 0, ticking = false;
+
+  function shift(){
+    if(reduced) return;
+    var vh = window.innerHeight;
+    var travel = Math.min(130, window.innerWidth * 0.1);
+    sx.forEach(function(el){
+      var r = el.getBoundingClientRect();
+      var dir = parseFloat(el.getAttribute("data-dir") || "1");
+      /* entering from the bottom: slide in from the side */
+      var inAmt = Math.min(Math.max((r.top - vh * 0.7) / (vh * 0.3), 0), 1);
+      /* leaving past the top: slide away the other way */
+      var outAmt = Math.min(Math.max((vh * 0.24 - r.bottom) / (vh * 0.24), 0), 1);
+      var x = inAmt * travel * dir - outAmt * travel * dir;
+      var o = 1 - Math.max(inAmt, outAmt) * 0.9;
+      var s = 1 - Math.max(inAmt, outAmt) * 0.03;
+      el.style.transform = (x || s !== 1) ? "translate3d(" + x.toFixed(1) + "px,0,0) scale(" + s.toFixed(3) + ")" : "";
+      el.style.opacity = o.toFixed(3);
+    });
+  }
+
+  function frame(){
+    ticking = false;
+    var y = window.scrollY, h = document.body.scrollHeight - window.innerHeight, p = h > 0 ? Math.min(y / h, 1) : 0;
+    prog.style.width = (p * 100).toFixed(2) + "%";
+    var dy = Math.abs(y - lastY); lastY = y; vel = vel * 0.84 + dy * 0.16;
+    if(!igniting){
+      gearEl.textContent = y < 40 ? "N" : String(Math.min(8, 1 + Math.floor(p * 8)));
+      setLeds(Math.min(10, Math.round(vel / 4)));
+      spdEl.textContent = Math.round(p * 100) + "%";
+    }
+    if(heroWrap && !reduced && y < window.innerHeight * 1.2){
+      heroWrap.style.transform = "translate3d(0," + (y * 0.16).toFixed(1) + "px,0)";
+      heroWrap.style.opacity = Math.max(0, 1 - y / (window.innerHeight * 0.95)).toFixed(3);
+    }
+    shift();
+    checkGridExit();
+    updateTrack(p);
+  }
+  /* let the rev lights fall back when scrolling stops */
+  setInterval(function(){ if(!igniting && vel > 0.2){ vel *= 0.6; setLeds(Math.min(10, Math.round(vel / 4))); } }, 120);
+
+  /* ============ track map ============ */
+  var circuit = $("circuit"), driven = $("driven"), carDot = $("cardot"), marksG = $("marks"), secLabel = $("tsec");
+  var CORNERS = [{id:"#grid",name:"Grid"},{id:"#history",name:"History"},{id:"#setup",name:"Setup"},{id:"#offtrack",name:"Off Track"},{id:"#contact",name:"Radio"}];
+  var LEN = 0, marks = [];
+  function layoutTrack(){
+    if(!circuit.getTotalLength) return;
+    LEN = circuit.getTotalLength();
+    driven.style.strokeDasharray = LEN + " " + LEN;
+    marksG.textContent = ""; marks = [];
+    var h = document.body.scrollHeight - window.innerHeight;
+    CORNERS.forEach(function(c){
+      var el = document.querySelector(c.id); if(!el) return;
+      var frac = h > 0 ? Math.min(Math.max(el.offsetTop / h, 0), 1) : 0;
+      var pt = circuit.getPointAtLength(frac * LEN);
+      var dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      dot.setAttribute("class", "mk"); dot.setAttribute("r", "4.2");
+      dot.setAttribute("cx", pt.x.toFixed(2)); dot.setAttribute("cy", pt.y.toFixed(2));
+      dot.addEventListener("click", function(){ el.scrollIntoView({behavior: reduced ? "auto" : "smooth"}); });
+      var t = document.createElementNS("http://www.w3.org/2000/svg", "title"); t.textContent = c.name; dot.appendChild(t);
+      marksG.appendChild(dot); marks.push({el:dot, frac:frac, name:c.name});
+    });
+  }
+  function updateTrack(p){
+    if(!LEN) return;
+    var pt = circuit.getPointAtLength(p * LEN);
+    carDot.setAttribute("cx", pt.x.toFixed(2)); carDot.setAttribute("cy", pt.y.toFixed(2));
+    driven.style.strokeDashoffset = (LEN - p * LEN).toFixed(1);
+    var cur = "Start";
+    marks.forEach(function(m){ var on = p >= m.frac - .02; m.el.classList.toggle("on", on); if(on) cur = m.name; });
+    if(secLabel.textContent !== cur) secLabel.textContent = cur;
+  }
+
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  window.addEventListener("resize", function(){ layoutTrack(); frame(); });
+  layoutTrack(); frame();
+  setTimeout(function(){ layoutTrack(); frame(); }, 900);
+
+  /* ============ nav highlight ============ */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll("nav.links a"));
+  var sections = navLinks.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  if("IntersectionObserver" in window){
+    var nio = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ var i = sections.indexOf(e.target); navLinks.forEach(function(a, j){ a.classList.toggle("on", i === j); }); } });
+    }, {rootMargin:"-45% 0px -50% 0px"});
+    sections.forEach(function(s){ if(s) nio.observe(s); });
+  }
+
+  /* ============ hero telemetry trace ============ */
+  var cv = $("trace"), traceOn = false;
+  window.__startTrace = function(){
+    if(traceOn || !cv) return; traceOn = true;
+    var ctx = cv.getContext("2d"), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), t = 0;
+    function size(){ W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    size(); window.addEventListener("resize", size);
+    function wave(x, ph, a){ return Math.sin(x * .012 + ph) * a + Math.sin(x * .031 + ph * 1.7) * a * .42 + Math.sin(x * .006 + ph * .6) * a * .7; }
+    (function draw(){
+      ctx.clearRect(0, 0, W, H);
+      [{c:paintCache.a,a:.85,amp:H*.2,off:H*.55,ph:t*.9,w:1.6},{c:paintCache.b,a:.55,amp:H*.14,off:H*.68,ph:t*.62,w:1.2},{c:paintCache.c,a:.35,amp:H*.09,off:H*.8,ph:t*1.25,w:1}]
+      .forEach(function(L){
+        ctx.beginPath();
+        for(var x = 0; x <= W; x += 6){ var yy = L.off + wave(x, L.ph, L.amp); if(x === 0) ctx.moveTo(x, yy); else ctx.lineTo(x, yy); }
+        ctx.globalAlpha = L.a; ctx.strokeStyle = L.c; ctx.lineWidth = L.w; ctx.stroke(); ctx.globalAlpha = 1;
+      });
+      t += .012 + Math.min(vel, 60) * .0009; /* traces speed up while you scroll */
+      requestAnimationFrame(draw);
+    })();
+  };
+  if(!reduced) window.__startTrace();
+  window.__frame = frame;
+})();
+</script>
+
+</body>
+</html>
