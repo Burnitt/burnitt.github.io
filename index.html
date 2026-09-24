@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Gurnit Chopra - Computer Engineering (Co-op) student at McMaster University. Embedded systems, hardware and edge AI portfolio.">
+<meta name="description" content="Gurnit Chopra - Computer Engineering (Co-op) student at McMaster University. Hardware systems, test and verification, and embedded projects.">
 <meta property="og:title" content="Gurnit Chopra - Engineering Portfolio">
-<meta property="og:description" content="Embedded systems, hardware and edge AI projects from a McMaster Computer Engineering student.">
+<meta property="og:description" content="Hardware systems, test and verification, and embedded projects from a McMaster Computer Engineering student.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0A0C0F">
 <title>Gurnit Chopra — Pit Wall</title>
@@ -126,69 +126,59 @@ section{position:relative;z-index:1;padding-block:clamp(46px,6.5vw,74px);scroll-
 .sec-head .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
 
 /* ============================================================
-   STARTING GRID
+/* ============================================================
+   STARTING GRID: a real 3D scene rendered with three.js
    ============================================================ */
-.gantry-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:22px}
-.gantry{display:flex;gap:clamp(6px,1.4vw,12px);padding:10px clamp(10px,2vw,16px);background:#06080A;border:1px solid var(--line);
-  border-radius:6px;box-shadow:0 10px 30px -18px #000}
-.lamp{display:flex;flex-direction:column;gap:6px;padding:6px;background:#0D1014;border-radius:5px;border:1px solid #181C22}
-.lamp i{display:block;width:clamp(14px,2.6vw,22px);height:clamp(14px,2.6vw,22px);border-radius:50%;background:var(--lamp-off);
-  box-shadow:inset 0 0 0 2px #2A0B0F;transition:background .08s,box-shadow .08s}
-.lamp.on i{background:var(--lamp-on);box-shadow:0 0 16px 3px rgba(255,43,43,.65),inset 0 0 0 2px #FF7B7B}
-.lights-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center}
+.gridwrap{display:block}
+.tower{margin-top:18px}
+.tower .rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.lights-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
 #lightsTxt{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);min-width:13ch;text-align:center}
 #lightsTxt.go{color:var(--amber)}
 .mini{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:6px 11px;border:1px solid var(--line-hot);
   background:transparent;color:var(--ink-2);border-radius:var(--r);cursor:pointer;transition:all .18s}
 .mini:hover{color:#fff;border-color:var(--maroon-hot)}
 
-.tarmac{position:relative;background:
-    repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 2px,transparent 2px 5px),
-    radial-gradient(120% 70% at 50% 0%,rgba(255,255,255,.04),transparent 60%),
-    var(--tarmac);
-  border:1px solid var(--line);border-radius:6px;overflow:hidden;padding:0 clamp(22px,4vw,44px)}
-/* kerbs down both sides */
-.tarmac::before,.tarmac::after{content:"";position:absolute;top:0;bottom:0;width:clamp(8px,1.4vw,12px);
-  background:repeating-linear-gradient(180deg,var(--maroon-hot) 0 22px,#E9ECEF 22px 44px);opacity:.85}
-.tarmac::before{left:0}.tarmac::after{right:0}
-.startline{height:14px;margin:0 calc(-1 * clamp(22px,4vw,44px));
-  background:repeating-conic-gradient(#EDEFF2 0 25%,#0B0D10 0 50%) 0 0/14px 14px;opacity:.9}
-.pitlane{position:absolute;left:50%;top:14px;bottom:0;width:0;border-left:2px dashed rgba(236,240,244,.12)}
-.slots{list-style:none;margin:0;padding:26px 0 96px;display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(16px,6vw,96px);row-gap:18px;position:relative}
-.slot:nth-child(even){transform:translateY(78px)}
-.slot-btn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:flex-start;gap:clamp(10px,2vw,18px);width:100%;
-  padding:6px;border-radius:6px;transition:background .2s}
-.slot-btn:hover,.slot-btn:focus-visible{background:rgba(255,255,255,.03)}
-.slot-btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
-.box{position:relative;flex:0 0 auto;padding:10px 7px 4px}
-.box::before{content:"";position:absolute;left:0;right:0;top:0;height:34px;border:3px solid var(--paint);border-bottom:0}
-.car{display:block;width:clamp(44px,6.4vw,62px);height:auto;color:var(--maroon);transition:transform .35s cubic-bezier(.2,.8,.2,1),filter .3s}
-.slot-btn:hover .car,.slot-btn:focus-visible .car{transform:translateY(-6px);filter:drop-shadow(0 0 10px rgba(214,33,95,.45))}
-.car .body{fill:currentColor}
-.car .acc{fill:var(--amber)}
-.car .tyre{fill:#0B0C0E}
-.car .wall{fill:none;stroke:var(--amber);stroke-width:1.2;opacity:.8}
-.car .dark{fill:#07080A}
-.car .num{fill:#fff;font-family:var(--display);font-weight:700;font-size:13px}
-.car.fly{animation:fly 3.2s both}
-@keyframes fly{
-  0%  {transform:none;opacity:1;animation-timing-function:cubic-bezier(.55,0,.9,.35)}
-  6%  {transform:translateY(4px) scaleY(.97);opacity:1;animation-timing-function:cubic-bezier(.5,0,1,.6)}
-  30% {transform:translateY(-1200px) scaleY(1.25);opacity:.2}
-  31% {transform:translateY(90px);opacity:0;animation-timing-function:cubic-bezier(.15,.7,.25,1)}
-  100%{transform:none;opacity:1}
-}
-.gantry{cursor:pointer;transition:border-color .2s}
-.gantry:hover{border-color:var(--line-hot)}
-.plate{padding-top:8px;min-width:0;display:block}
-.plate .pos,.plate .nm,.plate .meta{display:block}
-.plate .pos{font-family:var(--display);font-weight:700;font-size:clamp(22px,3vw,30px);line-height:1;color:var(--amber);letter-spacing:.02em}
-.plate .nm{font-family:var(--display);font-weight:600;font-size:clamp(14px,1.7vw,17px);line-height:1.2;margin-top:6px;color:var(--ink)}
-.plate .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-3);margin-top:6px;text-transform:uppercase}
-.plate .open{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-2);border-bottom:1px solid var(--line-hot);padding-bottom:2px;transition:color .2s,border-color .2s}
-.slot-btn:hover .open{color:var(--amber);border-color:var(--amber)}
-.hint{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);text-align:center;margin:16px 0 0}
+/* the grid is a real 3D scene (three.js) drawn into this canvas; the sky is CSS behind a transparent canvas */
+.scene{position:relative;aspect-ratio:16/9;border:1px solid var(--line);border-radius:6px;overflow:hidden;isolation:isolate;
+  background:linear-gradient(180deg,#020304 0%,#05080C 18%,#0A0F15 34%,#0B1016 42%,#0B1016 100%)}
+.scene::before{content:"";position:absolute;left:18%;right:18%;top:14%;height:30%;border-radius:50%;
+  background:var(--maroon);filter:blur(70px);opacity:.22;z-index:-1;pointer-events:none}
+.scene canvas{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:pan-y}
+.scene.hot canvas{cursor:pointer}
+
+/* grid numbers: plain text beside each car, like the position marker next to a grid slot; no badge */
+.gtags{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s}
+.scene.ready .gtags{opacity:1}
+.scene.flying .gtags{opacity:0}
+.gtag{all:unset;position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;padding:6px 7px;
+  font-family:var(--display);font-weight:700;font-size:14px;line-height:1;letter-spacing:.06em;white-space:nowrap;
+  color:rgba(232,237,242,.58);text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 12px rgba(0,0,0,.7);
+  transition:color .18s;will-change:transform}
+.gtag .nm{position:absolute;top:50%;left:100%;transform:translateY(-50%);font-family:var(--body);font-weight:600;
+  font-size:max(12px,.78em);letter-spacing:.01em;color:var(--ink);opacity:0;transition:opacity .18s;pointer-events:none}
+.gtag[data-side="l"] .nm{left:auto;right:100%}
+.gtag:hover,.gtag.lit,.gtag:focus-visible{color:var(--amber)}
+.gtag:hover .nm,.gtag.lit .nm,.gtag:focus-visible .nm{opacity:1}
+.gtag:focus-visible{outline:1px solid var(--amber);outline-offset:1px;border-radius:2px}
+.scene.flying .gtag{pointer-events:none}
+
+/* no WebGL: the timing tower carries the grid on its own */
+#grid.no3d .scene,#grid.no3d .lights-bar{display:none}
+
+/* timing tower */
+.tower{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--panel)}
+.tower h3{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
+  padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel-2);font-weight:500}
+.trow{all:unset;box-sizing:border-box;display:flex;gap:12px;align-items:baseline;width:100%;cursor:pointer;
+  padding:11px 14px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);transition:background .18s}
+.trow:hover,.trow.lit,.trow:focus-visible{background:#171C23}
+.trow:focus-visible{outline:2px solid var(--amber);outline-offset:-2px}
+.trow .p{font-family:var(--display);font-weight:700;color:var(--amber);font-size:15px;min-width:2.4ch}
+.trow .t{min-width:0}
+.trow .t b{display:block;font-family:var(--display);font-weight:600;font-size:14.5px;color:var(--ink);line-height:1.25}
+.trow .t span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-top:4px}
+.hint{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);text-align:center;margin:14px 0 0}
 
 /* ---------- pit board (project drawer) ---------- */
 .pit{position:fixed;inset:0;z-index:120}
@@ -304,6 +294,12 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
 .sx{will-change:transform,opacity}
 
 @media (max-width:1080px){#track{display:none}}
+@media (max-width:900px){
+  .gridwrap{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  .scene{aspect-ratio:4/3}
+}
 @media (max-width:820px){
   .two{grid-template-columns:1fr}
   .lap{grid-template-columns:1fr;gap:10px}
@@ -356,15 +352,15 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
 <div class="hero">
   <canvas id="trace" aria-hidden="true"></canvas>
   <div class="wrap" id="heroWrap">
-    <div class="eyebrow">Hamilton, ON &nbsp;//&nbsp; Computer Engineering Co-op &nbsp;//&nbsp; Open to Summer 2027</div>
+    <div class="eyebrow">Hamilton, ON &nbsp;//&nbsp; Hardware systems &amp; test &nbsp;//&nbsp; Open to Summer 2027</div>
     <h1><span class="ln"><span>Gurnit</span></span><span class="ln"><span>Chopra</span></span></h1>
-    <span class="thin">Second-year Computer Engineering (Co-op) at McMaster, building embedded systems and edge AI. I like the layer where sensors, silicon and firmware have to agree with each other.</span>
+    <span class="thin">Second-year Computer Engineering (Co-op) at McMaster, working toward hardware systems design, test and verification. I like the layer where sensors, circuits and firmware have to agree with each other, and the part where you prove that they do.</span>
     <div class="rule"></div>
     <div class="cta">
       <a class="btn primary" href="#grid">Go to the grid</a>
       <a class="btn" href="https://github.com/Burnitt" target="_blank" rel="noopener">GitHub</a>
       <a class="btn" href="https://www.linkedin.com/in/gurnit-chopra-295639273/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="mailto:cgurnit@gmail.com">Email</a>
+      <a class="btn" href="mailto:choprg5@mcmaster.ca">Email</a>
     </div>
     <div class="strip">
       <div class="stat"><b data-count="11.9" data-dec="1">11.9</b><span>GPA / 12.0</span></div>
@@ -383,23 +379,20 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
       <div class="tag">7 on the grid // P1 = latest</div>
     </div>
 
-    <div class="gantry-wrap">
-      <div class="gantry" id="gantry" role="button" tabindex="0" aria-label="Start the lights">
-        <div class="lamp"><i></i><i></i></div><div class="lamp"><i></i><i></i></div><div class="lamp"><i></i><i></i></div>
-        <div class="lamp"><i></i><i></i></div><div class="lamp"><i></i><i></i></div>
-      </div>
-      <div class="lights-bar">
-        <span id="lightsTxt" aria-live="polite">Grid forming</span>
-        <button class="mini" id="relight" type="button">Restart lights</button>
-      </div>
+    <div class="lights-bar">
+      <span id="lightsTxt" aria-live="polite">Grid forming</span>
+      <button class="mini" id="relight" type="button">Restart lights</button>
     </div>
 
-    <div class="tarmac">
-      <div class="startline"></div>
-      <div class="pitlane" aria-hidden="true"></div>
-      <ol class="slots" id="slots" aria-label="Projects, ordered by grid position"></ol>
+    <div class="gridwrap">
+      <div class="scene" id="gridScene" role="group" aria-label="Starting grid. Each car is a project; its grid number opens the pit board">
+        <canvas id="gridCanvas" aria-hidden="true"></canvas>
+        <div class="gtags" id="gridTags"></div>
+      </div>
+
+      <div class="tower"><h3>Timing tower</h3><div class="rows" id="tower"></div></div>
     </div>
-    <p class="hint">Pick a car to open its pit board</p>
+    <p class="hint" id="gridHint">Click a car or its grid number, or a row in the tower, to open its pit board</p>
   </div>
 </section>
 
@@ -495,6 +488,9 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
       <div class="bay sx" data-dir="-1"><h3>Design Tools &amp; Standards</h3><div class="tags">
         <span class="hot">Altium Designer <em style="font-style:normal;color:var(--amber)">· in progress</em></span>
         <span>Autodesk Inventor</span><span>Git / GitHub</span><span>NFPA 70 / 790 / 791</span><span>UL</span><span>CSA C22.2</span><span>CEC</span></div></div>
+      <div class="bay sx"><h3>Certifications</h3><div class="tags">
+        <span>AWS Cloud Practitioner Essentials</span><span>AWS Cloud Quest: Cloud Practitioner</span>
+        <span class="hot">EFC Doug Baldwin Scholarship <em style="font-style:normal;color:var(--amber)">· 2026</em></span></div></div>
     </div>
   </div>
 </section>
@@ -509,8 +505,8 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
     <div class="two">
       <div class="prose sx">
         <p>I got into engineering the way a lot of people get into cars: by wanting to know what was happening underneath. <strong>Formula 1</strong> is the version of that obsession I never grew out of, because it's a sport where the engineering is the story. A tenth of a second is a design decision someone made months earlier.</p>
-        <p>That's roughly why I like <strong>embedded systems</strong>. A race car and an avionics bay have the same shape of problem: a hard latency budget, sensors that lie to you, and a system that has to keep working when a subsystem doesn't. The ESP32 radar and the RoboMaster vision pipeline are both small versions of that.</p>
-        <p>Longer term, I want to go one layer deeper, into <strong>chip design and computer architecture</strong>. Logic Design this term is the first step on that road.</p>
+        <p>That's roughly why I've ended up drawn to <strong>hardware systems engineering, test and verification</strong>. A race car and a lab bench have the same shape of problem: sensors that lie to you, a system that has to keep working when one subsystem doesn't, and a result nobody should believe until it has been measured. Most of what I've learned on my own builds came from bring-up and debugging, not from the part that worked first try.</p>
+        <p>Longer term I want to keep going deeper into the hardware itself, through <strong>digital logic and computer architecture</strong>. Logic Design and Circuit Analysis this term are the first steps on that road.</p>
         <p>When I'm not building, I'm usually in <strong>Forza Horizon</strong> or <strong>Forza Motorsport</strong> tuning something that doesn't need tuning, out on the bike on a trail, or watching a race.</p>
       </div>
       <div class="dash sx" data-dir="-1" aria-label="Quick facts">
@@ -518,8 +514,8 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
         <div class="row"><span>School</span><span>McMaster University</span></div>
         <div class="row"><span>Year</span><span>Second year</span></div>
         <div class="row"><span>Base</span><span>Hamilton, Ontario</span></div>
-        <div class="row"><span>Targeting</span><span>Embedded · Edge AI · Chip design</span></div>
-        <div class="row"><span>Learning now</span><span>Altium PCB design</span></div>
+        <div class="row"><span>Targeting</span><span>Hardware systems · Test &amp; verification</span></div>
+        <div class="row"><span>Learning now</span><span>Altium PCB design · Logic design</span></div>
         <div class="row"><span>Award</span><span>EFC Doug Baldwin Scholarship</span></div>
         <div class="row"><span>Watching</span><span>Formula 1</span></div>
         <div class="row"><span>Playing</span><span>Forza Horizon / Motorsport</span></div>
@@ -534,12 +530,11 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
     <div class="finish sx">
       <div class="radio"><span class="bars"><i></i><i></i><i></i><i></i></span>Team radio</div>
       <h2>Radio the pit wall</h2>
-      <p>Open to Summer 2027 co-op terms in embedded systems, hardware and edge AI, and always up for a good hardware problem in the meantime.</p>
+      <p>Open to Summer 2027 co-op terms in hardware systems, test and verification, and embedded work, and always up for a good hardware problem in the meantime.</p>
       <div class="cta">
-        <a class="btn primary" href="mailto:cgurnit@gmail.com">cgurnit@gmail.com</a>
+        <a class="btn primary" href="mailto:choprg5@mcmaster.ca">choprg5@mcmaster.ca</a>
         <a class="btn" href="https://www.linkedin.com/in/gurnit-chopra-295639273/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="https://github.com/Burnitt" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://app.notion.com/p/Gurnit-Chopra-2da3afb3d1d5811a98fceb3b4eadf8c7" target="_blank" rel="noopener">Notion Portfolio</a>
       </div>
     </div>
   </div>
@@ -651,57 +646,588 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
      notes:["Crude sensing, honest logic. Taught me to design the states before writing the code."]}
   ];
 
-  /* ============ top-down open-wheel car (original drawing) ============ */
-  function carSVG(n){
-    return '<svg class="car" viewBox="0 0 60 150" aria-hidden="true">' +
-      /* front wing */
-      '<rect class="acc" x="3" y="4" width="54" height="6" rx="1.5"/>' +
-      '<rect class="body" x="3" y="3" width="3" height="11" rx="1"/><rect class="body" x="54" y="3" width="3" height="11" rx="1"/>' +
-      /* front suspension */
-      '<path d="M30 30 L10 28 M30 36 L10 36 M30 30 L50 28 M30 36 L50 36" stroke="#2A2F36" stroke-width="1.6"/>' +
-      /* front tyres */
-      '<rect class="tyre" x="1" y="20" width="12" height="22" rx="3.5"/><rect class="tyre" x="47" y="20" width="12" height="22" rx="3.5"/>' +
-      '<rect class="wall" x="3" y="22" width="8" height="18" rx="2.5"/><rect class="wall" x="49" y="22" width="8" height="18" rx="2.5"/>' +
-      /* nose */
-      '<path class="body" d="M27.5 8 H32.5 L35 46 H25 Z"/>' +
-      /* sidepods + chassis */
-      '<path class="body" d="M22 46 H38 C44 50 47 60 47 72 C47 88 42 104 38 112 H22 C18 104 13 88 13 72 C13 60 16 50 22 46 Z"/>' +
-      '<path class="acc" d="M13.6 70 C14 62 17 55 21 51 L22 60 C19 63 17 67 17 72 Z"/><path class="acc" d="M46.4 70 C46 62 43 55 39 51 L38 60 C41 63 43 67 43 72 Z"/>' +
-      /* cockpit + halo */
-      '<ellipse class="dark" cx="30" cy="62" rx="5.2" ry="9"/>' +
-      '<path d="M24.5 57 Q30 49 35.5 57" fill="none" stroke="#2A2F36" stroke-width="2.2"/>' +
-      '<circle cx="30" cy="62" r="2.6" fill="var(--amber)"/>' +
-      /* engine cover + number */
-      '<path class="dark" d="M27 76 H33 L32 110 H28 Z" opacity=".35"/>' +
-      '<text class="num" x="30" y="97" text-anchor="middle">' + n + '</text>' +
-      /* rear suspension + tyres */
-      '<path d="M30 116 L12 118 M30 122 L12 124 M30 116 L48 118 M30 122 L48 124" stroke="#2A2F36" stroke-width="1.6"/>' +
-      '<rect class="tyre" x="0" y="108" width="14" height="25" rx="4"/><rect class="tyre" x="46" y="108" width="14" height="25" rx="4"/>' +
-      '<rect class="wall" x="2" y="110" width="10" height="21" rx="3"/><rect class="wall" x="48" y="110" width="10" height="21" rx="3"/>' +
-      /* rear wing */
-      '<rect class="body" x="11" y="134" width="38" height="8" rx="1.5"/>' +
-      '<rect class="acc" x="11" y="134" width="38" height="2.4"/>' +
-      '<rect class="body" x="9" y="130" width="3" height="15" rx="1"/><rect class="body" x="48" y="130" width="3" height="15" rx="1"/>' +
-    '</svg>';
+  /* ============ STARTING GRID ============ */
+  /* grid slots in metres: P1 on pole (left), the rest staggered 6.6 m apart back toward the camera */
+  var SLOTS = CARS.map(function(c, i){ return {x:(i % 2 ? 1 : -1) * 3.1, z:-40 + i * 6.6}; });
+  var sceneHost = document.getElementById("gridScene");
+  var tagsEl = document.getElementById("gridTags");
+  var towerEl = document.getElementById("tower");
+  var towerRows = [], tagBtns = [], grid3d = null;
+
+  function lit(i, on){
+    towerRows[i].classList.toggle("lit", on);
+    tagBtns[i].classList.toggle("lit", on);
+    if(grid3d) grid3d.highlight(i, on);
   }
 
-  /* ============ build the grid ============ */
-  var slotsEl = document.getElementById("slots");
-  var slotBtns = [];
   CARS.forEach(function(c, i){
-    var li = document.createElement("li");
-    li.className = "slot";
-    li.innerHTML =
-      '<button class="slot-btn" type="button" aria-label="P' + (i+1) + ', ' + c.name + '. Open pit board">' +
-        '<span class="box">' + carSVG(i+1) + '</span>' +
-        '<span class="plate"><span class="pos">P' + (i+1) + '</span><span class="nm">' + c.name + '</span>' +
-        '<span class="meta">' + c.yr + '</span><span class="open">Pit board</span></span>' +
-      '</button>';
-    slotsEl.appendChild(li);
-    var btn = li.querySelector(".slot-btn");
-    btn.addEventListener("click", function(){ openPit(i, btn); });
-    slotBtns.push(btn);
+    var tag = document.createElement("button");
+    tag.className = "gtag"; tag.type = "button";
+    tag.setAttribute("data-side", SLOTS[i].x < 0 ? "l" : "r");
+    tag.setAttribute("aria-label", "P" + (i+1) + ", " + c.name + ". Open pit board");
+    tag.innerHTML = '<span class="pn">P' + (i+1) + '</span><span class="nm" aria-hidden="true">' + c.name + '</span>';
+    tag.addEventListener("click", function(){ openPit(i, tag); });
+    tagsEl.appendChild(tag);
+    tagBtns.push(tag);
+
+    var row = document.createElement("button");
+    row.className = "trow"; row.type = "button";
+    row.innerHTML = '<span class="p">P' + (i+1) + '</span><span class="t"><b>' + c.name + '</b><span>' + c.yr + '</span></span>';
+    row.addEventListener("click", function(){ openPit(i, row); });
+    towerEl.appendChild(row);
+    towerRows.push(row);
+
+    [tag, row].forEach(function(node){
+      ["mouseenter","focus"].forEach(function(ev){ node.addEventListener(ev, function(){ lit(i, true); }); });
+      ["mouseleave","blur"].forEach(function(ev){ node.addEventListener(ev, function(){ lit(i, false); }); });
+    });
   });
+
+  /* ---------------------------------------------------------------
+     The scene. Units are metres. The track runs away from the camera
+     along -z; the camera sits behind P7, a few metres up.
+     --------------------------------------------------------------- */
+  function initGrid3D(){
+    var T = window.THREE;
+    if(!T || !sceneHost) return null;
+    var canvas = document.getElementById("gridCanvas");
+    var renderer;
+    try{ renderer = new T.WebGLRenderer({canvas:canvas, antialias:true, alpha:true, powerPreference:"high-performance"}); }
+    catch(e){ return null; }
+    if(!renderer.getContext()) return null;
+
+    var small = Math.min(window.innerWidth, window.innerHeight) < 700;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2));
+    renderer.outputEncoding = T.sRGBEncoding;
+    renderer.setClearColor(0x000000, 0);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = T.PCFSoftShadowMap;
+    renderer.shadowMap.autoUpdate = false;          /* only re-cast shadows when something moves */
+    var aniso = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+
+    /* ---- small helpers ---- */
+    function C(hex){ return new T.Color(hex).convertSRGBToLinear(); }
+    function assign(m, o){ if(o) for(var k in o) m[k] = o[k]; return m; }
+    function std(hex, rough, metal, o){ return assign(new T.MeshStandardMaterial({color:C(hex), roughness:rough, metalness:metal || 0}), o); }
+    function lam(hex, o){ return assign(new T.MeshLambertMaterial({color:C(hex)}), o); }
+    function flat(hex, o){ return assign(new T.MeshBasicMaterial({color:C(hex)}), o); }
+    function decal(mat, depth){ mat.polygonOffset = true; mat.polygonOffsetFactor = -depth; mat.polygonOffsetUnits = -depth; return mat; }
+    function tex(w, h, draw, rx, ry){
+      var c = document.createElement("canvas"); c.width = w; c.height = h;
+      draw(c.getContext("2d"), w, h);
+      var t = new T.CanvasTexture(c);
+      t.encoding = T.sRGBEncoding; t.anisotropy = aniso;
+      if(rx || ry){ t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(rx || 1, ry || 1); }
+      return t;
+    }
+    var scene = new T.Scene();
+    function add(obj, parent){ (parent || scene).add(obj); return obj; }
+    function box(w, h, d, mat, x, y, z, parent){
+      var m = new T.Mesh(new T.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); return add(m, parent);
+    }
+    function flatOnGround(w, d, mat, x, z, y, parent){
+      var m = new T.Mesh(new T.PlaneGeometry(w, d), mat);
+      m.rotation.x = -Math.PI / 2; m.position.set(x, y || 0, z); m.receiveShadow = true;
+      return add(m, parent);
+    }
+    function wallPlane(w, h, mat, x, y, z, facing){       /* facing: +1 looks toward +x, -1 toward -x, 0 toward +z */
+      var m = new T.Mesh(new T.PlaneGeometry(w, h), mat);
+      m.position.set(x, y, z);
+      if(facing) m.rotation.y = facing * Math.PI / 2;
+      return add(m);
+    }
+
+    /* soft round sprite used for glows and contact shadows */
+    var soft = tex(128, 128, function(g){
+      var gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+      gr.addColorStop(0, "rgba(255,255,255,1)"); gr.addColorStop(.35, "rgba(255,255,255,.55)"); gr.addColorStop(1, "rgba(255,255,255,0)");
+      g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+    });
+    function glowSprite(hex, size, opacity){
+      var s = new T.Sprite(new T.SpriteMaterial({map:soft, color:C(hex), blending:T.AdditiveBlending, depthWrite:false, transparent:true, fog:false, opacity:opacity}));
+      s.scale.set(size, size, 1); return s;
+    }
+
+    /* ---- camera, fog, lights ---- */
+    var BASE_VFOV = 31;
+    var camera = new T.PerspectiveCamera(BASE_VFOV, 16 / 9, 1, 420);
+    var CAM = new T.Vector3(0, 6.6, 20), LOOK = new T.Vector3(0, 1.3, -26);
+    camera.position.copy(CAM); camera.lookAt(LOOK);
+    scene.fog = new T.Fog(new T.Color("#0B1016"), 60, 200);   /* fog blends in output space, so this is the sky hex as-is */
+
+    /* a little floodlit environment so the paint picks up highlights */
+    var pmrem = new T.PMREMGenerator(renderer);
+    var envScene = new T.Scene();
+    envScene.add(new T.Mesh(new T.SphereGeometry(50, 16, 10), new T.MeshBasicMaterial({color:C("#0E151E"), side:T.BackSide})));
+    var envFloor = new T.Mesh(new T.CircleGeometry(49, 24), new T.MeshBasicMaterial({color:C("#07080a")}));
+    envFloor.rotation.x = -Math.PI / 2; envFloor.position.y = -8; envScene.add(envFloor);
+    for(var ei = 0; ei < 7; ei++){
+      var ang = ei / 7 * Math.PI * 2;
+      var bank = new T.Mesh(new T.PlaneGeometry(9, 3), new T.MeshBasicMaterial({color:new T.Color(2.4, 2.3, 2.15), side:T.DoubleSide}));
+      bank.position.set(Math.cos(ang) * 38, 22, Math.sin(ang) * 38); bank.lookAt(0, 0, 0);
+      envScene.add(bank);
+    }
+    scene.environment = pmrem.fromScene(envScene, .03).texture;
+    pmrem.dispose();
+
+    add(new T.HemisphereLight(C("#7F95B8"), C("#15110E"), .32));
+    var key = new T.SpotLight(C("#EEF2FF"), 1.7, 200, .62, .7, 1);   /* floodlights over the main grandstand: shadows fall across the track */
+    key.position.set(-30, 42, -20); key.target.position.set(1, 0, -20);
+    key.castShadow = true;
+    key.shadow.mapSize.set(small ? 1024 : 2048, small ? 1024 : 2048);
+    key.shadow.camera.near = 20; key.shadow.camera.far = 120;
+    key.shadow.bias = -.0006; key.shadow.normalBias = .02;
+    add(key); add(key.target);
+    var fill = new T.DirectionalLight(C("#FFE4C8"), .55);   /* warm fill from behind the camera lights the car rears */
+    fill.position.set(9, 12, 30); fill.target.position.set(0, 0, -20);
+    add(fill); add(fill.target);
+    var START_Z = -45.6, GZ = -46.6;
+    var lampLight = new T.PointLight(C("#FF2A2A"), 0, 40, 1.6);  /* red wash on the tarmac while the lights count down */
+    lampLight.position.set(0, 6.2, GZ + 3);
+    add(lampLight);
+
+    /* ---- ground and track ---- */
+    var Z0 = 40, Z1 = -270, LEN = Z0 - Z1, ZM = (Z0 + Z1) / 2, HALF = 7.5;
+    function grainDraw(base){
+      return function(g, w, h){
+        g.fillStyle = base; g.fillRect(0, 0, w, h);
+        for(var i = 0; i < w * h / 7; i++){
+          var v = 95 + Math.random() * 125 | 0;
+          g.fillStyle = "rgba(" + v + "," + v + "," + v + ",.55)";
+          g.fillRect(Math.random() * w, Math.random() * h, 1 + Math.random() * 1.4, 1 + Math.random() * 1.4);
+        }
+      };
+    }
+    var apronMat = std("#171A1F", .95, 0, {envMapIntensity:.3});
+    apronMat.map = tex(256, 256, grainDraw("#8c8c8c"), 60, 90);
+    flatOnGround(220, LEN, apronMat, 0, ZM);
+
+    var trackTex = tex(512, 512, function(g, w, h){
+      grainDraw("#9a9a9a")(g, w, h);
+      /* rubber laid down in the launch lanes, one streak per tyre */
+      [3.1 - .8, 3.1 + .8].forEach(function(off){
+        [-1, 1].forEach(function(s){
+          var u = (HALF + s * off) / (HALF * 2) * w, bw = w * .03;
+          var gr = g.createLinearGradient(u - bw, 0, u + bw, 0);
+          gr.addColorStop(0, "rgba(0,0,0,0)"); gr.addColorStop(.5, "rgba(0,0,0,.32)"); gr.addColorStop(1, "rgba(0,0,0,0)");
+          g.fillStyle = gr; g.fillRect(u - bw, 0, bw * 2, h);
+        });
+      });
+    }, 1, LEN / 34);
+    trackTex.wrapS = T.ClampToEdgeWrapping;
+    var trackMat = decal(std("#2E343B", .86, 0, {envMapIntensity:.45, map:trackTex}), 1);
+    flatOnGround(HALF * 2, LEN, trackMat, 0, ZM);
+
+    var pitMat = decal(std("#22272D", .9, 0, {envMapIntensity:.35}), 1);
+    pitMat.map = apronMat.map.clone(); pitMat.map.needsUpdate = true; pitMat.map.repeat.set(4, 90);
+    flatOnGround(10, LEN, pitMat, 14, ZM);
+
+    var paintW = decal(std("#DDE2E8", .6), 3);
+    [-1, 1].forEach(function(s){ flatOnGround(.28, LEN, paintW, s * (HALF - .22), ZM); });
+    flatOnGround(.2, LEN, paintW, 12.4, ZM);                   /* pit lane working-lane line */
+
+    var chk = tex(512, 32, function(g, w, h){
+      var n = 32, sq = w / n;
+      for(var i = 0; i < n; i++) for(var j = 0; j < 2; j++){ g.fillStyle = (i + j) % 2 ? "#15181c" : "#e8ebee"; g.fillRect(i * sq, j * h / 2, sq, h / 2); }
+    });
+    flatOnGround(HALF * 2, 1.1, decal(std("#ffffff", .6, 0, {map:chk}), 4), 0, START_Z);
+
+    SLOTS.forEach(function(s){                             /* grid boxes painted ahead of each car */
+      var fz = s.z - 3.95;
+      flatOnGround(2.6, .16, paintW, s.x, fz);
+      flatOnGround(.14, 1.15, paintW, s.x - 1.23, fz + .57);
+      flatOnGround(.14, 1.15, paintW, s.x + 1.23, fz + .57);
+    });
+
+    /* painted run-off on the grandstand side, in the livery colour */
+    var hatch = tex(128, 128, function(g, w, h){
+      g.strokeStyle = "#fff"; g.lineWidth = 26;
+      for(var i = -2; i < 4; i++){ g.beginPath(); g.moveTo(i * 64, h); g.lineTo(i * 64 + h, 0); g.stroke(); }
+    }, 1, LEN / 3);
+    var runoffMat = decal(std("#9E0E48", .7, 0, {map:hatch, transparent:true, opacity:.34, depthWrite:false}), 2);
+    flatOnGround(2.7, LEN, runoffMat, -9.05, ZM);
+
+    /* ---- barriers and catch fencing ---- */
+    var concrete = std("#4B525B", .92, 0, {envMapIntensity:.4});
+    var LW = -10.75, PW = 8.85;
+    [LW, PW].forEach(function(x){ box(.5, 1.1, LEN, concrete, x, .55, ZM).receiveShadow = true; });
+    var boardMat = flat("#9E0E48");                                 /* LED boards along the walls */
+    wallPlane(LEN, .42, boardMat, LW + .26, .7, ZM, 1);
+    wallPlane(LEN, .42, boardMat, PW - .26, .7, ZM, -1);
+    var fenceTex = tex(64, 64, function(g){
+      g.strokeStyle = "rgba(200,210,220,.9)"; g.lineWidth = 2;
+      g.beginPath(); g.moveTo(0, 0); g.lineTo(64, 64); g.moveTo(64, 0); g.lineTo(0, 64); g.stroke();
+    }, LEN / .9, 3.4 / .9);
+    var fenceMat = flat("#9AA6B2", {map:fenceTex, transparent:true, opacity:.28, side:T.DoubleSide, depthWrite:false});
+    wallPlane(LEN, 3.4, fenceMat, LW, 2.8, ZM, 1);
+    wallPlane(LEN, 3.4, fenceMat, PW, 2.8, ZM, -1);
+    var postGeo = new T.BoxGeometry(.08, 3.5, .08), postMat = std("#39414B", .5, .6);
+    var nPost = Math.floor(LEN / 6) * 2, posts = new T.InstancedMesh(postGeo, postMat, nPost), dummy = new T.Object3D(), pi = 0;
+    for(var pz = Z0; pz > Z1 && pi < nPost - 1; pz -= 6){
+      dummy.position.set(LW, 2.85, pz); dummy.updateMatrix(); posts.setMatrixAt(pi++, dummy.matrix);
+      dummy.position.set(PW, 2.85, pz); dummy.updateMatrix(); posts.setMatrixAt(pi++, dummy.matrix);
+    }
+    posts.count = pi; add(posts);
+
+    /* ---- grandstands: stepped concrete, extruded along the straight ---- */
+    var SZ0 = 16, SZ1 = -160, SLEN = SZ0 - SZ1, SZM = (SZ0 + SZ1) / 2;
+    function stepped(x0, dir, base, rows, d, rise, mat){
+      var shp = new T.Shape(), x = x0, y = base;
+      shp.moveTo(x0, 0); shp.lineTo(x0, base);
+      for(var r = 0; r < rows; r++){
+        if(r > 0){ y += rise; shp.lineTo(x, y); }
+        x += dir * d; shp.lineTo(x, y);
+      }
+      shp.lineTo(x, 0); shp.lineTo(x0, 0);
+      var geo = new T.ExtrudeGeometry(shp, {depth:SLEN, bevelEnabled:false});
+      var m = new T.Mesh(geo, mat); m.position.z = SZ1; return add(m);
+    }
+    var standMat = lam("#1B222B", {side:T.DoubleSide});
+    var L = {x0:-13.6, dir:-1, base:2.4, rows:22, d:.92, rise:.56};
+    var R = {x0:20.4, dir:1, base:8.8, rows:12, d:.92, rise:.56};
+    stepped(L.x0, L.dir, L.base, L.rows, L.d, L.rise, standMat);
+
+    /* main grandstand roof, cantilevered from a back wall, with light strips under the front edge */
+    var backX = L.x0 + L.dir * L.rows * L.d, roofY = L.base + L.rows * L.rise + 6.2;
+    box(.7, roofY, SLEN, standMat, backX - .35, roofY / 2, SZM);
+    var roofW = (L.x0 + .8) - (backX - .8);
+    var roof = box(roofW, .5, SLEN, lam("#141A21"), (L.x0 + backX) / 2, roofY, SZM);
+    roof.rotation.z = .04;
+    var stripMat = flat("#FFF1D8");
+    box(.16, .1, SLEN, stripMat, L.x0 - 1.1, roofY - .52, SZM);
+    box(.16, .1, SLEN, stripMat, L.x0 - 9, roofY - .1, SZM);
+    for(var cz = SZ0 - 4; cz > SZ1; cz -= 18){                    /* roof trusses */
+      var tr = box(.18, .9, .18, lam("#222A33"), (backX + L.x0) / 2 - 1, roofY - .6, cz);
+      tr.scale.x = (L.x0 - backX) / .18 * .9;
+    }
+
+    /* pit building with lit garages, glass hospitality floor, and a fan terrace on the roof */
+    var bldgMat = lam("#161C23");
+    var faceX = 19.2;
+    box(15, R.base, SLEN, bldgMat, faceX + 7.5, R.base / 2, SZM);
+    stepped(R.x0, R.dir, R.base, R.rows, R.d, R.rise, standMat);
+    var winTex = tex(1024, 64, function(g, w, h){
+      g.fillStyle = "#0B1119"; g.fillRect(0, 0, w, h);
+      for(var x = 0; x < w; x += 16){
+        var r = Math.random();
+        g.fillStyle = r < .38 ? "rgba(236,204,150," + (.25 + Math.random() * .4) + ")" : r < .55 ? "rgba(150,190,230," + (.18 + Math.random() * .3) + ")" : "rgba(40,55,70,.4)";
+        g.fillRect(x + 2, 8, 12, h - 16);
+      }
+    }, SLEN / 60, 1);
+    wallPlane(SLEN, 2.6, flat("#ffffff", {map:winTex}), faceX - .01, 6, SZM, -1);
+    var garageIn = [flat("#3B3226"), flat("#2B3440"), flat("#3A2A2E")];
+    var garageLamp = flat("#FFF0D2");
+    var spillMat = flat("#FFD9A0", {map:soft, transparent:true, opacity:.10, blending:T.AdditiveBlending, depthWrite:false});
+    decal(spillMat, 5);
+    var gIdx = 0;
+    for(var gz = SZ0 - 5; gz > SZ1 + 4; gz -= 7.6){
+      wallPlane(5.4, 3.8, garageIn[gIdx++ % 3], faceX - .02, 1.9, gz, -1);
+      wallPlane(5, .14, garageLamp, faceX - .03, 3.6, gz, -1);
+      flatOnGround(7, 7, spillMat, faceX - 3.2, gz, .02);
+    }
+
+    /* far end: a bridge over the straight with an LED band */
+    var bridgeZ = -128;
+    box(110, 3, 3, lam("#151B22"), 0, 10, bridgeZ);
+    var ledMat = flat("#9E0E48");
+    wallPlane(110, 1.2, ledMat, 0, 10, bridgeZ + 1.52, 0);
+    [-32, -11.5, 11.5, 32].forEach(function(x){ box(1.4, 8.5, 1.4, lam("#1A2029"), x, 4.25, bridgeZ); });
+
+    /* floodlight towers */
+    var poleMat = std("#262E38", .6, .5);
+    [[-42, -78], [-42, -140], [42, -78], [42, -140], [-30, -200], [30, -200]].forEach(function(p){
+      var h = 25;
+      var pole = new T.Mesh(new T.CylinderGeometry(.3, .45, h, 8), poleMat); pole.position.set(p[0], h / 2, p[1]); add(pole);
+      var head = new T.Group(); head.position.set(p[0], h + 1.2, p[1]); head.lookAt(0, 0, p[1] + 20); add(head);
+      box(5.2, 3, .6, lam("#1D242D"), 0, 0, 0, head);
+      var face = new T.Mesh(new T.PlaneGeometry(4.8, 2.6), flat("#FFF6E6")); face.position.z = .31; head.add(face);
+      var gl = glowSprite("#FFF1DC", 22, .42); gl.position.set(p[0], h + 1.2, p[1]); add(gl);
+    });
+
+    /* ---- the crowd: thousands of tiny instanced people ---- */
+    var people = [];
+    function seat(S, zA, zB, occ){
+      for(var r = 0; r < S.rows; r++){
+        var seatY = S.base + r * S.rise, xc = S.x0 + S.dir * (r + .5) * S.d;
+        for(var z = zA; z > zB; z -= .6){
+          if(Math.random() > occ) continue;
+          people.push({x:xc + (Math.random() - .5) * .14, y:seatY, z:z + (Math.random() - .5) * .16, up:Math.random() < .07});
+        }
+      }
+    }
+    seat(L, SZ0 - 1, SZ1 + 1, small ? .62 : .84);
+    seat(R, SZ0 - 1, SZ1 + 1, small ? .5 : .72);
+    var SHIRTS = ["#9E0E48","#F2A900","#E8EDF2","#23344F","#1F6F46","#C43A3A","#3E7CB1","#6B7079","#D9D2C3","#12161C","#7A2E8C","#E07B2E","#9E0E48","#F2A900","#1B1F26","#B8C2CC"];
+    var SKIN = ["#F1C8A5","#D9A47C","#B77B55","#8A5A3C","#5E3B28","#E8B896","#C68E62"];
+    var bodyGeo = new T.BoxGeometry(.44, .6, .3), headGeo = new T.SphereGeometry(.13, 7, 5);
+    var crowdMat = new T.MeshLambertMaterial({color:C("#9A9A9A")});
+    var bodies = new T.InstancedMesh(bodyGeo, crowdMat, people.length);
+    var heads = new T.InstancedMesh(headGeo, crowdMat, people.length);
+    people.forEach(function(p, i){
+      var sy = p.up ? 1.55 : 1, s = .9 + Math.random() * .2;
+      dummy.position.set(p.x, p.y + .3 * sy * s + .04, p.z); dummy.scale.set(s, sy * s, s); dummy.rotation.set(0, (Math.random() - .5) * .5, 0);
+      dummy.updateMatrix(); bodies.setMatrixAt(i, dummy.matrix);
+      dummy.position.y = p.y + .6 * sy * s + .17; dummy.scale.set(s, s, s);
+      dummy.updateMatrix(); heads.setMatrixAt(i, dummy.matrix);
+      bodies.setColorAt(i, C(SHIRTS[Math.random() * SHIRTS.length | 0]));
+      heads.setColorAt(i, C(SKIN[Math.random() * SKIN.length | 0]));
+    });
+    add(bodies); add(heads);
+
+    /* ---- start light gantry: legs on the walls, five panels of two lamps ---- */
+    var gMat = new T.MeshPhongMaterial({color:C("#14181E"), specular:C("#1C2026"), shininess:30});
+    var gDark = new T.MeshPhongMaterial({color:C("#0B0E12"), specular:C("#15181C"), shininess:20});
+    [LW, PW].forEach(function(x){ box(.6, 8.4, .6, gMat, x, 4.2 + 1.1, GZ).castShadow = true; });
+    box(PW - LW + .6, 1, 1, gMat, (LW + PW) / 2, 9.9, GZ).castShadow = true;
+    box(7.6, 2.6, .5, gDark, 0, 8.1, GZ).castShadow = true;
+    var LAMP_OFF = C("#2A0808"), LAMP_ON = C("#FF2B2B"), lamps = [];
+    var lampGeo = new T.CircleGeometry(.37, 24), hoodGeo = new T.BoxGeometry(.86, .05, .3);
+    for(var k = 0; k < 5; k++){
+      var px = (k - 2) * 1.45;
+      box(1.18, 2.35, .42, gMat, px, 8.1, GZ + .3);
+      var lm = new T.MeshBasicMaterial({color:LAMP_OFF.clone()});
+      [8.62, 7.56].forEach(function(ly){
+        var disc = new T.Mesh(lampGeo, lm); disc.position.set(px, ly, GZ + .52); add(disc);
+        var hood = new T.Mesh(hoodGeo, gDark); hood.position.set(px, ly + .44, GZ + .62); add(hood);
+      });
+      var glow = glowSprite("#FF2B2B", 2.5, .7); glow.position.set(px, 8.1, GZ + 1); glow.visible = false; add(glow);
+      lamps.push({mat:lm, glow:glow});
+    }
+
+    /* ---- the cars ---- */
+    var M = {
+      body:new T.MeshPhongMaterial({color:C("#9E0E48"), specular:C("#4A3A42"), shininess:38}),
+      acc:new T.MeshPhongMaterial({color:C("#F2A900"), specular:C("#3A3530"), shininess:30}),
+      carbon:new T.MeshPhongMaterial({color:C("#14171B"), specular:C("#2A2E35"), shininess:48}),
+      tyre:std("#17191C", .92),
+      rim:std("#3A4049", .35, .8),
+      light:flat("#FF2A2A"),
+      hit:new T.MeshBasicMaterial({visible:false})
+    };
+    /* a box whose front (-z) end is resized; the bottom stays at y = 0 so parts sit where they are placed */
+    function taper(w0, h0, w1, h1, len, drop){
+      var g = new T.BoxGeometry(w0, h0, len), p = g.attributes.position;
+      for(var i = 0; i < p.count; i++){
+        var front = p.getZ(i) < 0, top = p.getY(i) > 0;
+        var w = front ? w1 : w0, h = front ? h1 : h0;
+        p.setXYZ(i, p.getX(i) * w / w0, (top ? h : 0) - (front ? drop || 0 : 0), p.getZ(i));
+      }
+      g.computeVertexNormals();
+      return g;
+    }
+    function part(geo, mat, x, y, z, parent, noShadow){
+      var m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = !noShadow; parent.add(m); return m;
+    }
+    function B(w, h, d){ return new T.BoxGeometry(w, h, d); }
+    var tyreGeoF = new T.CylinderGeometry(.35, .35, .31, 22), tyreGeoR = new T.CylinderGeometry(.37, .37, .42, 22);
+    var rimGeoF = new T.CylinderGeometry(.23, .23, .32, 14), rimGeoR = new T.CylinderGeometry(.24, .24, .43, 14);
+    var bandGeoF = new T.TorusGeometry(.29, .016, 4, 28), bandGeoR = new T.TorusGeometry(.305, .018, 4, 28);
+
+    function makeCar(){
+      var car = new T.Group();
+      part(B(1.55, .05, 3.9), M.carbon, 0, .08, .15, car);                          /* floor */
+      part(taper(.78, .5, .52, .4, 1.9), M.body, 0, .2, -.85, car);                 /* survival cell */
+      part(taper(.5, .34, .2, .16, 1.35, .1), M.body, 0, .22, -2.45, car);          /* nose */
+      [-1, 1].forEach(function(s){
+        part(taper(.34, .24, .5, .5, 1.8), M.body, s * .6, .12, .15, car);          /* sidepods */
+        part(B(.12, .07, .04), M.body, s * .46, .8, -1.02, car);                     /* mirrors */
+        part(B(.03, .14, .03), M.carbon, s * .44, .7, -1.0, car);
+        part(B(.035, .62, .66), M.body, s * .53, .76, 2.2, car);                     /* rear wing endplates */
+        part(B(.03, .26, .62), M.body, s * .975, .16, -2.95, car);                   /* front wing endplates */
+      });
+      part(taper(.3, .32, .66, .7, 2.1), M.body, 0, .25, .95, car);                 /* engine cover */
+      part(B(.3, .26, .42), M.body, 0, .92, .02, car);                               /* airbox */
+      part(taper(.03, .06, .03, .3, 1.05), M.acc, 0, .74, .72, car);                /* shark fin */
+      part(B(.42, .08, .72), M.carbon, 0, .69, -.62, car);                           /* cockpit rim */
+      part(new T.SphereGeometry(.14, 16, 12), M.acc, 0, .8, -.5, car);              /* helmet */
+      var halo = part(new T.TorusGeometry(.3, .028, 6, 22, Math.PI), M.carbon, 0, .93, -.55, car);
+      halo.rotation.x = -Math.PI / 2;
+      part(B(.05, .24, .05), M.carbon, 0, .8, -.85, car);
+      part(B(1.06, .045, .34), M.carbon, 0, .9, 2.18, car);                          /* rear wing */
+      part(B(1.06, .04, .2), M.acc, 0, 1.02, 2.36, car).rotation.x = .35;
+      part(B(.92, .03, .18), M.carbon, 0, .46, 2.12, car);                           /* beam wing */
+      part(B(.05, .42, .08), M.carbon, 0, .67, 2.05, car);
+      part(B(1.12, .16, .35), M.carbon, 0, .16, 2.1, car);                           /* diffuser */
+      part(B(.16, .07, .03), M.light, 0, .33, 2.29, car, true);                      /* rain light */
+      part(B(1.95, .035, .55), M.carbon, 0, .1, -3.0, car);                          /* front wing */
+      part(B(1.8, .03, .28), M.acc, 0, .17, -2.86, car).rotation.x = .3;
+
+      var wheels = [];
+      [[-1.78, .35, .83, tyreGeoF, rimGeoF, bandGeoF, .155], [1.55, .37, .8, tyreGeoR, rimGeoR, bandGeoR, .21]].forEach(function(w){
+        [-1, 1].forEach(function(s){
+          var wg = new T.Group(); wg.position.set(s * w[2], w[1], w[0]); car.add(wg);
+          var t = part(w[3], M.tyre, 0, 0, 0, wg); t.rotation.z = Math.PI / 2;
+          var r = part(w[4], M.rim, 0, 0, 0, wg, true); r.rotation.z = Math.PI / 2;
+          var band = part(w[5], M.acc, s * (w[6] + .003), 0, 0, wg, true); band.rotation.y = Math.PI / 2;
+          part(B(w[6] * 2 + .03, .3, .05), M.carbon, 0, 0, 0, wg, true);            /* spoke, so the spin reads */
+          var arm = w[2] - .3;                                                          /* wishbones, on the chassis so they do not spin */
+          part(B(arm, .03, .05), M.carbon, s * (.15 + arm / 2), w[1] + .06, w[0], car);
+          part(B(arm, .03, .05), M.carbon, s * (.15 + arm / 2), w[1] - .1, w[0], car);
+          wheels.push(wg);
+        });
+      });
+      return {group:car, wheels:wheels};
+    }
+
+    var shadowMat = decal(flat("#000000", {map:soft, transparent:true, opacity:.72, depthWrite:false}), 6);
+    var cars = SLOTS.map(function(s, i){
+      var c = makeCar();
+      c.group.scale.setScalar(1.12);
+      c.group.position.set(s.x, 0, s.z);
+      flatOnGround(2.4, 6.6, shadowMat, 0, -.3, .01, c.group);
+      c.glowMat = decal(flat("#D6215F", {map:soft, transparent:true, opacity:0, blending:T.AdditiveBlending, depthWrite:false}), 7);
+      flatOnGround(3.6, 7.8, c.glowMat, 0, -.3, .02, c.group);
+      c.hit = new T.Mesh(B(2.4, 1.6, 6.2), M.hit); c.hit.position.set(0, .8, -.4); c.hit.userData.i = i;
+      c.group.add(c.hit);
+      c.slot = s; c.z = s.z;
+      add(c.group);
+      return c;
+    });
+
+    /* ---- sizing: keep the horizontal field of view steady so narrow screens still see the whole grid ---- */
+    var W = 0, H = 0;
+    function resize(){
+      W = sceneHost.clientWidth; H = sceneHost.clientHeight;
+      if(!W || !H) return;
+      renderer.setSize(W, H, false);
+      camera.aspect = W / H;
+      var hf = Math.tan(BASE_VFOV * Math.PI / 360) * 16 / 9;
+      camera.fov = Math.min(64, Math.atan(hf / camera.aspect) * 360 / Math.PI);
+      camera.updateProjectionMatrix();
+      kick();
+    }
+
+    /* ---- grid numbers follow their cars ---- */
+    var v3 = new T.Vector3(), tagSize = [];
+    function placeTags(){
+      cars.forEach(function(c, i){
+        var p = c.group.position, side = c.slot.x < 0 ? -1 : 1;
+        v3.set(p.x + side * 1.45, .45, p.z + .4).project(camera);
+        var x = (v3.x * .5 + .5) * W, y = (-v3.y * .5 + .5) * H;
+        var dist = camera.position.distanceTo(p);
+        var fs = Math.round(Math.max(11, Math.min(18, 330 / dist * Math.min(1, Math.max(.72, W / 1000)))));
+        if(tagSize[i] !== fs){ tagBtns[i].style.fontSize = fs + "px"; tagSize[i] = fs; }
+        tagBtns[i].style.transform = "translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0) translate(" + (side < 0 ? "-100%" : "0") + ",-50%)";
+      });
+    }
+
+    /* ---- render on demand ---- */
+    var raf = 0, dirty = true, visible = true, last = performance.now();
+    var par = {x:0, y:0, tx:0, ty:0};
+    function kick(){ dirty = true; if(!raf && visible) raf = requestAnimationFrame(loop); }
+    function loop(now){
+      raf = 0;
+      var dt = Math.min(.05, (now - last) / 1000); last = now;
+      var busy = false;
+      if(flying) busy = stepLaunch(now) || busy;
+      var ease = 1 - Math.pow(.004, dt);
+      par.x += (par.tx - par.x) * ease; par.y += (par.ty - par.y) * ease;
+      if(Math.abs(par.tx - par.x) > .002 || Math.abs(par.ty - par.y) > .002) busy = true;
+      if(dirty || busy){
+        camera.position.set(CAM.x + par.x, CAM.y + par.y, CAM.z);
+        camera.lookAt(LOOK);
+        renderer.render(scene, camera);
+        placeTags();
+        dirty = false;
+      }
+      if(busy && visible) raf = requestAnimationFrame(loop);
+    }
+
+    /* ---- lights out: the grid launches away and comes back round from behind ---- */
+    var flying = false, flyT0 = 0;
+    var ACC = 110, OUT = 1.6, WAIT = .35, IN = 1.7, GAP = .13, BACK_Z = 30;
+    function launch(){
+      if(flying) return;
+      flying = true; flyT0 = performance.now(); last = flyT0;
+      sceneHost.classList.add("flying");
+      kick();
+    }
+    function stepLaunch(now){
+      var t = (now - flyT0) / 1000, busy = false;
+      cars.forEach(function(c, i){
+        var tt = t - i * GAP, s = c.slot, z;
+        if(tt < 0){ z = s.z; busy = true; }
+        else if(tt < OUT){ z = s.z - .5 * ACC * tt * tt; busy = true; }
+        else if(tt < OUT + WAIT){ z = Z1; busy = true; }
+        else if(tt < OUT + WAIT + IN){ var k = (tt - OUT - WAIT) / IN; z = BACK_Z + (s.z - BACK_Z) * (1 - Math.pow(1 - k, 3)); busy = true; }
+        else z = s.z;
+        var moved = z - c.z;
+        if(Math.abs(moved) < 60) c.wheels.forEach(function(w){ w.rotation.x += moved / .36; });
+        c.z = z; c.group.position.z = z; c.group.visible = z > Z1 + 1;
+      });
+      renderer.shadowMap.needsUpdate = true;
+      if(!busy){ flying = false; sceneHost.classList.remove("flying"); }
+      return busy;
+    }
+
+    /* ---- pointer: hover and click on the cars themselves, plus a little parallax ---- */
+    var ray = new T.Raycaster(), ndc = new T.Vector2(), hits = cars.map(function(c){ return c.hit; }), hover = -1;
+    function pick(ev){
+      var r = canvas.getBoundingClientRect();
+      ndc.set((ev.clientX - r.left) / r.width * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1);
+      ray.setFromCamera(ndc, camera);
+      var h = ray.intersectObjects(hits, false);
+      return h.length ? h[0].object.userData.i : -1;
+    }
+    function setHover(i){
+      if(i === hover) return;
+      if(hover >= 0) lit(hover, false);
+      hover = i;
+      if(i >= 0) lit(i, true);
+      sceneHost.classList.toggle("hot", i >= 0);
+    }
+    canvas.addEventListener("pointermove", function(ev){
+      if(flying) return;
+      if(ev.pointerType === "mouse"){
+        setHover(pick(ev));
+        if(!reduced){
+          var r = canvas.getBoundingClientRect();
+          par.tx = ((ev.clientX - r.left) / r.width - .5) * 2.6;
+          par.ty = -((ev.clientY - r.top) / r.height - .5) * 1.1;
+          kick();
+        }
+      }
+    });
+    canvas.addEventListener("pointerleave", function(){ setHover(-1); par.tx = 0; par.ty = 0; kick(); });
+    canvas.addEventListener("click", function(ev){ if(flying) return; var i = pick(ev); if(i >= 0) openPit(i, tagBtns[i]); });
+
+    /* ---- only draw while the grid is on screen ---- */
+    if("IntersectionObserver" in window){
+      new IntersectionObserver(function(es){ visible = es[0].isIntersecting; if(visible) kick(); }, {rootMargin:"120px"}).observe(sceneHost);
+    }
+    if("ResizeObserver" in window) new ResizeObserver(resize).observe(sceneHost);
+    else window.addEventListener("resize", resize);
+
+    var livery = [M.body, boardMat, ledMat];
+    resize();
+    renderer.shadowMap.needsUpdate = true;
+    sceneHost.classList.add("ready");
+
+    return {
+      lamp:function(k, on){
+        var L = lamps[k]; if(!L) return;
+        L.mat.color.copy(on ? LAMP_ON : LAMP_OFF); L.glow.visible = on; L.on = on;
+        lampLight.intensity = lamps.filter(function(l){ return l.on; }).length * .55;
+        kick();
+      },
+      launch:launch,
+      isFlying:function(){ return flying; },
+      highlight:function(i, on){ cars[i].glowMat.opacity = on ? .85 : 0; kick(); },
+      paint:function(a, b, h){
+        livery.forEach(function(m){ m.color.copy(C(a)); });
+        runoffMat.color.copy(C(a));
+        M.acc.color.copy(C(b));
+        cars.forEach(function(c){ c.glowMat.color.copy(C(h)); });
+        kick();
+      },
+      redraw:kick
+    };
+  }
+
+  function noGrid3D(){
+    document.getElementById("grid").classList.add("no3d");
+    document.getElementById("gridHint").textContent = "Click a row in the tower to open its pit board";
+  }
 
   /* ============ pit board ============ */
   var pit = document.getElementById("pit"), lastFocus = null, current = 0;
@@ -754,63 +1280,49 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
   });
 
   /* ============ start lights ============ */
-  var lamps = Array.prototype.slice.call(document.querySelectorAll("#gantry .lamp"));
+  var LAMPS = 5;
   var lightsTxt = $("lightsTxt"), lightTimers = [], running = false;
-  function clearLights(){ lightTimers.forEach(clearTimeout); lightTimers = []; lamps.forEach(function(l){ l.classList.remove("on"); }); }
+  function setLamp(k, on){ if(grid3d) grid3d.lamp(k, on); }
+  function clearLights(){ lightTimers.forEach(clearTimeout); lightTimers = []; for(var k = 0; k < LAMPS; k++) setLamp(k, false); }
   function startLights(){
     clearLights(); running = true;
     lightsTxt.classList.remove("go"); lightsTxt.textContent = "Grid forming";
-    lamps.forEach(function(l, k){
-      lightTimers.push(setTimeout(function(){ l.classList.add("on"); lightsTxt.textContent = "Light " + (k+1) + " of 5"; }, 450 + k * 700));
-    });
+    for(var k = 0; k < LAMPS; k++){
+      (function(k){
+        lightTimers.push(setTimeout(function(){ setLamp(k, true); lightsTxt.textContent = "Light " + (k+1) + " of 5"; }, 450 + k * 700));
+      })(k);
+    }
     var hold = 450 + 4 * 700 + 700 + Math.random() * 900;
     lightTimers.push(setTimeout(function(){
-      lamps.forEach(function(l){ l.classList.remove("on"); });
+      for(var k = 0; k < LAMPS; k++) setLamp(k, false);
       lightsTxt.textContent = "Lights out"; lightsTxt.classList.add("go");
       launchCars();
       running = false;
     }, hold));
   }
 
-  /* cars fly off the top of the grid, then roll back up into their boxes from below */
-  var flying = false;
-  function launchCars(){
-    if(reduced || flying) return;
-    flying = true;
-    slotBtns.forEach(function(b, k){
-      var car = b.querySelector(".car");
-      car.classList.remove("fly"); void car.offsetWidth;
-      /* P1 goes first, the grid behind follows in order */
-      car.style.animationDelay = (k * 0.09).toFixed(2) + "s";
-      car.classList.add("fly");
-    });
-    setTimeout(function(){
-      flying = false;
-      slotBtns.forEach(function(b){ var c = b.querySelector(".car"); c.classList.remove("fly"); c.style.animationDelay = ""; });
-    }, 3200 + slotBtns.length * 90 + 100);
-  }
+  /* cars launch up the straight, then come back round and settle on the grid */
+  function launchCars(){ if(reduced || !grid3d) return; grid3d.launch(); }
 
   $("relight").addEventListener("click", function(){ if(!running) startLights(); });
-  var gantry = $("gantry");
-  gantry.addEventListener("click", function(){ if(!running) startLights(); });
-  gantry.addEventListener("keydown", function(e){ if((e.key === "Enter" || e.key === " ") && !running){ e.preventDefault(); startLights(); } });
 
   /* scrolling away from the grid sends the cars off too; re-arms once the grid is back in view */
-  var tarmac = document.querySelector(".tarmac"), gridArmed = false;
+  var gridArmed = false;
   function checkGridExit(){
-    if(reduced || !tarmac) return;
-    var tr = tarmac.getBoundingClientRect(), vh = window.innerHeight;
+    if(reduced || !sceneHost || !grid3d) return;
+    var tr = sceneHost.getBoundingClientRect(), vh = window.innerHeight;
     /* armed while the grid sits across the middle of the screen */
     if(tr.top < vh * 0.6 && tr.bottom > vh * 0.4){ gridArmed = true; return; }
     /* leaving in either direction, while the cars are still in view */
     if(gridArmed && !running){ gridArmed = false; launchCars(); }
   }
-  if(!("IntersectionObserver" in window)){ setTimeout(startLights, 800); }
-  else {
+  function armLights(){
+    if(!grid3d) return;
+    if(!("IntersectionObserver" in window)){ setTimeout(startLights, 800); return; }
     var lio = new IntersectionObserver(function(es){
       es.forEach(function(e){ if(e.isIntersecting){ startLights(); lio.disconnect(); } });
     }, {threshold:.5, rootMargin:"0px 0px -15% 0px"});
-    lio.observe(gantry);
+    lio.observe(sceneHost);
   }
 
   /* ============ livery ============ */
@@ -821,6 +1333,8 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
     paintCache.a = cs.getPropertyValue("--maroon").trim() || "#9E0E48";
     paintCache.b = cs.getPropertyValue("--amber").trim() || "#F2A900";
     paintCache.c = cs.getPropertyValue("--coolant").trim() || "#33C3D6";
+    paintCache.h = cs.getPropertyValue("--maroon-hot").trim() || "#D6215F";
+    if(grid3d) grid3d.paint(paintCache.a, paintCache.b, paintCache.h);
   }
   function setLivery(name, save){
     if(name === "mac") root.removeAttribute("data-livery"); else root.setAttribute("data-livery", name);
@@ -831,6 +1345,19 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
   paints.forEach(function(b){ b.addEventListener("click", function(){ setLivery(b.getAttribute("data-livery"), true); }); });
   refreshPaint();
   try{ var saved = localStorage.getItem("livery"); if(saved === "gulf" || saved === "night") setLivery(saved, false); }catch(e){}
+
+  /* ============ bring in three.js for the grid, then build it ============ */
+  (function(){
+    var s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+    s.async = true;
+    s.onload = function(){
+      try{ grid3d = initGrid3D(); }catch(e){ grid3d = null; if(window.console) console.warn("Grid scene failed", e); }
+      if(grid3d){ refreshPaint(); armLights(); } else noGrid3D();
+    };
+    s.onerror = noGrid3D;
+    document.head.appendChild(s);
+  })();
 
   /* ============ counters ============ */
   var counted = false;
