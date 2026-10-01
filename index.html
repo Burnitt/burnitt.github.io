@@ -112,7 +112,7 @@ h1 .ln span{display:block}
 .btn:hover{transform:translateY(-2px);border-color:var(--maroon-hot)}
 .btn.primary{background:var(--maroon);border-color:var(--maroon);color:#fff}
 .btn.primary:hover{background:var(--maroon-hot);border-color:var(--maroon-hot)}
-.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);margin-top:38px;overflow:hidden}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);margin-top:38px;overflow:hidden}
 .stat{background:var(--panel);padding:16px 18px}
 .stat b{display:block;font-family:var(--display);font-size:clamp(24px,4vw,34px);font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
 .stat span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:8px}
@@ -303,7 +303,6 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
 @media (max-width:820px){
   .two{grid-template-columns:1fr}
   .lap{grid-template-columns:1fr;gap:10px}
-  .strip{grid-template-columns:repeat(2,1fr)}
   #hud{display:none}
   .livery{border-left:0;padding-left:0}
   .slot-btn{flex-direction:column;align-items:flex-start}
@@ -352,7 +351,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
 <div class="hero">
   <canvas id="trace" aria-hidden="true"></canvas>
   <div class="wrap" id="heroWrap">
-    <div class="eyebrow">Hamilton, ON &nbsp;//&nbsp; Hardware systems &amp; test &nbsp;//&nbsp; Open to Summer 2027</div>
+    <div class="eyebrow">Hardware systems &amp; test &nbsp;//&nbsp; Open to Summer 2027</div>
     <h1><span class="ln"><span>Gurnit</span></span><span class="ln"><span>Chopra</span></span></h1>
     <span class="thin">Second-year Computer Engineering (Co-op) at McMaster, working toward hardware systems design, test and verification. I like the layer where sensors, circuits and firmware have to agree with each other, and the part where you prove that they do.</span>
     <div class="rule"></div>
@@ -364,8 +363,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
     </div>
     <div class="strip">
       <div class="stat"><b data-count="11.9" data-dec="1">11.9</b><span>GPA / 12.0</span></div>
-      <div class="stat"><b data-count="70">70</b><span>% CV track accuracy</span></div>
-      <div class="stat"><b data-count="100">100</b><span>ms vision latency cap</span></div>
+      <div class="stat"><b data-count="30" data-suffix="+">30+</b><span>Club members, built from zero</span></div>
       <div class="stat"><b data-count="15">15</b><span>Equipment categories authored</span></div>
     </div>
   </div>
@@ -408,7 +406,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
         <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>June 2026 →</div>
         <div>
           <h3>Technical Training Developer</h3>
-          <div class="org">ICC Evaluation Service — Electrical Division (Remote)</div>
+          <div class="org">ICC Evaluation Service — Electrical Division · Brea, CA (Remote)</div>
           <ul>
             <li>Authoring field evaluation training modules across 15+ electrical equipment categories: battery energy storage, power conversion equipment, transformers, panelboards, hazardous location equipment.</li>
             <li>Mapping UL, CSA C22.2, NFPA 70/790/791 and CEC requirements to component-level inspection criteria covering wiring, markings, construction and testing.</li>
@@ -420,7 +418,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
         <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>Sep 2025 →</div>
         <div>
           <h3>Computer Vision Subteam</h3>
-          <div class="org">McMaster RoboMaster</div>
+          <div class="org">McMaster RoboMaster · Hamilton, ON</div>
           <ul>
             <li>Building real-time tracking and trajectory prediction in Python and OpenCV with a 10-person subteam, holding 70% accuracy under a 100 ms latency budget.</li>
             <li>Validated against recorded match footage rather than assumptions, improving detection consistency by roughly 20%.</li>
@@ -432,7 +430,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
         <div class="when"><div class="status done"><span class="tyre-ic"></span>Chequered</div>May – Aug 2026</div>
         <div>
           <h3>Software Engineering Intern</h3>
-          <div class="org">Hermes AI (Atticus.AI)</div>
+          <div class="org">Hermes AI (Atticus.AI) · Toronto, ON (Remote)</div>
           <ul>
             <li>Shipped production features to a legal AI platform with real clients: a vertical sidebar navigation migration, a Clear Chat feature, and chat-history scoping fixes across frontend and backend.</li>
             <li>Worked in Python, FastAPI, React and TypeScript inside a real Git/GitHub review loop.</li>
@@ -444,7 +442,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
         <div class="when"><div class="status done"><span class="tyre-ic"></span>Chequered</div>Nov 2023 – Sep 2025</div>
         <div>
           <h3>Technical Curriculum Developer</h3>
-          <div class="org">Youthtech Visionaries</div>
+          <div class="org">Youthtech Visionaries · Caledon, ON (Remote)</div>
           <ul>
             <li>Designed hands-on Arduino and circuit design demos, then taught them to people who had never opened a breadboard.</li>
             <li>Partnered with educators across 3 school boards to put technical resources into 20+ schools, reaching 500+ students.</li>
@@ -455,7 +453,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
         <div class="when"><div class="status done"><span class="tyre-ic"></span>Chequered</div>Sep 2023 – Jun 2025</div>
         <div>
           <h3>Cofounder &amp; Vice President</h3>
-          <div class="org">Mayfield SS Engineering Club</div>
+          <div class="org">Mayfield SS Engineering Club · Brampton, ON (On site)</div>
           <ul>
             <li>Started the club from nothing and grew it to 30+ members across 50+ meetings.</li>
             <li>Ran 10+ robotics and Arduino workshops and 5+ team engineering projects.</li>
@@ -489,7 +487,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
         <span class="hot">Altium Designer <em style="font-style:normal;color:var(--amber)">· in progress</em></span>
         <span>Autodesk Inventor</span><span>Git / GitHub</span><span>NFPA 70 / 790 / 791</span><span>UL</span><span>CSA C22.2</span><span>CEC</span></div></div>
       <div class="bay sx"><h3>Certifications</h3><div class="tags">
-        <span>AWS Cloud Practitioner Essentials</span><span>AWS Cloud Quest: Cloud Practitioner</span>
+        <span>AWS Cloud Practitioner Essentials</span><span>AWS Essentials of Prompt Engineering</span>
         <span class="hot">EFC Doug Baldwin Scholarship <em style="font-style:normal;color:var(--amber)">· 2026</em></span></div></div>
     </div>
   </div>
@@ -513,7 +511,6 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
         <div class="row"><span>Discipline</span><span>Computer Engineering (Co-op)</span></div>
         <div class="row"><span>School</span><span>McMaster University</span></div>
         <div class="row"><span>Year</span><span>Second year</span></div>
-        <div class="row"><span>Base</span><span>Hamilton, Ontario</span></div>
         <div class="row"><span>Targeting</span><span>Hardware systems · Test &amp; verification</span></div>
         <div class="row"><span>Learning now</span><span>Altium PCB design · Logic design</span></div>
         <div class="row"><span>Award</span><span>EFC Doug Baldwin Scholarship</span></div>
@@ -544,7 +541,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
 <footer>
   <div class="wrap foot-in">
     <span>© 2026 Gurnit Chopra</span>
-    <span>Chassis GC-26 // Hamilton, Ontario</span>
+    <span>Chassis GC-26</span>
     <span>Built from scratch, no template</span>
   </div>
 </footer>
@@ -1365,10 +1362,11 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
     if(counted) return; counted = true;
     document.querySelectorAll("[data-count]").forEach(function(el){
       var target = parseFloat(el.getAttribute("data-count")), dec = parseInt(el.getAttribute("data-dec") || "0", 10);
-      if(reduced){ el.textContent = target.toFixed(dec); return; }
+      var suf = el.getAttribute("data-suffix") || "";
+      if(reduced){ el.textContent = target.toFixed(dec) + suf; return; }
       var t0 = null;
       (function step(ts){ if(!t0) t0 = ts; var p = Math.min((ts - t0) / 1100, 1);
-        el.textContent = (target * (1 - Math.pow(1 - p, 3))).toFixed(dec); if(p < 1) requestAnimationFrame(step); })(performance.now());
+        el.textContent = (target * (1 - Math.pow(1 - p, 3))).toFixed(dec) + suf; if(p < 1) requestAnimationFrame(step); })(performance.now());
     });
   }
 
