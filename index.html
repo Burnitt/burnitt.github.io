@@ -374,7 +374,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
   <div class="wrap">
     <div class="sec-head sx">
       <h2>Starting Grid</h2>
-      <div class="tag">7 on the grid // P1 = latest</div>
+      <div class="tag">6 on the grid // P1 = latest</div>
     </div>
 
     <div class="lights-bar">
@@ -637,10 +637,6 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
      sum:"A self-contained radar on an ESP32. An HC-SR04 sweeps from 15° to 165° on an SG90 servo while C++ firmware draws range rings, a live sweep line and persistent detections on a 128×64 SSD1306 OLED. No PC in the loop.",
      specs:[["Stack","ESP32 · C++ · I²C · PWM"],["Sensing","Ultrasonic time-of-flight, 40 cm window"],["Display","SSD1306 over I²C on GPIO 32 / 33"],["Hard part","Timer conflict, strapping pins, I²C remap"]],
      notes:["Servo and display worked alone but failed together. Isolated each in a minimal sketch, then reintroduced them one at a time, which surfaced three separate faults.","Moved every signal off the ESP32 strapping pins after finding they were changing the boot mode.","Fixed a silent display by remapping I²C explicitly with Wire.begin(32, 33).","Next: bound the echo wait with a timeout and move to a timer-driven, non-blocking loop."]},
-    {name:"Surface Defect Detection", yr:"2026 · in progress", tags:["Vision & AI","Edge"],
-     sum:"YOLOv8-nano fine-tuned on RDD2022 for pavement and sidewalk cracks, built to run on a Raspberry Pi 5 rather than a workstation.",
-     specs:[["Stack","Python · YOLOv8 · OpenCV"],["Target","Raspberry Pi 5"],["Dataset","RDD2022"],["Next","ROS 2 perception node"]],
-     notes:["Edge inference is the constraint that shapes every choice, from model size to input resolution.","Planned as the perception layer of an autonomous defect inspection pipeline."]},
     {name:"Robotic End Effector", repo:"https://github.com/Burnitt/Robotic-End-Effector", yr:"Oct – Dec 2025", tags:["CAD","Mechatronics"],
      sum:"A servo-driven rack-and-pinion gripper for a warehouse arm, taken from gear geometry to dimensioned drawings to printed, tested parts on a Raspberry Pi 4 controlled Q-arm.",
      specs:[["Stack","Autodesk Inventor · 3D printing · Python"],["Team","McMaster 1P13 design project"],["Owned","Gear CAD, drawings, sign_up(), pack_products()"]],
@@ -702,7 +698,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
 
   /* ---------------------------------------------------------------
      The scene. Units are metres. The track runs away from the camera
-     along -z; the camera sits behind P7, a few metres up.
+     along -z; the camera sits behind the last car, a few metres up.
      --------------------------------------------------------------- */
   function initGrid3D(){
     var T = window.THREE;
