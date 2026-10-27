@@ -1317,6 +1317,7 @@ nav.links{flex-wrap:nowrap}
   }
   function openPit(i, from){
     lastFocus = from || document.activeElement;
+    if(window.__visitOpened) window.__visitOpened(CARS[i].name);
     fillPit(i);
     pit.hidden = false;
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ pit.classList.add("open"); }); });
@@ -1603,5 +1604,54 @@ nav.links{flex-wrap:nowrap}
 })();
 </script>
 
+<script>
+/* Visit pings: tells the Cloudflare Worker when someone arrives and what they looked at before leaving.
+   Visit the site once with ?me to stop counting your own visits on that browser (?me=off undoes it). */
+(function(){
+  "use strict";
+  var EP = "https://site-visits.cgurnit.workers.dev";
+  if(location.protocol === "file:") return;
+  try{
+    var q = new URLSearchParams(location.search).get("me");
+    if(q === "off") localStorage.removeItem("gc-me"); else if(q !== null) localStorage.setItem("gc-me", "1");
+    if(localStorage.getItem("gc-me")) return;
+  }catch(e){}
+  if(navigator.webdriver) return;
+
+  var t0 = Date.now(), maxScroll = 0, seen = [], opened = [], visit = null, sentAt = 0;
+  var dev = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  var names = {history:"History", grid:"Grid", setup:"Setup", reading:"Reading", offtrack:"Off Track", contact:"Radio"};
+
+  window.__visitOpened = function(name){ if(opened.indexOf(name) < 0) opened.push(name); };
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - innerHeight;
+    var p = h > 0 ? scrollY / h * 100 : 100;
+    if(p > maxScroll) maxScroll = p;
+  }
+  addEventListener("scroll", onScroll, {passive:true});
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ var n = names[e.target.id]; if(e.isIntersecting && n && seen.indexOf(n) < 0) seen.push(n); });
+    }, {threshold:.35});
+    Object.keys(names).forEach(function(id){ var el = document.getElementById(id); if(el) io.observe(el); });
+  }
+
+  fetch(EP + "/start", {method:"POST", body: JSON.stringify({
+    page: location.pathname + location.hash, ref: document.referrer, lang: navigator.language,
+    tz: (Intl.DateTimeFormat().resolvedOptions() || {}).timeZone, dev: dev
+  })}).then(function(r){ return r.ok ? r.json() : null; }).then(function(v){ if(v && v.id) visit = v; }).catch(function(){});
+
+  function leave(){
+    if(!visit || Date.now() - sentAt < 1500) return;
+    sentAt = Date.now(); onScroll();
+    var data = JSON.stringify({id: visit.id, sig: visit.sig, secs: Math.round((Date.now() - t0) / 1000),
+      scroll: maxScroll, seen: seen, opened: opened});
+    if(navigator.sendBeacon) navigator.sendBeacon(EP + "/end", data);
+    else fetch(EP + "/end", {method:"POST", body:data, keepalive:true}).catch(function(){});
+  }
+  document.addEventListener("visibilitychange", function(){ if(document.visibilityState === "hidden") leave(); });
+  addEventListener("pagehide", leave);
+})();
+</script>
 </body>
 </html>
