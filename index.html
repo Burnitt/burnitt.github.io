@@ -1092,11 +1092,13 @@ nav.links a.nav-cv{display:inline-block}
   <div class="cv-sec">
     <h2>Projects</h2>
     <div class="entry">
-      <div class="row"><span><a href="https://github.com/Burnitt/ESP32-Ultrasonic-Radar" target="_blank" rel="noopener"><b>ESP32 Ultrasonic Radar with OLED Display</b></a> | <span class="stack">ESP32, C/C++, I2C, PWM, SSD1306</span></span><span class="r">Jun 2026</span></div>
+      <div class="row"><span><a href="https://github.com/Burnitt/ESP32-Ultrasonic-Radar" target="_blank" rel="noopener"><b>ESP32 Ultrasonic Radar: Build &amp; Characterization</b></a> | <span class="stack">ESP32, C++, Python, Analog Discovery 3</span></span><span class="r">Jun – Oct 2026</span></div>
       <ul>
-        <li>Real-time <strong>ESP32</strong> radar that sweeps an ultrasonic sensor and plots detected objects on an OLED display</li>
-        <li>Debugged bring-up with a <strong>multimeter</strong> and <strong>serial logging</strong>, fixing I2C remapping and GPIO strapping-pin issues</li>
-        <li>Traced the signal path from an HC-SR04 sensor through C/C++ firmware to an SG90 servo and SSD1306 OLED</li>
+        <li>Built a real-time ultrasonic radar on an <strong>ESP32</strong> (HC-SR04, servo, I2C OLED) in C++, running without a PC</li>
+        <li>Wrote a <strong>test plan</strong> with pass/fail limits for 6 tests and published a <strong>test report</strong></li>
+        <li>Automated tests with an <strong>Analog Discovery 3</strong> and Python (pyserial, dwfpy), logging before/after data</li>
+        <li>Root-caused a <strong>5.05 V</strong> output on a 3.3 V GPIO, fixed with a divider; a timeout cut loop time <strong>19%</strong></li>
+        <li>Corrected distance conversion, cutting RMS error from <strong>0.92 to 0.63 cm</strong>; verified echo timing within 0.01%</li>
       </ul>
     </div>
     <div class="entry">
@@ -1106,19 +1108,12 @@ nav.links a.nav-cv{display:inline-block}
         <li>Validated 3D-printed prototypes on a Raspberry Pi 4 controlled arm, cutting manual handling effort by <strong>~95%</strong></li>
       </ul>
     </div>
-    <div class="entry">
-      <div class="row"><span><a href="https://github.com/Burnitt/Autonomous-Driveway-Gate" target="_blank" rel="noopener"><b>Autonomous Driveway Gate</b></a> | <span class="stack">Arduino, C++, Ultrasonic Sensing, Servo Control</span></span><span class="r">May 2024</span></div>
-      <ul>
-        <li>Prototype driveway gate that opens automatically when it detects an approaching vehicle</li>
-        <li>Tuned detection thresholds for a <strong>Parallax PING</strong> sensor and servo to prevent false triggers</li>
-      </ul>
-    </div>
   </div>
 
   <div class="cv-sec">
     <h2>Technical Skills</h2>
     <ul class="skills">
-      <li><b>Test &amp; Measurement:</b> Analog Discovery 3 (oscilloscope, logic analyzer), multimeter, serial logging, breadboarding</li>
+      <li><b>Test &amp; Measurement:</b> Analog Discovery 3 (scope, logic analyzer), multimeter, Python automation (pyserial, dwfpy)</li>
       <li><b>Standards &amp; Compliance:</b> ISO/IEC 17020, UL, CSA C22.2 series, NFPA 70/790/791, CEC, engineering drawings</li>
       <li><b>Hardware &amp; Interfaces:</b> FPGA, ESP32, Arduino, Raspberry Pi, I2C, UART, PWM, GPIO, sensors, motor drivers</li>
       <li><b>Languages:</b> Verilog, C/C++, Python, MATLAB, Java, JavaScript</li>
