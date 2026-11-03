@@ -100,7 +100,7 @@ nav.links a.on{color:var(--amber);border-color:rgba(242,169,0,.35)}
 .paint.p-night{background:linear-gradient(135deg,#31A567 52%,#EFC65B 52%)}
 
 /* ---------- hero ---------- */
-.hero{position:relative;z-index:1;padding-block:clamp(48px,9vw,104px) clamp(36px,6vw,64px);overflow:hidden}
+.hero{position:relative;z-index:1;padding-block:clamp(48px,9vw,104px) clamp(18px,3vw,32px);overflow:hidden}
 .hero canvas{position:absolute;inset:auto 0 0 0;width:100%;height:210px;opacity:.5;z-index:-1}
 .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);
   display:flex;align-items:center;gap:10px;margin-bottom:18px}
@@ -129,7 +129,7 @@ h1 .ln span{display:block}
 .stat span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:8px}
 
 /* ---------- sections ---------- */
-section{position:relative;z-index:1;padding-block:clamp(46px,6.5vw,74px);scroll-margin-top:72px}
+section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll-margin-top:72px}
 .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line);
   padding-bottom:14px;margin-bottom:30px;position:relative}
 .sec-head::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:90px;background:var(--maroon-hot)}
@@ -292,6 +292,40 @@ section{position:relative;z-index:1;padding-block:clamp(46px,6.5vw,74px);scroll-
   #grid:not(.no3d) #towerSw .pc-tags{display:none}
 }
 
+/* hero: latest project link */
+.latest{display:inline-flex;align-items:center;gap:12px;max-width:100%;margin-top:22px;padding:9px 14px;border:1px solid var(--line-hot);border-radius:var(--r);
+  background:var(--panel);color:var(--ink-2);font-size:14.5px;line-height:1.35;transition:border-color .18s,color .18s}
+.latest b{flex:none;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.latest i{font-style:normal;color:var(--amber);transition:transform .18s}
+.latest:hover{border-color:var(--amber);color:var(--ink)}
+.latest:hover i{transform:translateX(3px)}
+.latest + .strip{margin-top:22px}
+
+/* education: one compact card, grades on the right */
+.edu{display:grid;grid-template-columns:1fr auto;gap:22px 36px;align-items:center;margin-top:20px;padding:20px 22px;background:var(--panel);
+  border:1px solid var(--line);border-left:2px solid var(--maroon-hot);border-radius:var(--r)}
+.edu h3{font-size:19px;font-weight:600}
+.edu .org{font-family:var(--mono);font-size:12.5px;color:var(--maroon-hot);margin:6px 0 12px;letter-spacing:.04em}
+.edu-rows{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0}
+.edu-rows dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding-top:3px}
+.edu-rows dd{margin:0;font-size:14.5px;color:var(--ink-2)}
+.edu-stats{list-style:none;margin:0;padding:0;display:flex;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.edu-stats li{background:var(--panel-2);padding:12px 16px;min-width:118px;display:flex;flex-direction:column;gap:3px}
+.edu-stats b{font-family:var(--display);font-size:22px;font-weight:700;line-height:1.1;color:var(--ink)}
+.edu-stats b small{font-size:.55em;color:var(--ink-3);font-weight:600;margin-left:2px}
+.edu-stats span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+@media (max-width:900px){.edu{grid-template-columns:1fr}}
+.edu h3 .edu-loc{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-left:10px;white-space:nowrap}
+@media (max-width:520px){
+  .edu{padding:16px}
+  .edu h3 .edu-loc{display:block;margin:4px 0 0}
+  .edu-rows{grid-template-columns:1fr;gap:2px}.edu-rows dd{margin-bottom:8px}
+  .edu-stats{display:grid;grid-template-columns:repeat(3,1fr)}
+  .edu-stats li{min-width:0;padding:10px}
+  .edu-stats b{font-size:18px}
+  .edu-stats span{font-size:9px;letter-spacing:.06em}
+}
+
 /* plain section names first, the F1 name after as a subtitle */
 .sec-head h2 .f1,.finish h2 .f1{font-family:var(--mono);font-size:.4em;font-weight:500;letter-spacing:.14em;color:var(--amber);vertical-align:.32em;margin-left:.5em;white-space:nowrap}
 @media (max-width:520px){.sec-head h2 .f1,.finish h2 .f1{display:block;margin:6px 0 0;vertical-align:0;font-size:11px}}
@@ -322,6 +356,13 @@ a.zoom:hover img{border-color:var(--line-hot)}
 /* a featured photo takes two tiles in a folder, shown as a wide crop (the viewer opens the whole photo) */
 .f-grid .feature img{aspect-ratio:auto;object-fit:cover}
 @media (min-width:560px){.f-grid figure.feature{grid-column:span 2}}
+/* project files row: under the summary, above the photos */
+.pit-files{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:-6px 0 20px}
+.pit-files span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-right:4px}
+.pit-files a{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink);
+  padding:6px 10px;border:1px solid var(--line-hot);border-radius:var(--r);background:var(--panel-2);transition:border-color .18s,color .18s}
+.pit-files a i{font-style:normal;color:var(--amber)}
+.pit-files a:hover{border-color:var(--amber);color:#fff}
 /* links inside a pit board that flip to another project's board */
 #pitDetail a.pit-jump{color:var(--amber);text-decoration:underline;text-decoration-color:rgba(242,169,0,.45);text-underline-offset:2px}
 #pitDetail a.pit-jump:hover{text-decoration-color:var(--amber)}
@@ -618,6 +659,7 @@ nav.links a.nav-cv{display:inline-block}
       <a class="btn" href="https://www.linkedin.com/in/gurnitchopra/" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn" href="mailto:choprg5@mcmaster.ca">Email</a>
     </div>
+    <a class="latest" href="#grid" data-pit-open="0"><b>Latest</b><span>Radar Test &amp; Characterization: six AD3 tests, three issues found and fixed</span><i aria-hidden="true">→</i></a>
     <div class="strip">
       <div class="stat"><b>11.9</b><span>GPA / 12.0</span></div>
       <div class="stat"><b>Dean's List</b><span>2025 – 2026</span></div>
@@ -743,6 +785,7 @@ nav.links a.nav-cv{display:inline-block}
         </button>
         <div class="pc-detail" hidden>
           <p class="pit-sum">A continuation of <a href="#grid" class="pit-jump" data-pit="1">P2, the ESP32 Ultrasonic Radar</a>. I treated the finished radar as a device under test and characterized it across six tests, with limits set before measuring and before/after data for every fix.</p>
+          <div class="pit-files" aria-label="Project files"><span>Files</span><a href="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/blob/main/TEST_REPORT.md" target="_blank" rel="noopener">Test report<i aria-hidden="true">↗</i></a><a href="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/tree/main/test/data" target="_blank" rel="noopener">Raw data<i aria-hidden="true">↗</i></a><a href="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/tree/main/test" target="_blank" rel="noopener">Test scripts<i aria-hidden="true">↗</i></a></div>
           <div class="gal" data-gallery><figure class="fit"><a class="zoom" href="img/distance-fix.webp"><img src="img/distance-fix.webp" alt="Distance error against true distance, before and after the firmware fix" width="1050" height="630" loading="lazy" decoding="async"></a><figcaption>Distance error before vs. after the firmware fix. RMS error 0.92 → 0.63 cm; worst case −1.91 → −1.05 cm.</figcaption></figure><figure class="fit"><a class="zoom" href="img/echo-before.webp"><img src="img/echo-before.webp" alt="Scope capture of ECHO peaking at 5.05 volts" width="1600" height="877" loading="lazy" decoding="async"></a><figcaption>ECHO into the ESP32’s 3.3 V GPIO before the fix: 5.05 V peak.</figcaption></figure><figure class="fit"><a class="zoom" href="img/echo-after.webp"><img src="img/echo-after.webp" alt="Scope capture of ECHO peaking at 3.41 volts" width="1600" height="780" loading="lazy" decoding="async"></a><figcaption>After adding a resistor divider: 3.41 V peak.</figcaption></figure><figure class="fit wide"><a class="zoom" href="img/loop-before.webp"><img src="img/loop-before-band.webp" alt="Logic analyzer capture of TRIG, ECHO and GPIO 14 with no target in range, before the fix" width="1600" height="170" loading="lazy" decoding="async"></a><figcaption>Nothing in range: the sensor holds ECHO ~48 ms and the loop stretches to ~106 ms.</figcaption></figure><figure class="fit wide"><a class="zoom" href="img/loop-after.webp"><img src="img/loop-after-band.webp" alt="Logic analyzer capture of the same no-target case after the fix" width="1600" height="169" loading="lazy" decoding="async"></a><figcaption>With a 30 ms <code>pulseIn</code> timeout, the same case runs at ~86 ms.</figcaption></figure><figure class="fit"><a class="zoom" href="img/rail-dip.webp"><img src="img/rail-dip.webp" alt="Scope capture of the 5 V rail dipping after a servo pulse" width="1600" height="804" loading="lazy" decoding="async"></a><figcaption>5 V rail dips to 4.93 V for ~1.5 ms after each servo pulse, inside USB tolerance.</figcaption></figure></div>
           <dl class="pit-specs"><dt>Stack</dt><dd>AD3 · WaveForms · Python (dwfpy, pyserial, matplotlib)</dd><dt>Tests</dt><dd>Signal level, distance accuracy, echo timing, loop timing, servo PWM, rail droop</dd><dt>Found</dt><dd>5 V on a 3.3 V pin, 1% speed-of-sound error, <code>pulseIn</code> stall</dd><dt>Result</dt><dd>RMS error 0.92 → 0.63 cm, loop 106 → 86 ms, ECHO 5.05 → 3.41 V</dd><dt>Hard part</dt><dd>Stale serial buffers and auto-reset on port open</dd></dl>
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Measured the HC-SR04 ECHO at 5.05 V going into a 3.3 V GPIO; added a resistor divider and re-measured at 3.41 V.</li><li>Distance error grew with range; traced it to a speed-of-sound constant about 1% low. Fix moved the fit slope from 0.961 to 0.990.</li><li>With nothing in range, <code>pulseIn</code> waited out a 48 ms echo every ping. A 30 ms timeout cut the loop from 106 to 86 ms.</li><li>Readings that seemed stuck turned out to be stale serial data. Proved the sensor was fine with a three-probe logic capture and minimal sketches, then fixed the test script.</li><li>Found readings jumping by exactly one 40 kHz wavelength (0.43 cm): the sensor detecting a weak echo a cycle late.</li></ul></div>
@@ -760,6 +803,7 @@ nav.links a.nav-cv{display:inline-block}
         </button>
         <div class="pc-detail" hidden>
           <p class="pit-sum">An HC-SR04 sweeps from 15° to 165° on an SG90 servo while C++ firmware draws range rings, a live sweep line and persistent detections on a 128×64 SSD1306 OLED. No PC in the loop.</p>
+          
           <div class="gal" data-gallery><figure class="vid"><video class="loop" muted loop playsinline preload="none" width="540" height="540" data-poster="img/radar-sweep.webp" aria-label="The radar running: the servo pans the sensor while the OLED draws the sweep"><source src="img/radar-sweep.webm" type="video/webm"><source src="img/radar-sweep.mp4" type="video/mp4"></video><figcaption>Running live: the servo pans the HC-SR04 while the OLED draws the sweep and the range.</figcaption></figure><figure><a class="zoom" href="img/radar.webp"><img src="img/radar.webp" alt="ESP32 radar build with the OLED reading 159 degrees and 16 cm" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>The build mid-sweep: the OLED reads 159° and 16 cm.</figcaption></figure><figure class="fit"><a class="zoom" href="img/radar-wiring.webp"><img src="img/radar-wiring.webp" alt="Wokwi wiring diagram of the ESP32 radar" width="1563" height="891" loading="lazy" decoding="async"></a><figcaption>Wiring: HC-SR04 on GPIO 27/14, servo on GPIO 13, OLED on I²C (GPIO 32/33). <a class="ext" href="https://wokwi.com/projects/475235087654761473" target="_blank" rel="noopener">Open in Wokwi</a></figcaption></figure></div>
           <dl class="pit-specs"><dt>Stack</dt><dd>ESP32 · C++ · I²C · PWM</dd><dt>Sensing</dt><dd>Ultrasonic time-of-flight, 40 cm window</dd><dt>Display</dt><dd>SSD1306 over I²C on GPIO 32 / 33</dd><dt>Debug tools</dt><dd>Multimeter · serial logging</dd><dt>Hard part</dt><dd>Timer conflict, strapping pins, I²C remap</dd></dl>
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Servo and display worked alone but failed together. Isolated each in a minimal sketch, then reintroduced them one at a time, which surfaced three separate faults.</li><li>Moved every signal off the ESP32 strapping pins after finding they were changing the boot mode.</li><li>Fixed a silent display by remapping I²C explicitly with <code>Wire.begin(32, 33)</code>.</li><li>Next: move to a timer-driven, non-blocking loop.</li><li>Characterized and fixed in <a href="#grid" class="pit-jump" data-pit="0">P1: Radar Test &amp; Characterization</a>.</li></ul></div>
@@ -777,6 +821,7 @@ nav.links a.nav-cv{display:inline-block}
         </button>
         <div class="pc-detail" hidden>
           <p class="pit-sum">Taken from gear geometry to dimensioned drawings to printed, tested parts on a Raspberry Pi 4 controlled Q-arm.</p>
+          
           <div class="gal" data-gallery><figure><a class="zoom" href="img/effector.webp"><img src="img/effector.webp" alt="Printed gripper with the main gear between two racks" width="901" height="1200" loading="lazy" decoding="async"></a><figcaption>The printed gripper: the servo turns the main gear, which drives both racks to close the arms.</figcaption></figure><figure class="fit"><a class="zoom" href="img/effector-gear.webp"><img src="img/effector-gear.webp" alt="Dimensioned drawing of the main gear" width="870" height="675" loading="lazy" decoding="async"></a><figcaption>Main gear drawing (my part), sized to the servo's torque.</figcaption></figure><figure class="fit"><a class="zoom" href="img/effector-exploded.webp"><img src="img/effector-exploded.webp" alt="Exploded assembly drawing with parts list" width="976" height="741" loading="lazy" decoding="async"></a><figcaption>Exploded assembly drawing and parts list (mine).</figcaption></figure></div>
           <dl class="pit-specs"><dt>Stack</dt><dd>Autodesk Inventor · 3D printing · Python</dd><dt>Team</dt><dd>McMaster 1P13 design project</dd><dt>Owned</dt><dd>Gear CAD, drawings, <code>sign_up()</code>, <code>pack_products()</code></dd></dl>
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>A week before the deadline, testing showed the arms were too wide and knocked neighbouring items. We narrowed them and lengthened the tips over several reprints.</li><li>Iterated through printed prototypes to validate grip on the physical arm.</li><li>Cut manual handling effort by roughly 95% in the project scenario.</li></ul></div>
@@ -794,6 +839,7 @@ nav.links a.nav-cv{display:inline-block}
         </button>
         <div class="pc-detail" hidden>
           <p class="pit-sum">A Parallax PING sensor watching for a car, a servo doing the work, and a stepped sweep with threshold logic to avoid false triggers.</p>
+          
           <div class="gal" data-gallery><figure><a class="zoom" href="img/gate.webp"><img src="img/gate.webp" alt="Arduino Uno with Board of Education shield, PING sensor and servo" width="1200" height="1178" loading="lazy" decoding="async"></a><figcaption>The prototype on an Arduino Uno and Board of Education shield: PING sensor at right, the loose servo is the gate.</figcaption></figure><figure class="fit"><a class="zoom" href="img/gate-diagram.webp"><img src="img/gate-diagram.webp" alt="Tinkercad circuit diagram of the gate" width="1600" height="919" loading="lazy" decoding="async"></a><figcaption>Circuit in Tinkercad: PING signal on pin 11, servo on pin 9. <a class="ext" href="https://www.tinkercad.com/things/frosQddG6vk/editel?sharecode=wQ1teoypBejiX6jHJvJXi9Mn2uGAWApf8aHuyRncw8c" target="_blank" rel="noopener">Open in Tinkercad</a></figcaption></figure></div>
           <dl class="pit-specs"><dt>Stack</dt><dd>Arduino · C++ · ultrasonic sensing</dd><dt>Trigger</dt><dd>Object within 5 cm</dd><dt>Motion</dt><dd>Servo steps 2° every 15 ms</dd><dt>Note</dt><dd>First thing I built that ran unattended</dd></dl>
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Threshold logic mattered more than the sensor: most of the tuning went into ignoring things that weren't cars.</li><li>A hard <code>servo.write(90)</code> snapped the gate open, so I replaced it with a stepped loop for smooth motion.</li></ul></div>
@@ -811,6 +857,7 @@ nav.links a.nav-cv{display:inline-block}
         </button>
         <div class="pc-detail" hidden>
           <p class="pit-sum">Aluminum foil contact bumpers, continuous rotation servos, and a state machine that reroutes on contact.</p>
+          
           <div class="gal" data-gallery><figure><a class="zoom" href="img/maze.webp"><img src="img/maze.webp" alt="Cardboard and foil contact bumpers on the robot" width="1200" height="898" loading="lazy" decoding="async"></a><figcaption>Foil contact bumpers: each closes a circuit to an input pin when it hits a wall.</figcaption></figure></div>
           <dl class="pit-specs"><dt>Stack</dt><dd>Arduino · C++ · contact sensing</dd><dt>Inputs</dt><dd>Two foil bumpers on pins 8 and 9</dd><dt>Drive</dt><dd>Two continuous-rotation servos</dd><dt>Note</dt><dd>State machines, before a course taught them</dd></dl>
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Crude sensing, honest logic. Taught me to design the states before writing the code.</li><li>Tuned the reverse (500 ms) and turn (800 ms) over repeated runs: shorter re-hit the wall, longer overshot.</li></ul></div>
@@ -832,6 +879,7 @@ nav.links a.nav-cv{display:inline-block}
         </button>
         <div class="pc-detail" hidden>
           <p class="pit-sum">Three agents (campaign, email, media) behind a FastAPI backend, with a React/Vite frontend scaffolded from scratch.</p>
+          
           
           <dl class="pit-specs"><dt>Stack</dt><dd>Python · FastAPI · React/Vite · GPT-4o</dd><dt>Role</dt><dd>Co-builder</dd><dt>Caught</dt><dd>Client created before <code>load_dotenv()</code> ran</dd></dl>
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Moved client construction into the constructor so configuration loads before anything reads it.</li></ul></div>
@@ -911,6 +959,31 @@ nav.links a.nav-cv{display:inline-block}
       <div class="kit-row sx"><h3>Standards</h3><ul><li>ISO/IEC 17020 · UL · CSA C22.2 · NFPA 70 / 790 / 791 · CEC <span>ICC-ES training modules</span></li></ul></div>
       <div class="kit-row sx"><h3>Awards &amp; certs</h3><ul><li>Dean's Honour List <span>2025–26</span></li><li>EFC Doug Baldwin Memorial Scholarship <span>2026</span></li><li>AWS Cloud Practitioner Essentials</li><li>AWS Essentials of Prompt Engineering</li></ul></div>
     </div>
+  </div>
+</section>
+
+<!-- ===================== EDUCATION ===================== -->
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head sx">
+      <h2>Education<span class="f1"> // Qualifying</span></h2>
+      <div class="tag">Sep 2025 – Apr 2029 (expected)</div>
+    </div>
+    <article class="edu sx">
+      <div class="edu-main">
+        <h3>McMaster University <span class="edu-loc">Hamilton, ON</span></h3>
+        <div class="org">Bachelor of Engineering (B.Eng.), Computer Engineering (Co-op)</div>
+        <dl class="edu-rows">
+          <dt>Activities</dt><dd>McMaster RoboMaster · McMaster Exoskeleton · ML³ Labs · MERT</dd>
+          <dt>Coursework</dt><dd>Logic Design (Verilog, FPGA, Quartus) · Circuit Analysis · Probability &amp; Statistics</dd>
+        </dl>
+      </div>
+      <ul class="edu-stats" aria-label="Grades">
+        <li><b>11.9<small>/12</small></b><span>GPA · 3.95/4.0</span></li>
+        <li><b>12<small>/12</small></b><span>Minor in Innovation GPA</span></li>
+        <li><b>Dean's List</b><span>2025 – 2026</span></li>
+      </ul>
+    </article>
   </div>
 </section>
 
@@ -2002,6 +2075,11 @@ nav.links a.nav-cv{display:inline-block}
     }, true);
   })();
 
+  /* ============ hero "Latest" link opens that project's pit board ============ */
+  document.querySelectorAll("[data-pit-open]").forEach(function(a){
+    a.addEventListener("click", function(e){ e.preventDefault(); openPit(+a.getAttribute("data-pit-open"), a); });
+  });
+
   /* ============ setup sheet folders: one open at a time ============ */
   (function(){
     var tiles = Array.prototype.slice.call(document.querySelectorAll(".folder"));
@@ -2141,7 +2219,7 @@ nav.links a.nav-cv{display:inline-block}
 
   /* ============ track map ============ */
   var circuit = $("circuit"), driven = $("driven"), carDot = $("cardot"), marksG = $("marks"), secLabel = $("tsec");
-  var CORNERS = [{id:"#history",name:"Experience"},{id:"#grid",name:"Projects"},{id:"#setup",name:"Skills"},{id:"#offtrack",name:"About"},{id:"#contact",name:"Contact"}];
+  var CORNERS = [{id:"#history",name:"Experience"},{id:"#grid",name:"Projects"},{id:"#setup",name:"Skills"},{id:"#education",name:"Education"},{id:"#offtrack",name:"About"},{id:"#contact",name:"Contact"}];
   var LEN = 0, marks = [];
   function layoutTrack(){
     if(!circuit.getTotalLength) return;
@@ -2228,7 +2306,7 @@ nav.links a.nav-cv{display:inline-block}
 
   var t0 = Date.now(), maxScroll = 0, seen = [], opened = [], visit = null, sentAt = 0;
   var dev = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
-  var names = {history:"Experience", grid:"Projects", setup:"Skills", reading:"Reading", offtrack:"About", contact:"Contact"};
+  var names = {history:"Experience", grid:"Projects", setup:"Skills", education:"Education", reading:"Reading", offtrack:"About", contact:"Contact"};
 
   window.__visitOpened = function(name){ if(opened.indexOf(name) < 0) opened.push(name); };
   var pending = [];
