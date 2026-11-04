@@ -358,6 +358,10 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 .dcard .dc-meta dt{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding-top:3px}
 .dcard .dc-meta dd{margin:0}
 
+/* the start lights sit in the projects header row, halfway between the title and the tag; the grid starts right under the line */
+#grid .sec-head .lights-bar{margin:0 0 2px;flex-wrap:nowrap}
+#grid .sec-head + .stage{margin-top:16px}
+
 /* plain section names first, the F1 name after as a subtitle */
 .sec-head h2 .f1,.finish h2 .f1{font-family:var(--mono);font-size:.4em;font-weight:500;letter-spacing:.14em;color:var(--amber);vertical-align:.32em;margin-left:.5em;white-space:nowrap}
 @media (max-width:520px){.sec-head h2 .f1,.finish h2 .f1{display:block;margin:6px 0 0;vertical-align:0;font-size:11px}}
@@ -797,13 +801,13 @@ nav.links a.nav-cv{display:inline-block}
   <div class="wrap">
     <div class="sec-head sx">
       <h2>Projects<span class="f1"> // Starting Grid</span></h2>
+      <div class="lights-bar">
+        <span id="lightsTxt" aria-live="polite">Grid forming</span>
+        <button class="mini" id="relight" type="button">Restart lights</button>
+      </div>
       <div class="tag">P1 = latest // software in the pit lane</div>
     </div>
 
-    <div class="lights-bar">
-      <span id="lightsTxt" aria-live="polite">Grid forming</span>
-      <button class="mini" id="relight" type="button">Restart lights</button>
-    </div>
 
     <div class="stage">
       <div class="scene" id="gridScene" role="group" aria-label="Starting grid. Each car is a project; its grid number opens the pit board">
@@ -2112,6 +2116,20 @@ nav.links a.nav-cv{display:inline-block}
         var k = f.indexOf(document.activeElement); f[(k + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus(); }
     }, true);
   })();
+
+  /* ============ in-page links (nav, hero, map) scroll smoothly to their section; instant when motion is off ============ */
+  document.addEventListener("click", function(e){
+    if(e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if(!a || a.hasAttribute("data-resume") || a.hasAttribute("data-pit-open") || a.classList.contains("pit-jump")) return;
+    var id = a.getAttribute("href");
+    if(id.length < 2 || id === "#resume") return;
+    var el = document.getElementById(id.slice(1));
+    if(!el) return;
+    e.preventDefault();
+    el.scrollIntoView({behavior: reduced ? "auto" : "smooth", block: "start"});
+    try{ history.pushState(null, "", id); }catch(err){}
+  });
 
   /* ============ hero "Latest" link opens that project's pit board ============ */
   document.querySelectorAll("[data-pit-open]").forEach(function(a){
