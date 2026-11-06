@@ -362,6 +362,46 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 #grid .sec-head .lights-bar{margin:0 0 2px;flex-wrap:nowrap}
 #grid .sec-head + .stage{margin-top:16px}
 
+/* ---------- each project wears its car's paint: a see-through tint of the car colour, same text colours on every card ---------- */
+#grid .pcard .pc{background:linear-gradient(rgba(var(--car-rgb),.13),rgba(var(--car-rgb),.13)),var(--panel);border-color:rgba(var(--car-rgb),.42)}
+#grid .pcard .pc:hover,#grid .pcard .pc.lit,#grid .pcard .pc:focus-visible{background:linear-gradient(rgba(var(--car-rgb),.24),rgba(var(--car-rgb),.24)),var(--panel-2);border-color:rgb(var(--car-rgb))}
+@media (min-width:1040px){
+  #grid:not(.no3d) #tower .pcard .pc,#grid:not(.no3d) #towerSw .pcard .pc{background:linear-gradient(rgba(var(--car-rgb),.2),rgba(var(--car-rgb),.2)),rgba(8,10,13,.74);border-color:rgba(var(--car-rgb),.55)}
+  #grid:not(.no3d) #tower .pcard .pc:hover,#grid:not(.no3d) #tower .pcard .pc.lit,#grid:not(.no3d) #tower .pcard .pc:focus-visible,
+  #grid:not(.no3d) #towerSw .pcard .pc:hover,#grid:not(.no3d) #towerSw .pcard .pc.lit,#grid:not(.no3d) #towerSw .pcard .pc:focus-visible{background:linear-gradient(rgba(var(--car-rgb),.32),rgba(var(--car-rgb),.32)),rgba(10,12,16,.86);border-color:rgb(var(--car-rgb))}
+}
+#grid .pcard .pc-meta,#grid .pcard .pc-meta b{color:#F2F5F8}
+#grid .pcard .pc-meta span{color:#C3CCD4}
+#grid .pcard .pc-name{color:#FFFFFF}
+#grid .pcard .pc-what{color:#D4DBE1}
+#grid .pcard .pc-tags i{color:#E2E8ED;border-color:rgba(255,255,255,.22)}
+
+/* leader lines: a grey elbow from each card to its car's grid number */
+.leaders{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0;transition:opacity .5s}
+.scene.ready .leaders{opacity:1}
+.scene.flying .leaders{opacity:0}
+.leaders path{fill:none;stroke:rgba(196,205,214,.5);stroke-width:1.3;stroke-linejoin:round;transition:stroke .18s,stroke-width .18s}
+.leaders circle{fill:rgba(196,205,214,.7);transition:fill .18s}
+.leaders .lit path{stroke:var(--c);stroke-width:1.8}
+.leaders .lit circle{fill:var(--c)}
+/* the car's name on hover sits below or above its grid number (on the side the leader line doesn't come from), growing in over the track so cards never cover it */
+.gtag[data-nm] .nm{right:7px;left:auto;top:auto;bottom:auto;transform:none;padding:4px 7px 4px 6px;border-radius:3px;
+  background:rgba(5,7,10,.88);border-left:2px solid var(--c,var(--amber));text-shadow:none;white-space:nowrap}
+.gtag[data-side="l"][data-nm] .nm{right:auto;left:7px}
+.gtag[data-nm="below"] .nm{top:calc(100% + 2px)}
+.gtag[data-nm="above"] .nm{bottom:calc(100% + 2px)}
+
+/* languages as logos */
+.langs{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.langs li{position:relative;width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--line-hot);border-radius:6px;background:var(--panel);outline:none;transition:border-color .18s,transform .18s}
+.langs li svg{width:26px;height:26px;display:block}
+.langs li:hover,.langs li:focus-visible{border-color:var(--amber);transform:translateY(-2px)}
+.langs li::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%) translateY(4px);width:max-content;max-width:240px;
+  padding:6px 9px;border-radius:4px;background:#05070A;border:1px solid var(--line-hot);color:var(--ink);font-family:var(--mono);font-size:11px;line-height:1.35;
+  text-align:center;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:5}
+.langs li:hover::after,.langs li:focus-visible::after{opacity:1;transform:translateX(-50%) translateY(0)}
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
 /* plain section names first, the F1 name after as a subtitle */
 .sec-head h2 .f1,.finish h2 .f1{font-family:var(--mono);font-size:.4em;font-weight:500;letter-spacing:.14em;color:var(--amber);vertical-align:.32em;margin-left:.5em;white-space:nowrap}
 @media (max-width:520px){.sec-head h2 .f1,.finish h2 .f1{display:block;margin:6px 0 0;vertical-align:0;font-size:11px}}
@@ -812,10 +852,11 @@ nav.links a.nav-cv{display:inline-block}
     <div class="stage">
       <div class="scene" id="gridScene" role="group" aria-label="Starting grid. Each car is a project; its grid number opens the pit board">
         <canvas id="gridCanvas" aria-hidden="true"></canvas>
+        <svg class="leaders" id="gridLeaders" aria-hidden="true"></svg>
         <div class="gtags" id="gridTags"></div>
       </div>
       <ol class="tower" id="tower" aria-label="Projects">
-      <li class="pcard" data-repo="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/blob/main/TEST_REPORT.md" data-repo-label="View test report">
+      <li class="pcard" data-repo="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/blob/main/TEST_REPORT.md" data-repo-label="View test report" data-car="#E8002D" data-acc="#FFF200" style="--car-rgb:232,0,45">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><img src="img/radar-test-sq.webp" alt="Analog Discovery 3 probe wires clipped onto the ESP32 radar breadboard" width="320" height="320" loading="lazy" decoding="async"></span>
           <span class="pc-txt">
@@ -833,7 +874,7 @@ nav.links a.nav-cv{display:inline-block}
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Measured the HC-SR04 ECHO at 5.05 V going into a 3.3 V GPIO; added a resistor divider and re-measured at 3.41 V.</li><li>Distance error grew with range; traced it to a speed-of-sound constant about 1% low. Fix moved the fit slope from 0.961 to 0.990.</li><li>With nothing in range, <code>pulseIn</code> waited out a 48 ms echo every ping. A 30 ms timeout cut the loop from 106 to 86 ms.</li><li>Readings that seemed stuck turned out to be stale serial data. Proved the sensor was fine with a three-probe logic capture and minimal sketches, then fixed the test script.</li><li>Found readings jumping by exactly one 40 kHz wavelength (0.43 cm): the sensor detecting a weak echo a cycle late.</li></ul></div>
         </div>
       </li>
-      <li class="pcard" data-repo="https://github.com/Burnitt/ESP32-Ultrasonic-Radar">
+      <li class="pcard" data-repo="https://github.com/Burnitt/ESP32-Ultrasonic-Radar" data-car="#FF8000" data-acc="#47C7FC" style="--car-rgb:255,128,0">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><img src="img/radar-sq.webp" alt="ESP32 radar on a breadboard, its OLED showing a sweep" width="320" height="320" loading="lazy" decoding="async"></span>
           <span class="pc-txt">
@@ -851,7 +892,7 @@ nav.links a.nav-cv{display:inline-block}
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Servo and display worked alone but failed together. Isolated each in a minimal sketch, then reintroduced them one at a time, which surfaced three separate faults.</li><li>Moved every signal off the ESP32 strapping pins after finding they were changing the boot mode.</li><li>Fixed a silent display by remapping I²C explicitly with <code>Wire.begin(32, 33)</code>.</li><li>Next: move to a timer-driven, non-blocking loop.</li><li>Characterized and fixed in <a href="#grid" class="pit-jump" data-pit="0">P1: Radar Test &amp; Characterization</a>.</li></ul></div>
         </div>
       </li>
-      <li class="pcard" data-repo="https://github.com/Burnitt/Robotic-End-Effector">
+      <li class="pcard" data-repo="https://github.com/Burnitt/Robotic-End-Effector" data-car="#C8CCCE" data-acc="#27F4D2" style="--car-rgb:200,204,206">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><img src="img/effector-sq.webp" alt="3D-printed rack-and-pinion gripper" width="320" height="320" loading="lazy" decoding="async"></span>
           <span class="pc-txt">
@@ -869,7 +910,7 @@ nav.links a.nav-cv{display:inline-block}
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>A week before the deadline, testing showed the arms were too wide and knocked neighbouring items. We narrowed them and lengthened the tips over several reprints.</li><li>Iterated through printed prototypes to validate grip on the physical arm.</li><li>Cut manual handling effort by roughly 95% in the project scenario.</li></ul></div>
         </div>
       </li>
-      <li class="pcard" data-repo="https://github.com/Burnitt/Autonomous-Driveway-Gate">
+      <li class="pcard" data-repo="https://github.com/Burnitt/Autonomous-Driveway-Gate" data-car="#3671C6" data-acc="#FFC906" style="--car-rgb:54,113,198">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><img src="img/gate-sq.webp" alt="Arduino robot base with a PING sensor and servo" width="320" height="320" loading="lazy" decoding="async"></span>
           <span class="pc-txt">
@@ -887,7 +928,7 @@ nav.links a.nav-cv{display:inline-block}
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Threshold logic mattered more than the sensor: most of the tuning went into ignoring things that weren't cars.</li><li>A hard <code>servo.write(90)</code> snapped the gate open, so I replaced it with a stepped loop for smooth motion.</li></ul></div>
         </div>
       </li>
-      <li class="pcard" data-repo="https://github.com/Burnitt/Bumper-Guided-Maze-Navigator">
+      <li class="pcard" data-repo="https://github.com/Burnitt/Bumper-Guided-Maze-Navigator" data-car="#229971" data-acc="#CEDC00" style="--car-rgb:34,153,113">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><img src="img/maze-sq.webp" alt="Foil contact bumpers on a small robot" width="320" height="320" loading="lazy" decoding="async"></span>
           <span class="pc-txt">
@@ -909,7 +950,7 @@ nav.links a.nav-cv{display:inline-block}
       <div class="sw">
       <div class="sw-head"><b>Software</b><span>Pit lane</span></div>
       <ol class="tower" id="towerSw" aria-label="Software projects">
-      <li class="pcard" data-repo="https://github.com/Burnitt/Lumi-AI">
+      <li class="pcard" data-repo="https://github.com/Burnitt/Lumi-AI" data-car="#FF87BC" data-acc="#2293D1" style="--car-rgb:255,135,188">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><svg viewBox="0 0 80 80" role="img" aria-label="Lumi AI architecture: three agents behind one API and a web app"><rect width="80" height="80" fill="#0E1217"/><g font-family="IBM Plex Mono,monospace" font-size="6.2" fill="#9FAEBC" text-anchor="middle"><rect x="6" y="9" width="22" height="13" rx="2" fill="none" stroke="#2E3946"/><text x="17" y="17.6">camp</text><rect x="6" y="33" width="22" height="13" rx="2" fill="none" stroke="#2E3946"/><text x="17" y="41.6">email</text><rect x="6" y="57" width="22" height="13" rx="2" fill="none" stroke="#2E3946"/><text x="17" y="65.6">media</text><rect x="40" y="31" width="18" height="17" rx="2" fill="none" stroke="var(--amber,#F2A900)"/><text x="49" y="41.8" fill="#E8EDF2">API</text><rect x="64" y="27" width="11" height="25" rx="2" fill="none" stroke="var(--maroon-hot,#D6215F)"/><path d="M28 15.5 L40 37 M28 39.5 L40 39.5 M28 63.5 L40 42 M58 39.5 L64 39.5" stroke="#2E3946" fill="none"/></g></svg></span>
           <span class="pc-txt">
@@ -996,7 +1037,12 @@ nav.links a.nav-cv{display:inline-block}
       </div>
     </div>
     <div class="kit">
-      <div class="kit-row sx"><h3>Languages</h3><ul><li>C / C++ <span>radar, gate and maze firmware</span></li><li>Python <span>radar test automation, end effector, Hermes AI, Lumi AI</span></li><li>Verilog <span>Logic Design</span></li><li>MATLAB</li><li>Java</li><li>JavaScript / TypeScript <span>Hermes AI</span></li></ul></div>
+      <div class="kit-row sx"><h3>Languages</h3><ul class="langs" aria-label="Languages"><li tabindex="0" data-tip="C · radar, gate and maze firmware"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#659AD3" d="M115.4 30.7L67.1 2.9c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.4 1 3.5l106.8-62c-.6-1.2-1.5-2.1-2.4-2.7z"/><path fill="#03599C" d="M10.7 95.3c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4V36.1c0-.9-.1-1.9-.6-2.8l-106.6 62z"/><path fill="#fff" d="M85.3 76.1C81.1 83.5 73.1 88.5 64 88.5c-13.5 0-24.5-11-24.5-24.5s11-24.5 24.5-24.5c9.1 0 17.1 5 21.3 12.5l13-7.5c-6.8-11.9-19.6-20-34.3-20-21.8 0-39.5 17.7-39.5 39.5s17.7 39.5 39.5 39.5c14.6 0 27.4-8 34.2-19.8l-12.9-7.6z"/></svg><span class="sr">C (radar, gate and maze firmware)</span></li><li tabindex="0" data-tip="C++ · radar, gate and maze firmware"><svg aria-hidden="true" focusable="false" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#00599c" d="M118.766 95.82c.89-1.543 1.441-3.28 1.441-4.843V36.78c0-1.558-.55-3.297-1.441-4.84l-55.32 31.94Zm0 0"/>
+  <path fill="#004482" d="m68.36 126.586 46.933-27.094c1.352-.781 2.582-2.129 3.473-3.672l-55.32-31.94L8.12 95.82c.89 1.543 2.121 2.89 3.473 3.672l46.933 27.094c2.703 1.562 7.13 1.562 9.832 0Zm0 0"/>
+  <path fill="#659ad2" d="M118.766 31.941c-.891-1.546-2.121-2.894-3.473-3.671L68.359 1.172c-2.703-1.563-7.129-1.563-9.832 0L11.594 28.27C8.89 29.828 6.68 33.66 6.68 36.78v54.196c0 1.562.55 3.3 1.441 4.843L63.445 63.88Zm0 0"/>
+  <path fill="#fff" d="M63.445 26.035c-20.867 0-37.843 16.977-37.843 37.844s16.976 37.844 37.843 37.844c13.465 0 26.024-7.247 32.77-18.91L79.84 73.335c-3.38 5.84-9.66 9.465-16.395 9.465-10.433 0-18.922-8.488-18.922-18.922 0-10.434 8.49-18.922 18.922-18.922 6.73 0 13.017 3.629 16.39 9.465l16.38-9.477c-6.75-11.664-19.305-18.91-32.77-18.91zM92.88 57.57v4.207h-4.207v4.203h4.207v4.207h4.203V65.98h4.203v-4.203h-4.203V57.57H92.88zm15.766 0v4.207h-4.204v4.203h4.204v4.207h4.207V65.98h4.203v-4.203h-4.203V57.57h-4.207z"/>
+</svg><span class="sr">C++ (radar, gate and maze firmware)</span></li><li tabindex="0" data-tip="Python · radar test automation, end effector, Hermes AI, Lumi AI"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><linearGradient id="python-original-a" gradientUnits="userSpaceOnUse" x1="70.252" y1="1237.476" x2="170.659" y2="1151.089" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)"><stop offset="0" stop-color="#5A9FD4"/><stop offset="1" stop-color="#306998"/></linearGradient><linearGradient id="python-original-b" gradientUnits="userSpaceOnUse" x1="209.474" y1="1098.811" x2="173.62" y2="1149.537" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)"><stop offset="0" stop-color="#FFD43B"/><stop offset="1" stop-color="#FFE873"/></linearGradient><path fill="url(#python-original-a)" d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z" transform="translate(0 10.26)"/><path fill="url(#python-original-b)" d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zM77.809 87.927c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z" transform="translate(0 10.26)"/><radialGradient id="python-original-c" cx="1825.678" cy="444.45" r="26.743" gradientTransform="matrix(0 -.24 -1.055 0 532.979 557.576)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#B8B8B8" stop-opacity=".498"/><stop offset="1" stop-color="#7F7F7F" stop-opacity="0"/></radialGradient><path opacity=".444" fill="url(#python-original-c)" d="M97.309 119.597c0 3.543-14.816 6.416-33.091 6.416-18.276 0-33.092-2.873-33.092-6.416 0-3.544 14.815-6.417 33.092-6.417 18.275 0 33.091 2.872 33.091 6.417z"/></svg><span class="sr">Python (radar test automation, end effector, Hermes AI, Lumi AI)</span></li><li tabindex="0" data-tip="Verilog · Logic Design"><svg aria-hidden="true" focusable="false" viewBox="0 0 128 128"><g stroke="#8FA9C2" stroke-width="6" stroke-linecap="round"><path d="M42 14V30M42 98V114"/><path d="M64 14V30M64 98V114"/><path d="M86 14V30M86 98V114"/><path d="M14 42H30M98 42H114"/><path d="M14 64H30M98 64H114"/><path d="M14 86H30M98 86H114"/></g><rect x="30" y="30" width="68" height="68" rx="8" fill="#1F2B38" stroke="#8FA9C2" stroke-width="5"/><path d="M47 48l17 34 17-34" fill="none" stroke="#F2A900" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr">Verilog (Logic Design)</span></li><li tabindex="0" data-tip="MATLAB"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="matlab-original-a" gradientUnits="userSpaceOnUse" x1="16.803" y1="16.631" x2="15.013" y2="22.411" gradientTransform="matrix(4 0 0 -4 0 128)"><stop offset="0" stop-color="#512"/><stop offset=".23" stop-color="#523"/><stop offset=".36" stop-color="#534"/><stop offset=".51" stop-color="#645"/><stop offset=".66" stop-color="#568"/><stop offset=".84" stop-color="#29d"/></linearGradient><linearGradient id="matlab-original-b" gradientUnits="userSpaceOnUse" x1="29.71" y1="18.983" x2="11.71" y2="14.563" gradientTransform="scale(4)"><stop offset=".081" stop-color="#c33"/><stop offset=".189" stop-color="#de5239"/><stop offset=".313" stop-color="#f06e3e"/><stop offset=".421" stop-color="#fa8042"/><stop offset=".5" stop-color="#fe8643"/><stop offset=".58" stop-color="#fa7f42"/><stop offset=".696" stop-color="#ef6c3e"/><stop offset=".833" stop-color="#dc4c37"/><stop offset=".916" stop-color="#cf3633"/></linearGradient></defs><path d="M8 70.2l31.879-12.88a82.62 82.62 0 0110.883-11.8c2.636-1.399 7.597-.641 16.68-11.918 8.796-11 11.597-20.403 15.718-20.403 6.52 0 11.32 14.082 18.602 35.403A461.75 461.75 0 00120 96.48c-7.602-7.082-14.078-14.718-21.48-14.52-6.88.161-14.52 8.321-22.88 18.802C69 109.16 60.2 114.922 56.763 114.8c0 0-8.883-25.121-16.32-29.2a10.563 10.563 0 00-9.563.797L8 70.16zm0 0" fill="#49d"/><path d="M79.2 16.078c-2.68 3.602-5.92 10.203-11.76 17.524-9.082 11.277-14 10.52-16.68 11.918a78.673 78.673 0 00-10.882 11.8l13.2 9.64C64.28 51.68 70.28 35.122 74.96 24.399a54.649 54.649 0 014.238-8.32zm0 0" fill="url(#matlab-original-a)"/><path d="M83.2 13.2c-8.72 0-14.68 45.921-46.88 71.562 9.04-1.48 16.88 20.957 20.48 30.039 16-2.723 28.802-33.32 41.72-32.84 7.402.277 13.878 7.437 21.48 14.52C102.64 60 94.52 13.198 83.2 13.198zm0 0" fill="url(#matlab-original-b)"/></svg><span class="sr">MATLAB</span></li><li tabindex="0" data-tip="Java"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#0074BD" d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z"/><path fill="#EA2D2E" d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z"/><path fill="#0074BD" d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z"/><path fill="#EA2D2E" d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z"/><path fill="#0074BD" d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z"/></svg><span class="sr">Java</span></li><li tabindex="0" data-tip="JavaScript · Hermes AI"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z"/><path fill="#323330" d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z"/></svg><span class="sr">JavaScript (Hermes AI)</span></li><li tabindex="0" data-tip="TypeScript · Hermes AI"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#fff" d="M22.67 47h99.67v73.67H22.67z"/><path data-name="original" fill="#007acc" d="M1.5 63.91v62.5h125v-125H1.5zm100.73-5a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1 23 23 0 01-12.72-6.63c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73L82 101l3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H56.66v46.23H45.15V69.26H28.88v-5a49.19 49.19 0 01.12-5.17C29.08 59 39 59 51 59h21.83z"/></svg><span class="sr">TypeScript (Hermes AI)</span></li></ul></div>
       <div class="kit-row sx"><h3>Software &amp; tools</h3><ul><li>Git / GitHub</li><li>Quartus Prime <span>Logic Design</span></li><li>Altium Designer <span>PCB design course, in progress</span></li><li>Arduino IDE</li><li>VS Code</li><li>FastAPI · React <span>Hermes AI, Lumi AI</span></li></ul></div>
       <div class="kit-row sx"><h3>Standards</h3><ul><li>ISO/IEC 17020 · UL · CSA C22.2 · NFPA 70 / 790 / 791 · CEC <span>ICC-ES training modules</span></li></ul></div>
       <div class="kit-row sx"><h3>Awards &amp; certs</h3><ul><li>Dean's Honour List <span>2025–26</span></li><li>EFC Doug Baldwin Memorial Scholarship <span>2026</span></li><li>AWS Cloud Practitioner Essentials</li><li>AWS Essentials of Prompt Engineering</li></ul></div>
@@ -1303,6 +1349,8 @@ nav.links a.nav-cv{display:inline-block}
       tags: Array.prototype.map.call(li.querySelectorAll(".pc-tags i"), function(t){ return t.textContent; }),
       repo: li.getAttribute("data-repo"),
       repoLabel: li.getAttribute("data-repo-label"),
+      color: li.getAttribute("data-car") || "#9E0E48",
+      acc: li.getAttribute("data-acc") || "#F2A900",
       detail: li.querySelector(".pc-detail"),
       btn: li.querySelector(".pc")
     };
@@ -1314,11 +1362,12 @@ nav.links a.nav-cv{display:inline-block}
   var SLOTS = CARS.slice(0, GRID_N).map(function(c, i){ return {x:(i % 2 ? 1 : -1) * 3.1, z:-40 + (i + 5 - GRID_N) * 6.6}; });
   var sceneHost = document.getElementById("gridScene");
   var tagsEl = document.getElementById("gridTags");
-  var towerRows = [], tagBtns = [], grid3d = null;
+  var towerRows = [], tagBtns = [], leadPaths = [], grid3d = null;
 
   function lit(i, on){
     towerRows[i].classList.toggle("lit", on);
-    tagBtns[i].classList.toggle("lit", on);
+    tagBtns[i] && tagBtns[i].classList.toggle("lit", on);
+    if(leadPaths[i]) leadPaths[i].g.classList.toggle("lit", on);
     if(grid3d) grid3d.highlight(i, on);
   }
 
@@ -1687,34 +1736,34 @@ nav.links a.nav-cv{display:inline-block}
     var rimGeoF = new T.CylinderGeometry(.23, .23, .32, 14), rimGeoR = new T.CylinderGeometry(.24, .24, .43, 14);
     var bandGeoF = new T.TorusGeometry(.29, .016, 4, 28), bandGeoR = new T.TorusGeometry(.305, .018, 4, 28);
 
-    function makeCar(){
+    function makeCar(body, acc){
       var car = new T.Group();
       part(B(1.55, .05, 3.9), M.carbon, 0, .08, .15, car);                          /* floor */
-      part(taper(.78, .5, .52, .4, 1.9), M.body, 0, .2, -.85, car);                 /* survival cell */
-      part(taper(.5, .34, .2, .16, 1.35, .1), M.body, 0, .22, -2.45, car);          /* nose */
+      part(taper(.78, .5, .52, .4, 1.9), body, 0, .2, -.85, car);                 /* survival cell */
+      part(taper(.5, .34, .2, .16, 1.35, .1), body, 0, .22, -2.45, car);          /* nose */
       [-1, 1].forEach(function(s){
-        part(taper(.34, .24, .5, .5, 1.8), M.body, s * .6, .12, .15, car);          /* sidepods */
-        part(B(.12, .07, .04), M.body, s * .46, .8, -1.02, car);                     /* mirrors */
+        part(taper(.34, .24, .5, .5, 1.8), body, s * .6, .12, .15, car);          /* sidepods */
+        part(B(.12, .07, .04), body, s * .46, .8, -1.02, car);                     /* mirrors */
         part(B(.03, .14, .03), M.carbon, s * .44, .7, -1.0, car);
-        part(B(.035, .62, .66), M.body, s * .53, .76, 2.2, car);                     /* rear wing endplates */
-        part(B(.03, .26, .62), M.body, s * .975, .16, -2.95, car);                   /* front wing endplates */
+        part(B(.035, .62, .66), body, s * .53, .76, 2.2, car);                     /* rear wing endplates */
+        part(B(.03, .26, .62), body, s * .975, .16, -2.95, car);                   /* front wing endplates */
       });
-      part(taper(.3, .32, .66, .7, 2.1), M.body, 0, .25, .95, car);                 /* engine cover */
-      part(B(.3, .26, .42), M.body, 0, .92, .02, car);                               /* airbox */
-      part(taper(.03, .06, .03, .3, 1.05), M.acc, 0, .74, .72, car);                /* shark fin */
+      part(taper(.3, .32, .66, .7, 2.1), body, 0, .25, .95, car);                 /* engine cover */
+      part(B(.3, .26, .42), body, 0, .92, .02, car);                               /* airbox */
+      part(taper(.03, .06, .03, .3, 1.05), acc, 0, .74, .72, car);                /* shark fin */
       part(B(.42, .08, .72), M.carbon, 0, .69, -.62, car);                           /* cockpit rim */
-      part(new T.SphereGeometry(.14, 16, 12), M.acc, 0, .8, -.5, car);              /* helmet */
+      part(new T.SphereGeometry(.14, 16, 12), acc, 0, .8, -.5, car);              /* helmet */
       var halo = part(new T.TorusGeometry(.3, .028, 6, 22, Math.PI), M.carbon, 0, .93, -.55, car);
       halo.rotation.x = -Math.PI / 2;
       part(B(.05, .24, .05), M.carbon, 0, .8, -.85, car);
       part(B(1.06, .045, .34), M.carbon, 0, .9, 2.18, car);                          /* rear wing */
-      part(B(1.06, .04, .2), M.acc, 0, 1.02, 2.36, car).rotation.x = .35;
+      part(B(1.06, .04, .2), acc, 0, 1.02, 2.36, car).rotation.x = .35;
       part(B(.92, .03, .18), M.carbon, 0, .46, 2.12, car);                           /* beam wing */
       part(B(.05, .42, .08), M.carbon, 0, .67, 2.05, car);
       part(B(1.12, .16, .35), M.carbon, 0, .16, 2.1, car);                           /* diffuser */
       part(B(.16, .07, .03), M.light, 0, .33, 2.29, car, true);                      /* rain light */
       part(B(1.95, .035, .55), M.carbon, 0, .1, -3.0, car);                          /* front wing */
-      part(B(1.8, .03, .28), M.acc, 0, .17, -2.86, car).rotation.x = .3;
+      part(B(1.8, .03, .28), acc, 0, .17, -2.86, car).rotation.x = .3;
 
       var wheels = [];
       [[-1.78, .35, .83, tyreGeoF, rimGeoF, bandGeoF, .155], [1.55, .37, .8, tyreGeoR, rimGeoR, bandGeoR, .21]].forEach(function(w){
@@ -1722,7 +1771,7 @@ nav.links a.nav-cv{display:inline-block}
           var wg = new T.Group(); wg.position.set(s * w[2], w[1], w[0]); car.add(wg);
           var t = part(w[3], M.tyre, 0, 0, 0, wg); t.rotation.z = Math.PI / 2;
           var r = part(w[4], M.rim, 0, 0, 0, wg, true); r.rotation.z = Math.PI / 2;
-          var band = part(w[5], M.acc, s * (w[6] + .003), 0, 0, wg, true); band.rotation.y = Math.PI / 2;
+          var band = part(w[5], acc, s * (w[6] + .003), 0, 0, wg, true); band.rotation.y = Math.PI / 2;
           part(B(w[6] * 2 + .03, .3, .05), M.carbon, 0, 0, 0, wg, true);            /* spoke, so the spin reads */
           var arm = w[2] - .3;                                                          /* wishbones, on the chassis so they do not spin */
           part(B(arm, .03, .05), M.carbon, s * (.15 + arm / 2), w[1] + .06, w[0], car);
@@ -1735,11 +1784,13 @@ nav.links a.nav-cv{display:inline-block}
 
     var shadowMat = decal(flat("#000000", {map:soft, transparent:true, opacity:.72, depthWrite:false}), 6);
     var cars = SLOTS.map(function(s, i){
-      var c = makeCar();
+      var paint = CARS[i] || {};
+      var c = makeCar(new T.MeshPhongMaterial({color:C(paint.color || "#9E0E48"), specular:C("#4A3A42"), shininess:38}),
+                      new T.MeshPhongMaterial({color:C(paint.acc || "#F2A900"), specular:C("#3A3530"), shininess:30}));
       c.group.scale.setScalar(1.12);
       c.group.position.set(s.x, 0, s.z);
       flatOnGround(2.4, 6.6, shadowMat, 0, -.3, .01, c.group);
-      c.glowMat = decal(flat("#D6215F", {map:soft, transparent:true, opacity:0, blending:T.AdditiveBlending, depthWrite:false}), 7);
+      c.glowMat = decal(flat(paint.color || "#D6215F", {map:soft, transparent:true, opacity:0, blending:T.AdditiveBlending, depthWrite:false}), 7);
       flatOnGround(3.6, 7.8, c.glowMat, 0, -.3, .02, c.group);
       c.hit = new T.Mesh(B(2.4, 1.6, 6.2), M.hit); c.hit.position.set(0, .8, -.4); c.hit.userData.i = i;
       c.group.add(c.hit);
@@ -1763,6 +1814,36 @@ nav.links a.nav-cv{display:inline-block}
 
     /* ---- grid numbers follow their cars ---- */
     var v3 = new T.Vector3(), tagSize = [];
+    var NS = "http://www.w3.org/2000/svg", leadSvg = document.getElementById("gridLeaders");
+    cars.forEach(function(c, i){
+      var g = document.createElementNS(NS, "g"); g.style.setProperty("--c", CARS[i] ? CARS[i].color : "#D6215F");
+      if(tagBtns[i] && CARS[i]) tagBtns[i].style.setProperty("--c", CARS[i].color);
+      var path = document.createElementNS(NS, "path"), dot = document.createElementNS(NS, "circle"); dot.setAttribute("r", "2.6");
+      g.appendChild(path); g.appendChild(dot); leadSvg.appendChild(g);
+      leadPaths[i] = {g:g, path:path, dot:dot};
+    });
+    /* each card's inner edge, then straight across and down at 45 degrees to the outer edge of its grid number */
+    function placeLeaders(){
+      var sr = sceneHost.getBoundingClientRect(), ox = sr.left + sceneHost.clientLeft, oy = sr.top + sceneHost.clientTop;
+      leadSvg.setAttribute("viewBox", "0 0 " + W + " " + H);
+      cars.forEach(function(c, i){
+        var L = leadPaths[i], card = CARS[i] && CARS[i].btn;
+        if(!L || !card || !card.offsetParent){ if(L) L.g.style.display = "none"; return; }
+        L.g.style.display = "";
+        var r = card.getBoundingClientRect(), left = c.slot.x < 0, dir = left ? 1 : -1;
+        var sx = (left ? r.right : r.left) - ox, sy = r.top + r.height / 2 - oy;
+        var t = tagBtns[i], tw = t.offsetWidth || 24;
+        var ex = tagPos[i].x - (left ? tw + 3 : -tw - 3), ey = tagPos[i].y;
+        var nm = sy < ey ? "below" : "above";
+        if(t.getAttribute("data-nm") !== nm) t.setAttribute("data-nm", nm);
+        var dx = Math.abs(ex - sx), dy = Math.abs(ey - sy);
+        var run = Math.min(Math.max(18, dx - dy), dx);
+        var mx = sx + dir * run;
+        L.path.setAttribute("d", "M" + sx.toFixed(1) + " " + sy.toFixed(1) + "H" + mx.toFixed(1) + "L" + ex.toFixed(1) + " " + ey.toFixed(1));
+        L.dot.setAttribute("cx", ex.toFixed(1)); L.dot.setAttribute("cy", ey.toFixed(1));
+      });
+    }
+    var tagPos = [];
     function placeTags(){
       cars.forEach(function(c, i){
         var p = c.group.position, side = c.slot.x < 0 ? -1 : 1;
@@ -1772,7 +1853,9 @@ nav.links a.nav-cv{display:inline-block}
         var fs = Math.round(Math.max(11, Math.min(18, 330 / dist * Math.min(1, Math.max(.72, W / 1000)))));
         if(tagSize[i] !== fs){ tagBtns[i].style.fontSize = fs + "px"; tagSize[i] = fs; }
         tagBtns[i].style.transform = "translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0) translate(" + (side < 0 ? "-100%" : "0") + ",-50%)";
+        tagPos[i] = {x:x, y:y};
       });
+      placeLeaders();
     }
 
     /* ---- render on demand ---- */
@@ -1862,7 +1945,7 @@ nav.links a.nav-cv{display:inline-block}
     if("ResizeObserver" in window) new ResizeObserver(resize).observe(sceneHost);
     else window.addEventListener("resize", resize);
 
-    var livery = [M.body, boardMat, ledMat];
+    var livery = [boardMat, ledMat];
     resize();
     renderer.shadowMap.needsUpdate = true;
     sceneHost.classList.add("ready");
@@ -1880,8 +1963,6 @@ nav.links a.nav-cv{display:inline-block}
       paint:function(a, b, h){
         livery.forEach(function(m){ m.color.copy(C(a)); });
         runoffMat.color.copy(C(a));
-        M.acc.color.copy(C(b));
-        cars.forEach(function(c){ c.glowMat.color.copy(C(h)); });
         kick();
       },
       redraw:kick
