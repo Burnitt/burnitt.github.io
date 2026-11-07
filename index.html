@@ -402,6 +402,100 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 .langs li:hover::after,.langs li:focus-visible::after{opacity:1;transform:translateX(-50%) translateY(0)}
 .sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
+/* ---------- experience: club links, a hover preview of the "about" line, the rest behind Show more ---------- */
+.lap .org a.org-link{color:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:5px;border-bottom:1px solid rgba(214,33,95,.35);transition:color .18s,border-color .18s}
+.lap .org a.org-link svg{width:10px;height:10px;transition:transform .18s}
+.lap .org a.org-link:hover,.lap .org a.org-link:focus-visible{color:#fff;border-color:currentColor}
+.lap .org a.org-link:hover svg{transform:translate(2px,-2px)}
+.lap .org{margin-bottom:6px}
+.lap-peek{display:grid;grid-template-rows:1fr;transition:grid-template-rows .26s ease}
+.lap-peek-in{min-height:0;overflow:hidden}
+.lap-about{margin:4px 0 0;color:var(--ink-2);font-size:14.5px;line-height:1.55;max-width:80ch}
+.lap-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.lap-more-in{min-height:0;overflow:hidden;visibility:hidden;transition:visibility 0s .3s}
+.lap.open .lap-more{grid-template-rows:1fr}
+.lap.open .lap-more-in{visibility:visible;transition:visibility 0s}
+.lap .lap-more ul{margin:8px 0 0}
+.lap-toggle{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);transition:color .18s}
+.lap-toggle span{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border:1px solid var(--line-hot);border-radius:99px;font-size:10px;letter-spacing:0;color:var(--ink-2)}
+.lap-toggle::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+.lap.open .lap-toggle::after{transform:translateY(1px) rotate(-135deg)}
+.lap-toggle:hover,.lap-toggle:focus-visible,.lap.peek .lap-toggle,.lap.open .lap-toggle{color:var(--amber)}
+.lap-toggle:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px}
+/* mouse screens: rows start as title, team and dates only; hovering previews the about line */
+@media (hover:hover) and (pointer:fine) and (min-width:900px){
+  .lap-peek{grid-template-rows:0fr}
+  .lap.peek .lap-peek,.lap.open .lap-peek,.lap:focus-within .lap-peek{grid-template-rows:1fr}
+  .lap{padding:18px 0}
+}
+#lapsAll{margin-left:12px;vertical-align:1px}
+
+/* skill folders: a featured photo takes a 2 x 2 block, and every photo says where it came from */
+.f-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:900px){.f-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.f-grid{grid-template-columns:1fr}}
+.f-grid figure{position:relative}
+.f-grid figure.feature{display:flex;flex-direction:column}
+@media (min-width:481px){
+  .f-grid figure.feature{grid-column:span 2;grid-row:span 2}
+  .f-grid figure.feature a.zoom{position:relative;flex:1;min-height:220px}
+  .f-grid figure.feature img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto}
+}
+.f-grid .src{position:absolute;top:7px;left:7px;z-index:1;pointer-events:none;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:#E8EDF2;background:rgba(5,7,10,.82);border:1px solid rgba(255,255,255,.14);padding:3px 7px;border-radius:2px}
+
+/* pit board: three headline numbers, like a timing screen, in the car's colour */
+.pit-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:16px 0 4px;background:var(--line);border:1px solid var(--line);
+  border-left:3px solid rgb(var(--car-rgb,214,33,95));border-radius:var(--r);overflow:hidden}
+.pit-stats div{background:var(--panel-2);padding:10px 12px;min-width:0}
+.pit-stats b{display:block;font-family:var(--display);font-size:clamp(17px,4.4vw,22px);font-weight:700;line-height:1.1;color:var(--ink);overflow-wrap:anywhere}
+.pit-stats span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:5px;line-height:1.35}
+/* race control log: one entry per fault, limit then before -> after, then the fix */
+.race-log{margin:0 0 22px}
+.race-log h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);font-weight:500;margin:0 0 8px}
+.race-log ol{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.race-log li{padding:10px 12px;border-top:1px solid var(--line);background:var(--panel-2)}
+.race-log li:first-child{border-top:0}
+.rc-top{display:flex;align-items:baseline;gap:10px}
+.rc-n{font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
+.rc-top b{flex:1;font-weight:600;font-size:14px;color:var(--ink)}
+.rc-res{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#36C27A;border:1px solid rgba(54,194,122,.45);border-radius:99px;padding:1px 8px}
+.rc-val{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:6px 0 4px 26px;font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+.rc-val i{font-style:normal;color:var(--ink-3)}
+.rc-val .rc-after{color:var(--ink)}
+.rc-val .rc-lim{font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);border:1px solid var(--line-hot);border-radius:3px;padding:1px 6px;margin-right:4px}
+.rc-fix{margin-left:26px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.rc-fix span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-right:8px}
+
+/* filter chips: matching cards light up and pulse gently, the rest dim */
+.grid-filter{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 0}
+.gf-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-right:2px}
+.gf{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border:1px solid var(--line-hot);border-radius:99px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-2);transition:color .18s,border-color .18s,background .18s}
+.gf i{font-style:normal;font-size:10px;color:var(--ink-3)}
+.gf:hover{color:var(--ink);border-color:var(--ink-3)}
+.gf.on{color:var(--asphalt);background:var(--amber);border-color:var(--amber)}
+.gf.on i{color:rgba(10,12,15,.65)}
+.gf:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+#grid .sec-head + .grid-filter + .stage{margin-top:12px}
+@media (max-width:640px){
+  .grid-filter{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--gut) * -1);padding:2px var(--gut) 4px;
+    -webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+  .grid-filter::-webkit-scrollbar{display:none}
+  .gf{flex:none}
+}
+#grid .pcard{transition:opacity .3s,filter .3s}
+#grid.filtering .pcard:not(.match){opacity:.26;filter:saturate(.25)}
+#grid.filtering .pcard.match .pc{border-color:rgb(var(--car-rgb));animation:gfPulse 1.9s ease-in-out infinite}
+@keyframes gfPulse{
+  0%,100%{box-shadow:inset 0 0 0 999px rgba(var(--car-rgb),.05),0 0 0 1px rgba(var(--car-rgb),.55),0 0 10px rgba(var(--car-rgb),.2)}
+  50%{box-shadow:inset 0 0 0 999px rgba(var(--car-rgb),.2),0 0 0 1px rgba(var(--car-rgb),.95),0 0 24px rgba(var(--car-rgb),.55)}}
+/* motion off: no pulse, just a steady highlight */
+.calm #grid.filtering .pcard.match .pc{box-shadow:inset 0 0 0 999px rgba(var(--car-rgb),.14),0 0 0 1px rgb(var(--car-rgb)),0 0 16px rgba(var(--car-rgb),.4)}
+#grid.filtering .gtag.dim,#grid.filtering .leaders g.dim{opacity:.22}
+.gtag,.leaders g{transition:opacity .3s}
+
 /* plain section names first, the F1 name after as a subtitle */
 .sec-head h2 .f1,.finish h2 .f1{font-family:var(--mono);font-size:.4em;font-weight:500;letter-spacing:.14em;color:var(--amber);vertical-align:.32em;margin-left:.5em;white-space:nowrap}
 @media (max-width:520px){.sec-head h2 .f1,.finish h2 .f1{display:block;margin:6px 0 0;vertical-align:0;font-size:11px}}
@@ -755,81 +849,99 @@ nav.links a.nav-cv{display:inline-block}
   <div class="wrap">
     <div class="sec-head sx">
       <h2>Experience<span class="f1"> // Race History</span></h2>
-      <div class="tag">2025 – present</div>
+      <div class="tag">2025 – present <button class="mini" id="lapsAll" type="button" aria-pressed="false">Expand all</button></div>
     </div>
     <div class="laps">
       <article class="lap sx">
         <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>Oct 2026 →</div>
-        <div>
+        <div class="lap-body">
           <h3>Embedded Systems &amp; Controls Software Engineer</h3>
-          <div class="org">McMaster Exoskeleton · Hamilton, ON (On site)</div>
-          <ul>
-            <li>Student design team building a wearable assistive exoskeleton for the international ACE competition.</li>
-            <li>Firmware for the exo's sensing and actuation loop: an STM32 (Nucleo-F446RE, Cortex-M4F) reads LSM6DSO32 joint IMUs and commands CubeMars AK70-9 actuators over CAN.</li>
-            <li>Working on moving the IMU link from I²C to 4-wire SPI.</li>
-          </ul>
+          <div class="org"><a class="org-link" href="https://macexo.com/" target="_blank" rel="noopener" title="Open McMaster Exoskeleton’s website">McMaster Exoskeleton<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON (On site)</div>
+          <div class="lap-peek"><div class="lap-peek-in">
+            <p class="lap-about">Student design team building a wearable assistive exoskeleton for the international ACE competition.</p>
+            <div class="lap-more" id="lap1-more"><div class="lap-more-in"><ul>
+              <li>Firmware for the exo's sensing and actuation loop: an STM32 (Nucleo-F446RE, Cortex-M4F) reads LSM6DSO32 joint IMUs and commands CubeMars AK70-9 actuators over CAN.</li>
+              <li>Working on moving the IMU link from I²C to 4-wire SPI.</li>
+            </ul></div></div>
+          </div></div>
+          <button class="lap-toggle" type="button" aria-expanded="false" aria-controls="lap1-more">Show more<span>2</span></button>
         </div>
       </article>
       <article class="lap sx" data-dir="-1">
         <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>Sep 2026 →</div>
-        <div>
+        <div class="lap-body">
           <h3>Electrical Engineer</h3>
-          <div class="org">McMaster RoboMaster · Hamilton, ON (On site)</div>
-          <ul>
-            <li>Student team designing and building robots for DJI's international RoboMaster University competition.</li>
-            <li>Moved over from the computer vision subteam to work on the robots' electrical systems.</li>
-            <li>The subteam is starting on custom PCB design, and I'm ramping up through an Altium Designer PCB course alongside it.</li>
-          </ul>
+          <div class="org"><a class="org-link" href="https://macrobomaster.com/" target="_blank" rel="noopener" title="Open McMaster RoboMaster’s website">McMaster RoboMaster<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON (On site)</div>
+          <div class="lap-peek"><div class="lap-peek-in">
+            <p class="lap-about">Student team designing and building robots for DJI's international RoboMaster University competition.</p>
+            <div class="lap-more" id="lap2-more"><div class="lap-more-in"><ul>
+              <li>Moved over from the computer vision subteam to work on the robots' electrical systems.</li>
+              <li>The subteam is starting on custom PCB design, and I'm ramping up through an Altium Designer PCB course alongside it.</li>
+            </ul></div></div>
+          </div></div>
+          <button class="lap-toggle" type="button" aria-expanded="false" aria-controls="lap2-more">Show more<span>2</span></button>
         </div>
       </article>
       <article class="lap sx">
         <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>Oct 2026 →</div>
-        <div>
+        <div class="lap-body">
           <h3>Co-Founder</h3>
-          <div class="org">McMaster Low Latency Labs (ML³) · Hamilton, ON (On site)</div>
-          <ul>
-            <li>Student club building low-latency, high-performance computing systems across hardware and software.</li>
-            <li>Co-founded the club, and set to lead its FPGA design subteam when it launches in Winter 2027.</li>
-            <li>Building the foundations for that role now through Harris &amp; Harris and Merrick's <em>Getting Started with FPGAs</em>: HDL, sequential logic, and the full simulation, synthesis and place-and-route flow.</li>
-          </ul>
+          <div class="org"><a class="org-link" href="https://ml3labs.com/" target="_blank" rel="noopener" title="Open ML³ Labs’s website">McMaster Low Latency Labs (ML³)<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON (On site)</div>
+          <div class="lap-peek"><div class="lap-peek-in">
+            <p class="lap-about">Student club building low-latency, high-performance computing systems across hardware and software.</p>
+            <div class="lap-more" id="lap3-more"><div class="lap-more-in"><ul>
+              <li>Co-founded the club, and set to lead its FPGA design subteam when it launches in Winter 2027.</li>
+              <li>Building the foundations for that role now through Harris &amp; Harris and Merrick's <em>Getting Started with FPGAs</em>: HDL, sequential logic, and the full simulation, synthesis and place-and-route flow.</li>
+            </ul></div></div>
+          </div></div>
+          <button class="lap-toggle" type="button" aria-expanded="false" aria-controls="lap3-more">Show more<span>2</span></button>
         </div>
       </article>
       <article class="lap sx" data-dir="-1">
         <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>June 2026 →</div>
-        <div>
+        <div class="lap-body">
           <h3>Technical Training Developer</h3>
           <div class="org">ICC Evaluation Service — Electrical Division · Brea, CA (Remote)</div>
-          <ul>
-            <li>Subsidiary of the International Code Council that evaluates building and electrical products for code compliance.</li>
-            <li>Authored 26 ISO/IEC 17020 field evaluation training modules for electrical equipment, each 40+ scripted slides.</li>
-            <li>Wrote pass/fail test training on hi-pot, insulation resistance, ground bond and leakage current, plus construction checks like clearance and creepage.</li>
-            <li>Mapped UL, CSA C22.2, NFPA 70/790/791 and CEC requirements to inspection criteria for 14 equipment categories, from battery energy storage to hazardous-location equipment.</li>
-          </ul>
+          <div class="lap-peek"><div class="lap-peek-in">
+            <p class="lap-about">Subsidiary of the International Code Council that evaluates building and electrical products for code compliance.</p>
+            <div class="lap-more" id="lap4-more"><div class="lap-more-in"><ul>
+              <li>Authored 26 ISO/IEC 17020 field evaluation training modules for electrical equipment, each 40+ scripted slides.</li>
+              <li>Wrote pass/fail test training on hi-pot, insulation resistance, ground bond and leakage current, plus construction checks like clearance and creepage.</li>
+              <li>Mapped UL, CSA C22.2, NFPA 70/790/791 and CEC requirements to inspection criteria for 14 equipment categories, from battery energy storage to hazardous-location equipment.</li>
+            </ul></div></div>
+          </div></div>
+          <button class="lap-toggle" type="button" aria-expanded="false" aria-controls="lap4-more">Show more<span>3</span></button>
         </div>
       </article>
       <article class="lap sx">
         <div class="when"><div class="status done"><span class="tyre-ic"></span>Chequered</div>May – Aug 2026</div>
-        <div>
+        <div class="lap-body">
           <h3>Software Engineering Intern</h3>
           <div class="org">Hermes AI (Atticus.AI) · Toronto, ON (Remote)</div>
-          <ul>
-            <li>Early-stage Canadian startup building an AI platform for legal work.</li>
-            <li>Shipped production features to a legal AI platform with real clients: a vertical sidebar navigation migration, a Clear Chat feature, and chat-history scoping fixes across frontend and backend.</li>
-            <li>Worked in Python, FastAPI, React and TypeScript inside a real Git/GitHub review loop.</li>
-            <li>Fixed a Windows and Python 3.13 setup failure by unpinning LangChain to 0.3.x.</li>
-          </ul>
+          <div class="lap-peek"><div class="lap-peek-in">
+            <p class="lap-about">Early-stage Canadian startup building an AI platform for legal work.</p>
+            <div class="lap-more" id="lap5-more"><div class="lap-more-in"><ul>
+              <li>Shipped production features to a legal AI platform with real clients: a vertical sidebar navigation migration, a Clear Chat feature, and chat-history scoping fixes across frontend and backend.</li>
+              <li>Worked in Python, FastAPI, React and TypeScript inside a real Git/GitHub review loop.</li>
+              <li>Fixed a Windows and Python 3.13 setup failure by unpinning LangChain to 0.3.x.</li>
+            </ul></div></div>
+          </div></div>
+          <button class="lap-toggle" type="button" aria-expanded="false" aria-controls="lap5-more">Show more<span>3</span></button>
         </div>
       </article>
       <article class="lap sx" data-dir="-1">
         <div class="when"><div class="status done"><span class="tyre-ic"></span>Chequered</div>Sep 2025 – Aug 2026</div>
-        <div>
+        <div class="lap-body">
           <h3>Computer Vision Engineer</h3>
-          <div class="org">McMaster RoboMaster · Hamilton, ON (On site)</div>
-          <ul>
-            <li>Vision subteam behind the robots' auto-aim, on the same RoboMaster competition team.</li>
-            <li>Ran live test sessions on the robot's auto-aim system, measuring a 70% hit rate on moving targets.</li>
-            <li>Collected match and test footage for training, supporting a ~20% year-over-year gain in opponent detection.</li>
-          </ul>
+          <div class="org"><a class="org-link" href="https://macrobomaster.com/" target="_blank" rel="noopener" title="Open McMaster RoboMaster’s website">McMaster RoboMaster<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON (On site)</div>
+          <div class="lap-peek"><div class="lap-peek-in">
+            <p class="lap-about">Vision subteam behind the robots' auto-aim, on the same RoboMaster competition team.</p>
+            <div class="lap-more" id="lap6-more"><div class="lap-more-in"><ul>
+              <li>Ran live test sessions on the robot's auto-aim system, measuring a 70% hit rate on moving targets.</li>
+              <li>Collected match and test footage for training, supporting a ~20% year-over-year gain in opponent detection.</li>
+            </ul></div></div>
+          </div></div>
+          <button class="lap-toggle" type="button" aria-expanded="false" aria-controls="lap6-more">Show more<span>2</span></button>
         </div>
       </article>
     </div>
@@ -847,6 +959,14 @@ nav.links a.nav-cv{display:inline-block}
       </div>
       <div class="tag">P1 = latest // software in the pit lane</div>
     </div>
+    <div class="grid-filter" role="group" aria-label="Filter projects by skill">
+      <span class="gf-lbl">Filter</span>
+      <button type="button" class="gf on" data-skill="" aria-pressed="true">All<i>6</i></button>
+      <button type="button" class="gf" data-skill="test" aria-pressed="false">Test &amp; measurement<i>1</i></button>
+      <button type="button" class="gf" data-skill="embedded" aria-pressed="false">Embedded<i>4</i></button>
+      <button type="button" class="gf" data-skill="cad" aria-pressed="false">CAD &amp; mechanical<i>1</i></button>
+      <button type="button" class="gf" data-skill="software" aria-pressed="false">Software<i>1</i></button>
+    </div>
 
 
     <div class="stage">
@@ -856,7 +976,7 @@ nav.links a.nav-cv{display:inline-block}
         <div class="gtags" id="gridTags"></div>
       </div>
       <ol class="tower" id="tower" aria-label="Projects">
-      <li class="pcard" data-repo="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/blob/main/TEST_REPORT.md" data-repo-label="View test report" data-car="#E8002D" data-acc="#FFF200" style="--car-rgb:232,0,45">
+      <li class="pcard" data-repo="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/blob/main/TEST_REPORT.md" data-repo-label="View test report" data-car="#E8002D" data-acc="#FFF200" data-skills="test embedded" style="--car-rgb:232,0,45">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><img src="img/radar-test-sq.webp" alt="Analog Discovery 3 probe wires clipped onto the ESP32 radar breadboard" width="320" height="320" loading="lazy" decoding="async"></span>
           <span class="pc-txt">
@@ -867,14 +987,16 @@ nav.links a.nav-cv{display:inline-block}
           </span>
         </button>
         <div class="pc-detail" hidden>
+          <div class="pit-stats"><div><b>6</b><span>Tests run</span></div><div><b>3</b><span>Faults fixed</span></div><div><b>0.63 cm</b><span>RMS error, from 0.92</span></div></div>
           <p class="pit-sum">A continuation of <a href="#grid" class="pit-jump" data-pit="1">P2, the ESP32 Ultrasonic Radar</a>. I treated the finished radar as a device under test and characterized it across six tests, with limits set before measuring and before/after data for every fix.</p>
           <div class="pit-files" aria-label="Project files"><span>Files</span><a href="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/blob/main/TEST_REPORT.md" target="_blank" rel="noopener">Test report<i aria-hidden="true">↗</i></a><a href="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/tree/main/test/data" target="_blank" rel="noopener">Raw data<i aria-hidden="true">↗</i></a><a href="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/tree/main/test" target="_blank" rel="noopener">Test scripts<i aria-hidden="true">↗</i></a></div>
+          <div class="race-log"><h4>Race control log</h4><ol><li><div class="rc-top"><span class="rc-n">01</span><b>ECHO overdrove a 3.3 V GPIO</b><span class="rc-res">Fixed</span></div><div class="rc-val"><span class="rc-lim">Limit ≤ 3.6 V</span><span>5.05 V</span><i aria-hidden="true">→</i><span class="rc-after">3.41 V</span></div><div class="rc-fix"><span>Fix</span>Resistor divider between ECHO and GPIO 14</div></li><li><div class="rc-top"><span class="rc-n">02</span><b>Distance read short at range</b><span class="rc-res">Fixed</span></div><div class="rc-val"><span class="rc-lim">Limit ±1 cm</span><span>0.92 cm</span><i aria-hidden="true">→</i><span class="rc-after">0.63 cm RMS</span></div><div class="rc-fix"><span>Fix</span>Speed of sound 0.034 → 0.0343 cm/µs (error was growing with distance)</div></li><li><div class="rc-top"><span class="rc-n">03</span><b>Loop stalled with nothing in range</b><span class="rc-res">Fixed</span></div><div class="rc-val"><span class="rc-lim">Limit Minimize</span><span>~106 ms</span><i aria-hidden="true">→</i><span class="rc-after">~86 ms</span></div><div class="rc-fix"><span>Fix</span>30 ms timeout on <code>pulseIn()</code>, which was waiting out a 48 ms echo</div></li><li><div class="rc-top"><span class="rc-n">04</span><b>Readings looked stuck (test rig)</b><span class="rc-res">Fixed</span></div><div class="rc-val"><span>Stale data</span><i aria-hidden="true">→</i><span class="rc-after">Fresh each move</span></div><div class="rc-fix"><span>Fix</span>3-probe capture proved the sensor fine; the script now discards 1.5 s of serial data after each move</div></li></ol></div>
           <div class="gal" data-gallery><figure class="fit"><a class="zoom" href="img/distance-fix.webp"><img src="img/distance-fix.webp" alt="Distance error against true distance, before and after the firmware fix" width="1050" height="630" loading="lazy" decoding="async"></a><figcaption>Distance error before vs. after the firmware fix. RMS error 0.92 → 0.63 cm; worst case −1.91 → −1.05 cm.</figcaption></figure><figure class="fit"><a class="zoom" href="img/echo-before.webp"><img src="img/echo-before.webp" alt="Scope capture of ECHO peaking at 5.05 volts" width="1600" height="877" loading="lazy" decoding="async"></a><figcaption>ECHO into the ESP32’s 3.3 V GPIO before the fix: 5.05 V peak.</figcaption></figure><figure class="fit"><a class="zoom" href="img/echo-after.webp"><img src="img/echo-after.webp" alt="Scope capture of ECHO peaking at 3.41 volts" width="1600" height="780" loading="lazy" decoding="async"></a><figcaption>After adding a resistor divider: 3.41 V peak.</figcaption></figure><figure class="fit wide"><a class="zoom" href="img/loop-before.webp"><img src="img/loop-before-band.webp" alt="Logic analyzer capture of TRIG, ECHO and GPIO 14 with no target in range, before the fix" width="1600" height="170" loading="lazy" decoding="async"></a><figcaption>Nothing in range: the sensor holds ECHO ~48 ms and the loop stretches to ~106 ms.</figcaption></figure><figure class="fit wide"><a class="zoom" href="img/loop-after.webp"><img src="img/loop-after-band.webp" alt="Logic analyzer capture of the same no-target case after the fix" width="1600" height="169" loading="lazy" decoding="async"></a><figcaption>With a 30 ms <code>pulseIn</code> timeout, the same case runs at ~86 ms.</figcaption></figure><figure class="fit"><a class="zoom" href="img/rail-dip.webp"><img src="img/rail-dip.webp" alt="Scope capture of the 5 V rail dipping after a servo pulse" width="1600" height="804" loading="lazy" decoding="async"></a><figcaption>5 V rail dips to 4.93 V for ~1.5 ms after each servo pulse, inside USB tolerance.</figcaption></figure></div>
-          <dl class="pit-specs"><dt>Stack</dt><dd>AD3 · WaveForms · Python (dwfpy, pyserial, matplotlib)</dd><dt>Tests</dt><dd>Signal level, distance accuracy, echo timing, loop timing, servo PWM, rail droop</dd><dt>Found</dt><dd>5 V on a 3.3 V pin, 1% speed-of-sound error, <code>pulseIn</code> stall</dd><dt>Result</dt><dd>RMS error 0.92 → 0.63 cm, loop 106 → 86 ms, ECHO 5.05 → 3.41 V</dd><dt>Hard part</dt><dd>Stale serial buffers and auto-reset on port open</dd></dl>
+          <dl class="pit-specs"><dt>Stack</dt><dd>AD3 · WaveForms · Python (dwfpy, pyserial, matplotlib)</dd><dt>Tests</dt><dd>Signal level, distance accuracy, echo timing, loop timing, servo PWM, rail droop</dd><dt>Hard part</dt><dd>Stale serial buffers and auto-reset on port open</dd></dl>
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Measured the HC-SR04 ECHO at 5.05 V going into a 3.3 V GPIO; added a resistor divider and re-measured at 3.41 V.</li><li>Distance error grew with range; traced it to a speed-of-sound constant about 1% low. Fix moved the fit slope from 0.961 to 0.990.</li><li>With nothing in range, <code>pulseIn</code> waited out a 48 ms echo every ping. A 30 ms timeout cut the loop from 106 to 86 ms.</li><li>Readings that seemed stuck turned out to be stale serial data. Proved the sensor was fine with a three-probe logic capture and minimal sketches, then fixed the test script.</li><li>Found readings jumping by exactly one 40 kHz wavelength (0.43 cm): the sensor detecting a weak echo a cycle late.</li></ul></div>
         </div>
       </li>
-      <li class="pcard" data-repo="https://github.com/Burnitt/ESP32-Ultrasonic-Radar" data-car="#FF8000" data-acc="#47C7FC" style="--car-rgb:255,128,0">
+      <li class="pcard" data-repo="https://github.com/Burnitt/ESP32-Ultrasonic-Radar" data-car="#FF8000" data-acc="#47C7FC" data-skills="embedded" style="--car-rgb:255,128,0">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><img src="img/radar-sq.webp" alt="ESP32 radar on a breadboard, its OLED showing a sweep" width="320" height="320" loading="lazy" decoding="async"></span>
           <span class="pc-txt">
@@ -885,14 +1007,16 @@ nav.links a.nav-cv{display:inline-block}
           </span>
         </button>
         <div class="pc-detail" hidden>
+          <div class="pit-stats"><div><b>150°</b><span>Sweep, 15° to 165°</span></div><div><b>40 cm</b><span>Detection window</span></div><div><b>128×64</b><span>OLED, no PC</span></div></div>
           <p class="pit-sum">An HC-SR04 sweeps from 15° to 165° on an SG90 servo while C++ firmware draws range rings, a live sweep line and persistent detections on a 128×64 SSD1306 OLED. No PC in the loop.</p>
+          
           
           <div class="gal" data-gallery><figure class="vid"><video class="loop" muted loop playsinline preload="none" width="540" height="540" data-poster="img/radar-sweep.webp" aria-label="The radar running: the servo pans the sensor while the OLED draws the sweep"><source src="img/radar-sweep.webm" type="video/webm"><source src="img/radar-sweep.mp4" type="video/mp4"></video><figcaption>Running live: the servo pans the HC-SR04 while the OLED draws the sweep and the range.</figcaption></figure><figure><a class="zoom" href="img/radar.webp"><img src="img/radar.webp" alt="ESP32 radar build with the OLED reading 159 degrees and 16 cm" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>The build mid-sweep: the OLED reads 159° and 16 cm.</figcaption></figure><figure class="fit"><a class="zoom" href="img/radar-wiring.webp"><img src="img/radar-wiring.webp" alt="Wokwi wiring diagram of the ESP32 radar" width="1563" height="891" loading="lazy" decoding="async"></a><figcaption>Wiring: HC-SR04 on GPIO 27/14, servo on GPIO 13, OLED on I²C (GPIO 32/33). <a class="ext" href="https://wokwi.com/projects/475235087654761473" target="_blank" rel="noopener">Open in Wokwi</a></figcaption></figure></div>
           <dl class="pit-specs"><dt>Stack</dt><dd>ESP32 · C++ · I²C · PWM</dd><dt>Sensing</dt><dd>Ultrasonic time-of-flight, 40 cm window</dd><dt>Display</dt><dd>SSD1306 over I²C on GPIO 32 / 33</dd><dt>Debug tools</dt><dd>Multimeter · serial logging</dd><dt>Hard part</dt><dd>Timer conflict, strapping pins, I²C remap</dd></dl>
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Servo and display worked alone but failed together. Isolated each in a minimal sketch, then reintroduced them one at a time, which surfaced three separate faults.</li><li>Moved every signal off the ESP32 strapping pins after finding they were changing the boot mode.</li><li>Fixed a silent display by remapping I²C explicitly with <code>Wire.begin(32, 33)</code>.</li><li>Next: move to a timer-driven, non-blocking loop.</li><li>Characterized and fixed in <a href="#grid" class="pit-jump" data-pit="0">P1: Radar Test &amp; Characterization</a>.</li></ul></div>
         </div>
       </li>
-      <li class="pcard" data-repo="https://github.com/Burnitt/Robotic-End-Effector" data-car="#C8CCCE" data-acc="#27F4D2" style="--car-rgb:200,204,206">
+      <li class="pcard" data-repo="https://github.com/Burnitt/Robotic-End-Effector" data-car="#C8CCCE" data-acc="#27F4D2" data-skills="cad" style="--car-rgb:200,204,206">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><img src="img/effector-sq.webp" alt="3D-printed rack-and-pinion gripper" width="320" height="320" loading="lazy" decoding="async"></span>
           <span class="pc-txt">
@@ -903,14 +1027,16 @@ nav.links a.nav-cv{display:inline-block}
           </span>
         </button>
         <div class="pc-detail" hidden>
+          <div class="pit-stats"><div><b>~95%</b><span>Less manual handling</span></div><div><b>Pi 4</b><span>Arm controller</span></div><div><b>1P13</b><span>Team design project</span></div></div>
           <p class="pit-sum">Taken from gear geometry to dimensioned drawings to printed, tested parts on a Raspberry Pi 4 controlled Q-arm.</p>
+          
           
           <div class="gal" data-gallery><figure><a class="zoom" href="img/effector.webp"><img src="img/effector.webp" alt="Printed gripper with the main gear between two racks" width="901" height="1200" loading="lazy" decoding="async"></a><figcaption>The printed gripper: the servo turns the main gear, which drives both racks to close the arms.</figcaption></figure><figure class="fit"><a class="zoom" href="img/effector-gear.webp"><img src="img/effector-gear.webp" alt="Dimensioned drawing of the main gear" width="870" height="675" loading="lazy" decoding="async"></a><figcaption>Main gear drawing (my part), sized to the servo's torque.</figcaption></figure><figure class="fit"><a class="zoom" href="img/effector-exploded.webp"><img src="img/effector-exploded.webp" alt="Exploded assembly drawing with parts list" width="976" height="741" loading="lazy" decoding="async"></a><figcaption>Exploded assembly drawing and parts list (mine).</figcaption></figure></div>
           <dl class="pit-specs"><dt>Stack</dt><dd>Autodesk Inventor · 3D printing · Python</dd><dt>Team</dt><dd>McMaster 1P13 design project</dd><dt>Owned</dt><dd>Gear CAD, drawings, <code>sign_up()</code>, <code>pack_products()</code></dd></dl>
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>A week before the deadline, testing showed the arms were too wide and knocked neighbouring items. We narrowed them and lengthened the tips over several reprints.</li><li>Iterated through printed prototypes to validate grip on the physical arm.</li><li>Cut manual handling effort by roughly 95% in the project scenario.</li></ul></div>
         </div>
       </li>
-      <li class="pcard" data-repo="https://github.com/Burnitt/Autonomous-Driveway-Gate" data-car="#3671C6" data-acc="#FFC906" style="--car-rgb:54,113,198">
+      <li class="pcard" data-repo="https://github.com/Burnitt/Autonomous-Driveway-Gate" data-car="#3671C6" data-acc="#FFC906" data-skills="embedded" style="--car-rgb:54,113,198">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><img src="img/gate-sq.webp" alt="Arduino robot base with a PING sensor and servo" width="320" height="320" loading="lazy" decoding="async"></span>
           <span class="pc-txt">
@@ -921,14 +1047,16 @@ nav.links a.nav-cv{display:inline-block}
           </span>
         </button>
         <div class="pc-detail" hidden>
+          <div class="pit-stats"><div><b>5 cm</b><span>Trigger distance</span></div><div><b>2° / 15 ms</b><span>Servo step</span></div><div><b>PING</b><span>Ultrasonic sensor</span></div></div>
           <p class="pit-sum">A Parallax PING sensor watching for a car, a servo doing the work, and a stepped sweep with threshold logic to avoid false triggers.</p>
+          
           
           <div class="gal" data-gallery><figure><a class="zoom" href="img/gate.webp"><img src="img/gate.webp" alt="Arduino Uno with Board of Education shield, PING sensor and servo" width="1200" height="1178" loading="lazy" decoding="async"></a><figcaption>The prototype on an Arduino Uno and Board of Education shield: PING sensor at right, the loose servo is the gate.</figcaption></figure><figure class="fit"><a class="zoom" href="img/gate-diagram.webp"><img src="img/gate-diagram.webp" alt="Tinkercad circuit diagram of the gate" width="1600" height="919" loading="lazy" decoding="async"></a><figcaption>Circuit in Tinkercad: PING signal on pin 11, servo on pin 9. <a class="ext" href="https://www.tinkercad.com/things/frosQddG6vk/editel?sharecode=wQ1teoypBejiX6jHJvJXi9Mn2uGAWApf8aHuyRncw8c" target="_blank" rel="noopener">Open in Tinkercad</a></figcaption></figure></div>
           <dl class="pit-specs"><dt>Stack</dt><dd>Arduino · C++ · ultrasonic sensing</dd><dt>Trigger</dt><dd>Object within 5 cm</dd><dt>Motion</dt><dd>Servo steps 2° every 15 ms</dd><dt>Note</dt><dd>First thing I built that ran unattended</dd></dl>
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Threshold logic mattered more than the sensor: most of the tuning went into ignoring things that weren't cars.</li><li>A hard <code>servo.write(90)</code> snapped the gate open, so I replaced it with a stepped loop for smooth motion.</li></ul></div>
         </div>
       </li>
-      <li class="pcard" data-repo="https://github.com/Burnitt/Bumper-Guided-Maze-Navigator" data-car="#229971" data-acc="#CEDC00" style="--car-rgb:34,153,113">
+      <li class="pcard" data-repo="https://github.com/Burnitt/Bumper-Guided-Maze-Navigator" data-car="#229971" data-acc="#CEDC00" data-skills="embedded" style="--car-rgb:34,153,113">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><img src="img/maze-sq.webp" alt="Foil contact bumpers on a small robot" width="320" height="320" loading="lazy" decoding="async"></span>
           <span class="pc-txt">
@@ -939,7 +1067,9 @@ nav.links a.nav-cv{display:inline-block}
           </span>
         </button>
         <div class="pc-detail" hidden>
+          <div class="pit-stats"><div><b>2</b><span>Contact bumpers</span></div><div><b>500 ms</b><span>Reverse time</span></div><div><b>800 ms</b><span>Turn time</span></div></div>
           <p class="pit-sum">Aluminum foil contact bumpers, continuous rotation servos, and a state machine that reroutes on contact.</p>
+          
           
           <div class="gal" data-gallery><figure><a class="zoom" href="img/maze.webp"><img src="img/maze.webp" alt="Cardboard and foil contact bumpers on the robot" width="1200" height="898" loading="lazy" decoding="async"></a><figcaption>Foil contact bumpers: each closes a circuit to an input pin when it hits a wall.</figcaption></figure></div>
           <dl class="pit-specs"><dt>Stack</dt><dd>Arduino · C++ · contact sensing</dd><dt>Inputs</dt><dd>Two foil bumpers on pins 8 and 9</dd><dt>Drive</dt><dd>Two continuous-rotation servos</dd><dt>Note</dt><dd>State machines, before a course taught them</dd></dl>
@@ -950,7 +1080,7 @@ nav.links a.nav-cv{display:inline-block}
       <div class="sw">
       <div class="sw-head"><b>Software</b><span>Pit lane</span></div>
       <ol class="tower" id="towerSw" aria-label="Software projects">
-      <li class="pcard" data-repo="https://github.com/Burnitt/Lumi-AI" data-car="#FF87BC" data-acc="#2293D1" style="--car-rgb:255,135,188">
+      <li class="pcard" data-repo="https://github.com/Burnitt/Lumi-AI" data-car="#FF87BC" data-acc="#2293D1" data-skills="software" style="--car-rgb:255,135,188">
         <button class="pc" type="button" aria-haspopup="dialog">
           <span class="pc-img"><svg viewBox="0 0 80 80" role="img" aria-label="Lumi AI architecture: three agents behind one API and a web app"><rect width="80" height="80" fill="#0E1217"/><g font-family="IBM Plex Mono,monospace" font-size="6.2" fill="#9FAEBC" text-anchor="middle"><rect x="6" y="9" width="22" height="13" rx="2" fill="none" stroke="#2E3946"/><text x="17" y="17.6">camp</text><rect x="6" y="33" width="22" height="13" rx="2" fill="none" stroke="#2E3946"/><text x="17" y="41.6">email</text><rect x="6" y="57" width="22" height="13" rx="2" fill="none" stroke="#2E3946"/><text x="17" y="65.6">media</text><rect x="40" y="31" width="18" height="17" rx="2" fill="none" stroke="var(--amber,#F2A900)"/><text x="49" y="41.8" fill="#E8EDF2">API</text><rect x="64" y="27" width="11" height="25" rx="2" fill="none" stroke="var(--maroon-hot,#D6215F)"/><path d="M28 15.5 L40 37 M28 39.5 L40 39.5 M28 63.5 L40 42 M58 39.5 L64 39.5" stroke="#2E3946" fill="none"/></g></svg></span>
           <span class="pc-txt">
@@ -961,7 +1091,9 @@ nav.links a.nav-cv{display:inline-block}
           </span>
         </button>
         <div class="pc-detail" hidden>
+          <div class="pit-stats"><div><b>3</b><span>AI agents</span></div><div><b>FastAPI</b><span>Backend</span></div><div><b>GPT-4o</b><span>Model</span></div></div>
           <p class="pit-sum">Three agents (campaign, email, media) behind a FastAPI backend, with a React/Vite frontend scaffolded from scratch.</p>
+          
           
           
           <dl class="pit-specs"><dt>Stack</dt><dd>Python · FastAPI · React/Vite · GPT-4o</dd><dt>Role</dt><dd>Co-builder</dd><dt>Caught</dt><dd>Client created before <code>load_dotenv()</code> ran</dd></dl>
@@ -985,14 +1117,14 @@ nav.links a.nav-cv{display:inline-block}
     <div class="folders">
       <button class="folder sx" type="button" aria-expanded="false" aria-controls="f-test">
         <span class="f-tab">Test &amp; Measurement</span>
-        <span class="f-stack" aria-hidden="true"><img src="img/ad3-triangle-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"><img src="img/scope-cursor-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"><img src="img/ad3-xy-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span>
-        <span class="f-count">11 photos and captures</span>
+        <span class="f-stack" aria-hidden="true"><img src="img/ad3-xy-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"><img src="img/radar-test-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"><img src="img/scope-cursor-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span>
+        <span class="f-count">7 photos and captures</span>
         <span class="f-short">Analog Discovery 3 · logic analyzer · Keysight bench scope · Python test automation</span>
       </button>
       <button class="folder sx" type="button" aria-expanded="false" aria-controls="f-logic">
         <span class="f-tab">Digital Logic &amp; FPGA</span>
-        <span class="f-stack" aria-hidden="true"><img src="img/fpga-board-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"><img src="img/sevenseg-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"><img src="img/logic-wiring-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span>
-        <span class="f-count">6 photos and captures</span>
+        <span class="f-stack" aria-hidden="true"><img src="img/wire-mess-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"><img src="img/fpga-quartus-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"><img src="img/de10-bcd-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span>
+        <span class="f-count">3 photos and captures</span>
         <span class="f-short">Verilog · Quartus Prime · DE10-Lite (MAX 10) · 74HC logic</span>
       </button>
       <button class="folder sx" type="button" aria-expanded="false" aria-controls="f-embed">
@@ -1012,28 +1144,28 @@ nav.links a.nav-cv{display:inline-block}
       <div class="f-head"><h3>Test &amp; Measurement</h3><button class="mini f-close" type="button">Close folder</button></div>
       <div class="f-body">
         <ul class="f-uses" aria-label="Where I used each tool"><li><b>Analog Discovery 3</b> <em>scope, waveform generator, voltmeter, XY and math channels</em><span>Circuit Analysis labs (ELECENG 2CI4), ESP32 radar characterization</span></li><li><b>Logic analyzer</b><span>radar TRIG/ECHO timing, three-probe fault isolation</span></li><li><b>Test automation</b><span>Python (pyserial, dwfpy, matplotlib), radar test scripts</span></li><li><b>Keysight DSOX2002A</b> <em>two-channel bench scope, time cursors</em><span>Logic Design lab (COMPENG 2DI4)</span></li><li><b>Multimeter</b><span>ESP32 radar bring-up</span></li><li><b>Serial logging</b><span>ESP32 radar: tracked down the I²C remap and strapping-pin faults</span></li><li><b>Breadboarding</b><span>every build on this page</span></li></ul>
-        <div class="f-grid" data-gallery><figure class="feature"><a class="zoom" href="img/radar-bench.webp"><img src="img/radar-bench-feature.webp" alt="ESP32 radar on a breadboard with Analog Discovery 3 probe wires clipped on" width="1200" height="444" loading="lazy" decoding="async"></a><figcaption>The radar as a device under test: AD3 probes clipped on for the servo PWM measurements, with the resistor divider on the ECHO line.</figcaption></figure><figure class="fit"><a class="zoom" href="img/ad3-xy.webp"><img src="img/ad3-xy.webp" alt="XY plot of current against voltage for a resistor" width="906" height="1541" loading="lazy" decoding="async"></a><figcaption>XY plot of resistor current against voltage over a 2.5 to 5 V sweep. The slope gives R ≈ 327 Ω against a 330 Ω part (0.8%).</figcaption></figure><figure class="fit"><a class="zoom" href="img/ad3-triangle.webp"><img src="img/ad3-triangle.webp" alt="Triangle input and divider output on two channels" width="1315" height="584" loading="lazy" decoding="async"></a><figcaption>2.5 kHz triangle in (yellow) and divider node V1 (blue): same shape, in phase, scaled by about 0.487.</figcaption></figure><figure class="fit"><a class="zoom" href="img/ad3-ratio.webp"><img src="img/ad3-ratio.webp" alt="Math channel showing the ratio of two voltages" width="1281" height="508" loading="lazy" decoding="async"></a><figcaption>Math channel V1/Vin reads 0.4916, within 0.92% of the 0.4871 predicted by nodal analysis. Spikes are where Vin crosses 0 V.</figcaption></figure><figure class="fit"><a class="zoom" href="img/ad3-voltmeter.webp"><img src="img/ad3-voltmeter.webp" alt="AD3 voltmeter reading 1.748 volts" width="1352" height="534" loading="lazy" decoding="async"></a><figcaption>1.748 V measured at node Va against a 1.72 V hand calculation, inside resistor tolerance.</figcaption></figure><figure><a class="zoom" href="img/scope-cursor.webp"><img src="img/scope-cursor.webp" alt="Keysight oscilloscope with two waveforms and time cursors" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>Keysight DSOX2002A in the logic lab: two channels timed with cursors (ΔX = 4.90 µs).</figcaption></figure><figure><a class="zoom" href="img/scope-65ns.webp"><img src="img/scope-65ns.webp" alt="Keysight oscilloscope measuring a 65.6 nanosecond interval" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>Cursor measurement of a 65.6 ns interval on the bench scope.</figcaption></figure><figure class="fit"><a class="zoom" href="img/echo-after.webp"><img src="img/echo-after.webp" alt="Scope capture of the radar's ECHO at the ESP32 pin" width="1600" height="780" loading="lazy" decoding="async"></a><figcaption>HC-SR04 ECHO at the ESP32 pin: 5.05 V before a resistor divider, 3.41 V after, under the 3.6 V limit.</figcaption></figure><figure class="fit"><a class="zoom" href="img/rail-dip.webp"><img src="img/rail-dip.webp" alt="Scope capture of the 5 V rail under servo load" width="1600" height="804" loading="lazy" decoding="async"></a><figcaption>5 V rail under servo load: 5.12 V average, 4.93 V minimum, against a 4.75 V USB limit.</figcaption></figure><figure class="fit"><a class="zoom" href="img/servo-pwm-90.webp"><img src="img/servo-pwm-90.webp" alt="Scope capture of the servo PWM signal at 90 degrees" width="1600" height="800" loading="lazy" decoding="async"></a><figcaption>Servo PWM at 90°: 1445 µs measured vs. 1450 µs expected, 20.000 ms period.</figcaption></figure><figure class="fit wide"><a class="zoom" href="img/trig-width.webp"><img src="img/trig-width-band.webp" alt="Logic analyzer capture of the TRIG pulse" width="1600" height="169" loading="lazy" decoding="async"></a><figcaption>AD3 logic analyzer at 1 MHz: TRIG high for ~12.7 µs against the 10 µs datasheet minimum.</figcaption></figure></div>
+        <div class="f-grid" data-gallery><figure class="feature"><span class="src">Radar test</span><a class="zoom" href="img/radar-bench.webp"><img src="img/radar-bench.webp" alt="ESP32 radar on a breadboard with Analog Discovery 3 probe wires clipped on" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>The radar as a device under test: AD3 probes clipped on for the servo PWM measurements, with the resistor divider on the ECHO line.</figcaption></figure><figure class="fit"><span class="src">Radar test</span><a class="zoom" href="img/echo-after.webp"><img src="img/echo-after.webp" alt="Scope capture of the radar's ECHO at the ESP32 pin" width="1600" height="780" loading="lazy" decoding="async"></a><figcaption>HC-SR04 ECHO at the ESP32 pin: 5.05 V before a resistor divider, 3.41 V after, under the 3.6 V limit.</figcaption></figure><figure class="fit"><span class="src">Radar test</span><a class="zoom" href="img/rail-dip.webp"><img src="img/rail-dip.webp" alt="Scope capture of the 5 V rail under servo load" width="1600" height="804" loading="lazy" decoding="async"></a><figcaption>5 V rail under servo load: 5.12 V average, 4.93 V minimum, against a 4.75 V USB limit.</figcaption></figure><figure class="fit"><span class="src">Radar test</span><a class="zoom" href="img/servo-pwm-90.webp"><img src="img/servo-pwm-90.webp" alt="Scope capture of the servo PWM signal at 90 degrees" width="1600" height="800" loading="lazy" decoding="async"></a><figcaption>Servo PWM at 90°: 1445 µs measured vs. 1450 µs expected, 20.000 ms period.</figcaption></figure><figure class="fit"><span class="src">Circuits lab · 2CI4</span><a class="zoom" href="img/ad3-xy.webp"><img src="img/ad3-xy.webp" alt="XY plot of current against voltage for a resistor" width="906" height="1541" loading="lazy" decoding="async"></a><figcaption>XY plot of resistor current against voltage over a 2.5 to 5 V sweep. The slope gives R ≈ 327 Ω against a 330 Ω part (0.8%).</figcaption></figure><figure><span class="src">Logic lab · 2DI4</span><a class="zoom" href="img/scope-cursor.webp"><img src="img/scope-cursor.webp" alt="Keysight oscilloscope with two waveforms and time cursors" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>Keysight DSOX2002A in the logic lab: two channels timed with cursors (ΔX = 4.90 µs).</figcaption></figure><figure class="fit wide"><span class="src">Radar test</span><a class="zoom" href="img/trig-width.webp"><img src="img/trig-width-band.webp" alt="Logic analyzer capture of the TRIG pulse" width="1600" height="169" loading="lazy" decoding="async"></a><figcaption>AD3 logic analyzer at 1 MHz: TRIG high for ~12.7 µs against the 10 µs datasheet minimum.</figcaption></figure></div>
       </div>
     </div>
     <div class="f-open" id="f-logic" hidden>
       <div class="f-head"><h3>Digital Logic &amp; FPGA</h3><button class="mini f-close" type="button">Close folder</button></div>
       <div class="f-body">
         <ul class="f-uses" aria-label="Where I used each tool"><li><b>Verilog + Quartus Prime</b><span>Logic Design (COMPENG 2DI4)</span></li><li><b>Terasic DE10-Lite</b> <em>Intel MAX 10 FPGA</em><span>Logic Design lab</span></li><li><b>74HC-series logic</b> <em>74HC00, 74HC04, 74HC10, 74HC20</em><span>gate-level builds on the logic trainer</span></li></ul>
-        <div class="f-grid" data-gallery><figure><a class="zoom" href="img/fpga-board.webp"><img src="img/fpga-board.webp" alt="DE10-Lite FPGA board on the logic trainer" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>Terasic DE10-Lite (Intel MAX 10 FPGA) on the McMaster ECE logic trainer.</figcaption></figure><figure><a class="zoom" href="img/sevenseg.webp"><img src="img/sevenseg.webp" alt="74HC chips wired to a seven-segment display" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>74HC-series gates driving a seven-segment display.</figcaption></figure><figure><a class="zoom" href="img/logic-wiring.webp"><img src="img/logic-wiring.webp" alt="Jumper-wired gates on the logic trainer" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>Gate-level build on the logic trainer.</figcaption></figure><figure><a class="zoom" href="img/wire-mess.webp"><img src="img/wire-mess.webp" alt="Dense jumper wiring on the logic trainer with the seven-segment display lit" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>Was not fun to wire. The display lighting up made it worth it.</figcaption></figure><figure><a class="zoom" href="img/sevenseg-plan.webp"><img src="img/sevenseg-plan.webp" alt="Whiteboard sketch of seven-segment layout" width="900" height="1200" loading="lazy" decoding="async"></a><figcaption>Mapping segments a to g before wiring the display.</figcaption></figure><figure><a class="zoom" href="img/lab-bench.webp"><img src="img/lab-bench.webp" alt="Lab bench with logic trainer, power supply and oscilloscope" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>The bench: logic trainer, bench supply and Keysight scope.</figcaption></figure></div>
+        <div class="f-grid" data-gallery><figure class="feature"><span class="src">Logic lab · 2DI4</span><a class="zoom" href="img/fpga-quartus.webp"><img src="img/fpga-quartus.webp" alt="Laptop running Quartus Prime with a Verilog decoder, cabled to the DE10-Lite, Keysight scope behind" width="1024" height="768" loading="lazy" decoding="async"></a><figcaption>From Verilog to hardware: a 3-to-8 line decoder written in Quartus Prime and programmed onto the DE10-Lite, with the Keysight scope behind it.</figcaption></figure><figure><span class="src">Logic lab · 2DI4</span><a class="zoom" href="img/de10-bcd.webp"><img src="img/de10-bcd.webp" alt="DE10-Lite with a digit lit on its seven-segment display" width="1024" height="768" loading="lazy" decoding="async"></a><figcaption>Inputs on the DE10-Lite’s slide switches, result on its seven-segment display. Used for the BCD and 4-bit adder (with carry-in) labs.</figcaption></figure><figure><span class="src">Logic lab · 2DI4</span><a class="zoom" href="img/wire-mess.webp"><img src="img/wire-mess.webp" alt="Dense jumper wiring on the logic trainer with the seven-segment display lit" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>Was not fun to wire. The display lighting up made it worth it.</figcaption></figure></div>
       </div>
     </div>
     <div class="f-open" id="f-embed" hidden>
       <div class="f-head"><h3>Embedded &amp; Interfaces</h3><button class="mini f-close" type="button">Close folder</button></div>
       <div class="f-body">
         <ul class="f-uses" aria-label="Where I used each tool"><li><b>ESP32</b><span>ultrasonic radar</span></li><li><b>Arduino Uno</b><span>driveway gate, maze navigator</span></li><li><b>Raspberry Pi 4</b><span>robotic end effector (Q-arm)</span></li><li><b>STM32 Nucleo-F446RE</b><span>McMaster Exoskeleton</span></li><li><b>I²C</b><span>SSD1306 OLED on the radar, remapped to GPIO 32/33</span></li><li><b>PWM</b><span>servo sweeps on the radar and gate</span></li><li><b>GPIO inputs</b><span>foil contact bumpers on the maze robot</span></li><li><b>UART / serial</b><span>radar debug logging</span></li><li><b>Ultrasonic time-of-flight</b><span>HC-SR04 on the radar, Parallax PING on the gate</span></li></ul>
-        <div class="f-grid" data-gallery><figure><a class="zoom" href="img/radar.webp"><img src="img/radar.webp" alt="ESP32 radar build with its OLED" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>ESP32 radar mid-sweep: the OLED reads 159° and 16 cm, partway through its 150° sweep (15° to 165°).</figcaption></figure><figure class="fit"><a class="zoom" href="img/radar-wiring.webp"><img src="img/radar-wiring.webp" alt="Wokwi wiring diagram of the radar" width="1563" height="891" loading="lazy" decoding="async"></a><figcaption>Radar wiring in Wokwi. <a class="ext" href="https://wokwi.com/projects/475235087654761473" target="_blank" rel="noopener">Open in Wokwi</a></figcaption></figure><figure><a class="zoom" href="img/gate.webp"><img src="img/gate.webp" alt="Driveway gate prototype" width="1200" height="1178" loading="lazy" decoding="async"></a><figcaption>Driveway gate prototype: PING sensor at right, servo as the gate.</figcaption></figure><figure class="fit"><a class="zoom" href="img/gate-diagram.webp"><img src="img/gate-diagram.webp" alt="Tinkercad diagram of the gate circuit" width="1600" height="919" loading="lazy" decoding="async"></a><figcaption>Gate circuit in Tinkercad.</figcaption></figure><figure><a class="zoom" href="img/maze.webp"><img src="img/maze.webp" alt="Foil contact bumpers on the maze robot" width="1200" height="898" loading="lazy" decoding="async"></a><figcaption>Foil contact bumpers wired to two input pins on the maze robot.</figcaption></figure><figure><a class="zoom" href="img/radar-divider.webp"><img src="img/radar-divider.webp" alt="Radar breadboard with a resistor divider on the ECHO line" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>Resistor divider level-shifting the HC-SR04’s 5 V ECHO down to 3.4 V for the ESP32.</figcaption></figure></div>
+        <div class="f-grid" data-gallery><figure class="feature"><span class="src">Radar</span><a class="zoom" href="img/radar.webp"><img src="img/radar.webp" alt="ESP32 radar build with its OLED" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>ESP32 radar mid-sweep: the OLED reads 159° and 16 cm, partway through its 150° sweep (15° to 165°).</figcaption></figure><figure><span class="src">Radar test</span><a class="zoom" href="img/radar-divider.webp"><img src="img/radar-divider.webp" alt="Radar breadboard with a resistor divider on the ECHO line" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>Resistor divider level-shifting the HC-SR04’s 5 V ECHO down to 3.4 V for the ESP32.</figcaption></figure><figure class="fit"><span class="src">Radar</span><a class="zoom" href="img/radar-wiring.webp"><img src="img/radar-wiring.webp" alt="Wokwi wiring diagram of the radar" width="1563" height="891" loading="lazy" decoding="async"></a><figcaption>Radar wiring in Wokwi. <a class="ext" href="https://wokwi.com/projects/475235087654761473" target="_blank" rel="noopener">Open in Wokwi</a></figcaption></figure><figure><span class="src">Driveway gate</span><a class="zoom" href="img/gate.webp"><img src="img/gate.webp" alt="Driveway gate prototype" width="1200" height="1178" loading="lazy" decoding="async"></a><figcaption>Driveway gate prototype: PING sensor at right, servo as the gate.</figcaption></figure><figure><span class="src">Maze robot</span><a class="zoom" href="img/maze.webp"><img src="img/maze.webp" alt="Foil contact bumpers on the maze robot" width="1200" height="898" loading="lazy" decoding="async"></a><figcaption>Foil contact bumpers wired to two input pins on the maze robot.</figcaption></figure><figure class="fit"><span class="src">Driveway gate</span><a class="zoom" href="img/gate-diagram.webp"><img src="img/gate-diagram.webp" alt="Tinkercad diagram of the gate circuit" width="1600" height="919" loading="lazy" decoding="async"></a><figcaption>Gate circuit in Tinkercad.</figcaption></figure></div>
       </div>
     </div>
     <div class="f-open" id="f-cad" hidden>
       <div class="f-head"><h3>CAD &amp; Mechanical</h3><button class="mini f-close" type="button">Close folder</button></div>
       <div class="f-body">
         <ul class="f-uses" aria-label="Where I used each tool"><li><b>Autodesk Inventor</b><span>main gear and assembly drawings for the end effector</span></li><li><b>Engineering drawings</b> <em>dimensioned parts, exploded views</em><span>end effector</span></li><li><b>3D printing</b> <em>PLA</em><span>printed and reprinted gripper parts</span></li></ul>
-        <div class="f-grid" data-gallery><figure><a class="zoom" href="img/effector.webp"><img src="img/effector.webp" alt="Printed rack-and-pinion gripper" width="901" height="1200" loading="lazy" decoding="async"></a><figcaption>The printed gripper.</figcaption></figure><figure class="fit"><a class="zoom" href="img/effector-gear.webp"><img src="img/effector-gear.webp" alt="Main gear drawing" width="870" height="675" loading="lazy" decoding="async"></a><figcaption>Main gear drawing.</figcaption></figure><figure class="fit"><a class="zoom" href="img/effector-exploded.webp"><img src="img/effector-exploded.webp" alt="Exploded assembly drawing" width="976" height="741" loading="lazy" decoding="async"></a><figcaption>Exploded assembly with parts list.</figcaption></figure></div>
+        <div class="f-grid" data-gallery><figure><span class="src">End effector</span><a class="zoom" href="img/effector.webp"><img src="img/effector.webp" alt="Printed rack-and-pinion gripper" width="901" height="1200" loading="lazy" decoding="async"></a><figcaption>The printed gripper.</figcaption></figure><figure class="fit"><span class="src">End effector</span><a class="zoom" href="img/effector-gear.webp"><img src="img/effector-gear.webp" alt="Main gear drawing" width="870" height="675" loading="lazy" decoding="async"></a><figcaption>Main gear drawing.</figcaption></figure><figure class="fit"><span class="src">End effector</span><a class="zoom" href="img/effector-exploded.webp"><img src="img/effector-exploded.webp" alt="Exploded assembly drawing" width="976" height="741" loading="lazy" decoding="async"></a><figcaption>Exploded assembly with parts list.</figcaption></figure></div>
       </div>
     </div>
     <div class="kit">
@@ -1154,6 +1286,7 @@ nav.links a.nav-cv{display:inline-block}
     <span>© 2026 Gurnit Chopra</span>
     <span>Chassis GC-26</span>
     <span>Built from scratch, no template</span>
+    <span>Last updated <time datetime="2026-11-07">Nov 7, 2026</time></span>
   </div>
 </footer>
 
@@ -1350,6 +1483,9 @@ nav.links a.nav-cv{display:inline-block}
       repo: li.getAttribute("data-repo"),
       repoLabel: li.getAttribute("data-repo-label"),
       color: li.getAttribute("data-car") || "#9E0E48",
+      rgb: li.style.getPropertyValue("--car-rgb").trim(),
+      skills: (li.getAttribute("data-skills") || "").split(" "),
+      li: li,
       acc: li.getAttribute("data-acc") || "#F2A900",
       detail: li.querySelector(".pc-detail"),
       btn: li.querySelector(".pc")
@@ -1364,12 +1500,14 @@ nav.links a.nav-cv{display:inline-block}
   var tagsEl = document.getElementById("gridTags");
   var towerRows = [], tagBtns = [], leadPaths = [], grid3d = null;
 
+  var gfMatch = [];                                     /* cars picked out by the skill filter keep their glow */
   function lit(i, on){
     towerRows[i].classList.toggle("lit", on);
     tagBtns[i] && tagBtns[i].classList.toggle("lit", on);
-    if(leadPaths[i]) leadPaths[i].g.classList.toggle("lit", on);
-    if(grid3d) grid3d.highlight(i, on);
+    if(leadPaths[i]) leadPaths[i].g.classList.toggle("lit", on || !!gfMatch[i]);
+    if(grid3d) grid3d.highlight(i, on || !!gfMatch[i]);
   }
+  function applyGlow(){ CARS.forEach(function(c, i){ lit(i, false); }); }
 
   CARS.forEach(function(c, i){
     var tag = document.createElement("button");
@@ -1985,6 +2123,7 @@ nav.links a.nav-cv{display:inline-block}
     $("pitYr").textContent = c.yr;
     $("pitTags").innerHTML = c.tags.map(function(t){ return "<span>" + t + "</span>"; }).join("");
     $("pitWhat").textContent = c.what;
+    pit.style.setProperty("--car-rgb", c.rgb || "214,33,95");
     $("pitDetail").innerHTML = c.detail.innerHTML;
     pit.querySelector(".pit-body").scrollTop = 0;
     pitVideo();
@@ -2120,7 +2259,7 @@ nav.links a.nav-cv{display:inline-block}
       s.async = true;
       s.onload = function(){
         try{ grid3d = initGrid3D(); }catch(e){ grid3d = null; if(window.console) console.warn("Grid scene failed", e); }
-        if(grid3d){ refreshPaint(); armLights(); } else noGrid3D();
+        if(grid3d){ refreshPaint(); armLights(); applyGlow(); } else noGrid3D();
       };
       s.onerror = noGrid3D;
       document.head.appendChild(s);
@@ -2211,6 +2350,64 @@ nav.links a.nav-cv{display:inline-block}
     el.scrollIntoView({behavior: reduced ? "auto" : "smooth", block: "start"});
     try{ history.pushState(null, "", id); }catch(err){}
   });
+
+  /* ============ starting grid filter: matching projects light up and pulse, the rest dim ============ */
+  (function(){
+    var sec = $("grid"), chips = Array.prototype.slice.call(document.querySelectorAll(".gf"));
+    if(!sec || !chips.length) return;
+    chips.forEach(function(ch){                          /* counts come from the cards, so they never go stale */
+      var k = ch.getAttribute("data-skill"), n = CARS.filter(function(c){ return !k || c.skills.indexOf(k) >= 0; }).length;
+      ch.querySelector("i").textContent = n;
+    });
+    function set(k){
+      chips.forEach(function(ch){ var on = ch.getAttribute("data-skill") === k; ch.classList.toggle("on", on); ch.setAttribute("aria-pressed", String(on)); });
+      sec.classList.toggle("filtering", !!k);
+      CARS.forEach(function(c, i){
+        var m = !!k && c.skills.indexOf(k) >= 0;
+        c.li.classList.toggle("match", m);
+        gfMatch[i] = m;
+        if(tagBtns[i]) tagBtns[i].classList.toggle("dim", !!k && !m);
+        if(leadPaths[i]) leadPaths[i].g.classList.toggle("dim", !!k && !m);
+      });
+      applyGlow();
+    }
+    chips.forEach(function(ch){
+      ch.addEventListener("click", function(){
+        var k = ch.getAttribute("data-skill");
+        if(k && ch.classList.contains("on")) k = "";          /* clicking the active chip clears it */
+        set(k);
+        if(k && window.__visitOpened) window.__visitOpened("Filter: " + ch.firstChild.nodeValue);
+      });
+    });
+  })();
+
+  /* ============ experience: hover previews the about line, Show more opens the rest ============ */
+  (function(){
+    var laps = Array.prototype.slice.call(document.querySelectorAll("#history .lap")), all = $("lapsAll");
+    var fine = window.matchMedia ? window.matchMedia("(hover:hover) and (pointer:fine) and (min-width:900px)") : {matches:false};
+    function setOpen(lap, on){
+      lap.classList.toggle("open", on);
+      var b = lap.querySelector(".lap-toggle");
+      b.setAttribute("aria-expanded", String(on));
+      b.firstChild.nodeValue = on ? "Show less" : "Show more";
+    }
+    function syncAll(){
+      var every = laps.every(function(l){ return l.classList.contains("open"); });
+      all.textContent = every ? "Collapse all" : "Expand all"; all.setAttribute("aria-pressed", String(every));
+    }
+    laps.forEach(function(lap){
+      var t = 0;
+      lap.querySelector(".lap-toggle").addEventListener("click", function(){ setOpen(lap, !lap.classList.contains("open")); syncAll(); });
+      /* a short delay so sweeping the mouse down the list doesn't make every row jump */
+      lap.addEventListener("mouseenter", function(){ if(!fine.matches) return; clearTimeout(t); t = setTimeout(function(){ lap.classList.add("peek"); }, 140); });
+      lap.addEventListener("mouseleave", function(){ clearTimeout(t); t = setTimeout(function(){ lap.classList.remove("peek"); }, 120); });
+    });
+    all.addEventListener("click", function(){
+      var open = !laps.every(function(l){ return l.classList.contains("open"); });
+      laps.forEach(function(l){ setOpen(l, open); }); syncAll();
+      if(window.__visitOpened) window.__visitOpened(open ? "Experience: expand all" : "Experience: collapse all");
+    });
+  })();
 
   /* ============ hero "Latest" link opens that project's pit board ============ */
   document.querySelectorAll("[data-pit-open]").forEach(function(a){
