@@ -776,10 +776,11 @@ nav.links a.nav-cv{display:inline-block}
 .facts{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-wrap:wrap;gap:6px 22px;font-size:14.5px;color:var(--ink)}
 .facts b{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-right:8px}
 .hero.h2 .cta{margin-top:0;align-items:center}
-.h-links{display:inline-flex;flex-wrap:wrap;gap:4px 16px;margin-left:6px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
-.h-links a{color:var(--ink-2);padding:6px 0;border-bottom:1px solid transparent;transition:color .18s,border-color .18s}
-.h-links a i{font-style:normal;margin-left:4px;color:var(--ink-3)}
-.h-links a:hover,.h-links a:focus-visible{color:var(--ink);border-color:var(--amber)}
+.h-links{display:inline-flex;gap:8px;margin-left:4px}
+.h-links a{display:grid;place-items:center;width:42px;height:42px;color:var(--ink-2);border:1px solid var(--line-hot);border-radius:var(--r);background:var(--panel);
+  transition:color .18s,border-color .18s,transform .18s}
+.h-links a svg{width:18px;height:18px;display:block}
+.h-links a:hover,.h-links a:focus-visible{color:#fff;border-color:var(--amber);transform:translateY(-2px)}
 .hero.h2 .latest{margin-top:0;justify-self:start}
 @media (min-width:1040px){
   .hero.h2 #heroWrap{grid-template-columns:minmax(0,1fr) auto;column-gap:40px;row-gap:14px;align-items:end}
@@ -899,9 +900,9 @@ nav.links a.nav-cv{display:inline-block}
         <a class="btn primary" href="#grid">See the projects</a>
         <a class="btn cv" href="#resume" data-resume>Resume</a>
         <span class="h-links">
-          <a href="https://github.com/Burnitt" target="_blank" rel="noopener">GitHub<i aria-hidden="true">↗</i></a>
-          <a href="https://www.linkedin.com/in/gurnitchopra/" target="_blank" rel="noopener">LinkedIn<i aria-hidden="true">↗</i></a>
-          <a href="mailto:choprg5@mcmaster.ca">Email</a>
+          <a href="https://github.com/Burnitt" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+          <a href="https://www.linkedin.com/in/gurnitchopra/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M13.6 0H2.4A2.4 2.4 0 000 2.4v11.2A2.4 2.4 0 002.4 16h11.2a2.4 2.4 0 002.4-2.4V2.4A2.4 2.4 0 0013.6 0zM4.9 13.4H2.6V6.1h2.3v7.3zM3.7 5.1a1.33 1.33 0 110-2.66 1.33 1.33 0 010 2.66zm9.7 8.3h-2.3V9.9c0-.85-.02-1.94-1.18-1.94-1.18 0-1.36.92-1.36 1.88v3.56H6.3V6.1h2.2v1h.03c.31-.58 1.06-1.19 2.18-1.19 2.33 0 2.76 1.53 2.76 3.53v3.96z"/></svg></a>
+          <a href="mailto:choprg5@mcmaster.ca" aria-label="Email choprg5@mcmaster.ca" title="Email"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M1.5 3.5h13v9h-13z"/><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M1.8 3.8 8 8.6l6.2-4.8"/></svg></a>
         </span>
       </div>
     </div>
