@@ -885,6 +885,25 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
   .edu-stats li{flex-direction:row;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 18px}
   .edu-stats span{text-align:right}
 }
+/* round 13 polish */
+/* hero GPA line: label at the same size as the words around it */
+.facts b{font-family:var(--body);font-size:inherit;font-weight:600;letter-spacing:0;text-transform:none;color:var(--amber);margin-right:6px}
+/* experience on desktop: collapsed rows sit tighter */
+@media (hover:hover) and (pointer:fine) and (min-width:900px){
+  .lap .org{margin-bottom:2px}
+  .lap:not(.peek):not(.open):not(:focus-within) .lap-toggle{margin-top:6px}
+}
+/* phones: grades as three short rows (number left, label right) instead of three cramped boxes */
+@media (max-width:900px){
+  .edu-stats{flex-direction:column}
+  .edu-stats li{flex-direction:row;align-items:baseline;justify-content:space-between;gap:12px;padding:10px 14px}
+  .edu-stats span{text-align:right}
+}
+@media (max-width:520px){
+  .edu-stats{display:flex}
+  .edu-stats b{font-size:19px}
+  .edu-stats span{font-size:9.5px}
+}
 </style>
 
 </head>
@@ -1110,7 +1129,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
         <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>Oct 2026 →</div>
         <div class="lap-body">
           <h3>Embedded Systems &amp; Controls Software Engineer</h3>
-          <div class="org"><a class="org-link" href="https://macexo.com/" target="_blank" rel="noopener" title="Open McMaster Exoskeleton’s website">McMaster Exoskeleton<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON (On site)</div>
+          <div class="org"><a class="org-link" href="https://macexo.com/" target="_blank" rel="noopener" title="Open McMaster Exoskeleton’s website">McMaster Exoskeleton<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON</div>
           <div class="lap-peek"><div class="lap-peek-in">
             <p class="lap-about">Student design team building a wearable assistive exoskeleton for the international ACE competition.</p>
             <div class="lap-more" id="lap1-more"><div class="lap-more-in"><ul>
@@ -1125,7 +1144,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
         <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>Sep 2026 →</div>
         <div class="lap-body">
           <h3>Electrical Engineer</h3>
-          <div class="org"><a class="org-link" href="https://macrobomaster.com/" target="_blank" rel="noopener" title="Open McMaster RoboMaster’s website">McMaster RoboMaster<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON (On site)</div>
+          <div class="org"><a class="org-link" href="https://macrobomaster.com/" target="_blank" rel="noopener" title="Open McMaster RoboMaster’s website">McMaster RoboMaster<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON</div>
           <div class="lap-peek"><div class="lap-peek-in">
             <p class="lap-about">Student team designing and building robots for DJI's international RoboMaster University competition.</p>
             <div class="lap-more" id="lap2-more"><div class="lap-more-in"><ul>
@@ -1140,7 +1159,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
         <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>Oct 2026 →</div>
         <div class="lap-body">
           <h3>Co-Founder &amp; FPGA Design Lead</h3>
-          <div class="org"><a class="org-link" href="https://ml3labs.com/" target="_blank" rel="noopener" title="Open ML³ Labs’s website">McMaster Low Latency Labs (ML³)<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON (On site)</div>
+          <div class="org"><a class="org-link" href="https://ml3labs.com/" target="_blank" rel="noopener" title="Open ML³ Labs’ website">McMaster Low Latency Labs (ML³)<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON</div>
           <div class="lap-peek"><div class="lap-peek-in">
             <p class="lap-about">Student club building low-latency, high-performance computing systems across hardware and software.</p>
             <div class="lap-more" id="lap3-more"><div class="lap-more-in"><ul>
@@ -1152,7 +1171,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
         </div>
       </article>
       <article class="lap sx" data-dir="-1">
-        <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>June 2026 →</div>
+        <div class="when"><div class="status live"><span class="tyre-ic"></span>On track</div>Jun 2026 →</div>
         <div class="lap-body">
           <h3>Technical Training Developer</h3>
           <div class="org">ICC Evaluation Service — Electrical Division · Brea, CA (Remote)</div>
@@ -1187,7 +1206,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
         <div class="when"><div class="status done"><span class="tyre-ic"></span>Chequered</div>Sep 2025 – Aug 2026</div>
         <div class="lap-body">
           <h3>Computer Vision Engineer</h3>
-          <div class="org"><a class="org-link" href="https://macrobomaster.com/" target="_blank" rel="noopener" title="Open McMaster RoboMaster’s website">McMaster RoboMaster<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON (On site)</div>
+          <div class="org"><a class="org-link" href="https://macrobomaster.com/" target="_blank" rel="noopener" title="Open McMaster RoboMaster’s website">McMaster RoboMaster<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a> · Hamilton, ON</div>
           <div class="lap-peek"><div class="lap-peek-in">
             <p class="lap-about">Vision subteam behind the robots' auto-aim, on the same RoboMaster competition team.</p>
             <div class="lap-more" id="lap6-more"><div class="lap-more-in"><ul>
@@ -1337,7 +1356,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
     <span>© 2026 Gurnit Chopra</span>
     <span>Chassis GC-26</span>
     <span>Built from scratch, no template</span>
-    <span>Last updated <time datetime="2026-11-10">Nov 10, 2026</time></span>
+    <span>Last updated <time datetime="2026-11-23">Nov 23, 2026</time></span>
     <span><a class="foot-x" href="full.html">Full site, with the F1 side →</a></span>
   </div>
 </footer>
