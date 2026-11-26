@@ -17,7 +17,7 @@
 <title>Gurnit Chopra | Full Site</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 
 <style>
 /* ============================================================
@@ -26,15 +26,15 @@
 :root{
   --asphalt:#0A0C0F; --panel:#12161B; --panel-2:#171C23;
   --line:#222A33; --line-hot:#2E3946;
-  --ink:#E8EDF2; --ink-2:#9FAEBC; --ink-3:#66757F;
+  --ink:#E8EDF2; --ink-2:#B2BFCB; --ink-3:#66757F;
   --maroon:#9E0E48; --maroon-hot:#D6215F; --amber:#F2A900; --coolant:#33C3D6;
   --grid:rgba(255,255,255,.035);
   --tarmac:#101316; --paint:rgba(236,240,244,.78);
   --lamp-off:#1A0709; --lamp-on:#FF2B2B;
   --led-g:#2ED573; --led-r:#FF3B3B; --led-b:#4DA3FF;
 
-  --display:"Chakra Petch",'Trebuchet MS',system-ui,sans-serif;
-  --body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --display:"Titillium Web","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
 
   --gut:clamp(16px,4vw,56px);
@@ -43,13 +43,13 @@
 }
 :root[data-livery="gulf"]{
   --asphalt:#070C11; --panel:#0F1720; --panel-2:#131C26; --line:#1E2C38; --line-hot:#2B3F50;
-  --ink:#E9F2F8; --ink-2:#9DB4C4; --ink-3:#627585;
+  --ink:#E9F2F8; --ink-2:#B0C3D1; --ink-3:#627585;
   --maroon:#1B7FA8; --maroon-hot:#4FB3D9; --amber:#F26B21; --coolant:#6FD8F2;
   --grid:rgba(120,200,235,.045); --tarmac:#0C1218;
 }
 :root[data-livery="night"]{
   --asphalt:#070B09; --panel:#0F1713; --panel-2:#131D18; --line:#1D2C24; --line-hot:#2A3F33;
-  --ink:#E8F3EC; --ink-2:#9BB5A6; --ink-3:#5F7A6B;
+  --ink:#E8F3EC; --ink-2:#AFC5B8; --ink-3:#5F7A6B;
   --maroon:#1F6F46; --maroon-hot:#31A567; --amber:#EFC65B; --coolant:#74D6A6;
   --grid:rgba(140,235,185,.04); --tarmac:#0C1310;
 }
@@ -82,16 +82,16 @@ h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
 header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:80;background:rgba(10,12,15,.84);
   backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .bar-in{display:flex;align-items:center;gap:20px;justify-content:space-between;max-width:var(--maxw);margin:0 auto;padding:10px var(--gut)}
-.marque{font-family:var(--display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;display:flex;align-items:center;gap:9px}
+.marque{font-family:var(--display);font-weight:700;letter-spacing:0;font-size:13px;display:flex;align-items:center;gap:9px}
 .marque .dot{width:8px;height:8px;background:var(--maroon-hot);border-radius:50%;animation:pulse 2.6s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(214,33,95,.7)}70%{box-shadow:0 0 0 9px rgba(214,33,95,0)}100%{box-shadow:0 0 0 0 rgba(214,33,95,0)}}
 nav.links{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-nav.links a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+nav.links a{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--ink-3);
   padding:7px 10px;border:1px solid transparent;border-radius:var(--r);transition:color .18s,border-color .18s,background .18s}
 nav.links a:hover{color:var(--ink);border-color:var(--line-hot);background:var(--panel)}
 nav.links a.on{color:var(--amber);border-color:rgba(242,169,0,.35)}
 .livery{display:flex;align-items:center;gap:7px;padding-left:14px;border-left:1px solid var(--line)}
-.livery .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--ink-3);text-transform:uppercase}
+.livery .lbl{font-family:var(--body);font-size:12px;letter-spacing:0;color:var(--ink-3)}
 .paint{width:19px;height:19px;border-radius:50%;border:1px solid var(--line-hot);cursor:pointer;padding:0;transition:transform .18s,border-color .18s}
 .paint:hover{transform:scale(1.15)}
 .paint[aria-pressed="true"]{border-color:var(--ink);transform:scale(1.15)}
@@ -102,10 +102,10 @@ nav.links a.on{color:var(--amber);border-color:rgba(242,169,0,.35)}
 /* ---------- hero ---------- */
 .hero{position:relative;z-index:1;padding-block:clamp(48px,9vw,104px) clamp(18px,3vw,32px);overflow:hidden}
 .hero canvas{position:absolute;inset:auto 0 0 0;width:100%;height:210px;opacity:.5;z-index:-1}
-.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);
+.eyebrow{font-family:var(--body);font-size:13px;letter-spacing:0;color:var(--amber);
   display:flex;align-items:center;gap:10px;margin-bottom:18px}
 .eyebrow::after{content:"";height:1px;flex:1;max-width:220px;background:linear-gradient(90deg,rgba(242,169,0,.55),transparent)}
-h1{font-size:clamp(42px,9.2vw,96px);font-weight:700;letter-spacing:-.015em;text-transform:uppercase}
+h1{font-size:clamp(42px,9.2vw,96px);font-weight:700;letter-spacing:-.015em}
 h1 .ln{display:block;overflow:hidden}
 h1 .ln span{display:block}
 .js-anim h1 .ln span{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
@@ -117,7 +117,7 @@ h1 .ln span{display:block}
 .js-anim .hero .rule{animation:draw 1.1s .25s cubic-bezier(.2,.8,.2,1) both}
 @keyframes draw{from{transform:scaleX(0)}to{transform:none}}
 .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-.btn{font-family:var(--mono);font-size:12px;letter-spacing:.11em;text-transform:uppercase;padding:11px 16px;
+.btn{font-family:var(--body);font-size:13px;letter-spacing:0;padding:11px 16px;
   border:1px solid var(--line-hot);border-radius:var(--r);color:var(--ink);background:var(--panel);display:inline-flex;align-items:center;gap:8px;
   transition:transform .16s,border-color .16s,background .16s;cursor:pointer}
 .btn:hover{transform:translateY(-2px);border-color:var(--maroon-hot)}
@@ -126,24 +126,24 @@ h1 .ln span{display:block}
 .strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);margin-top:38px;overflow:hidden}
 .stat{background:var(--panel);padding:16px 18px}
 .stat b{display:block;font-family:var(--display);font-size:clamp(24px,4vw,34px);font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
-.stat span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:8px}
+.stat span{display:block;font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--ink-3);margin-top:8px}
 
 /* ---------- sections ---------- */
 section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll-margin-top:72px}
 .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line);
   padding-bottom:14px;margin-bottom:30px;position:relative}
 .sec-head::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:90px;background:var(--maroon-hot)}
-.sec-head h2{font-size:clamp(23px,3.6vw,34px);font-weight:600;letter-spacing:.01em;text-transform:uppercase}
-.sec-head .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.sec-head h2{font-size:clamp(23px,3.6vw,34px);font-weight:600;letter-spacing:.01em}
+.sec-head .tag{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--ink-3);white-space:nowrap}
 
 /* ============================================================
 /* ============================================================
    STARTING GRID: a real 3D scene rendered with three.js
    ============================================================ */
 .lights-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
-#lightsTxt{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);min-width:13ch;text-align:center}
+#lightsTxt{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--ink-3);min-width:13ch;text-align:center}
 #lightsTxt.go{color:var(--amber)}
-.mini{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:6px 11px;border:1px solid var(--line-hot);
+.mini{font-family:var(--body);font-size:12.5px;letter-spacing:0;padding:6px 11px;border:1px solid var(--line-hot);
   background:transparent;color:var(--ink-2);border-radius:var(--r);cursor:pointer;transition:all .18s}
 .mini:hover{color:#fff;border-color:var(--maroon-hot)}
 
@@ -174,7 +174,7 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 /* no WebGL: the project cards carry the grid on their own */
 #grid.no3d .scene,#grid.no3d .lights-bar{display:none}
 
-.hint{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);text-align:center;margin:14px 0 0}
+.hint{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--ink-3);text-align:center;margin:14px 0 0}
 
 /* ---------- pit board (project drawer) ---------- */
 .pit{position:fixed;inset:0;z-index:120}
@@ -186,8 +186,8 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 .pit.open .pit-panel{transform:none}
 .pit-top{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--line);
   background:repeating-linear-gradient(90deg,transparent 0 10px,rgba(255,255,255,.02) 10px 11px),var(--panel-2)}
-.pit-top .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
-.x{all:unset;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);
+.pit-top .lbl{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--ink-3)}
+.x{all:unset;cursor:pointer;font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--ink-2);
   border:1px solid var(--line-hot);padding:6px 10px;border-radius:var(--r)}
 .x:hover{color:#fff;border-color:var(--maroon-hot)}
 .x:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
@@ -195,16 +195,16 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 .pit-hd{display:flex;gap:18px;align-items:flex-start}
 .pit-hd .big{font-family:var(--display);font-weight:700;font-size:56px;line-height:.85;color:var(--amber)}
 .pit-hd h3{font-size:26px;font-weight:600}
-.pit-hd .yr{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.08em;margin-top:8px}
+.pit-hd .yr{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.02em;margin-top:8px}
 .tagrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.tagrow span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--line-hot);padding:4px 8px;border-radius:99px}
+.tagrow span{font-family:var(--body);font-size:12px;letter-spacing:0;color:var(--ink-2);border:1px solid var(--line-hot);padding:4px 8px;border-radius:99px}
 .pit-sum{color:var(--ink-2);font-size:15.5px;margin:20px 0 22px;max-width:60ch}
 .pit-specs{display:grid;grid-template-columns:auto 1fr;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:0 0 22px}
 .pit-specs dt,.pit-specs dd{margin:0;padding:10px 13px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px}
-.pit-specs dt{color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;font-size:10.5px;background:var(--panel-2)}
+.pit-specs dt{color:var(--ink-3);letter-spacing:0;font-size:12.5px;background:var(--panel-2)}
 .pit-specs dd{color:var(--ink)}
 .pit-specs dt:nth-last-of-type(1),.pit-specs dd:nth-last-of-type(1){border-bottom:0}
-.pit-notes h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin:0 0 10px}
+.pit-notes h4{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--amber);margin:0 0 10px}
 .pit-notes ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:14.5px}
 .pit-notes li{margin-bottom:8px}
 .pit-foot{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:14px 22px;border-top:1px solid var(--line);flex-wrap:wrap}
@@ -222,12 +222,12 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 .pc-img{flex:0 0 auto;width:80px;height:80px;border-radius:3px;overflow:hidden;background:#05070A;border:1px solid rgba(255,255,255,.06)}
 .pc-img img,.pc-img svg{display:block;width:100%;height:100%;object-fit:cover}
 .pc-txt{min-width:0;display:flex;flex-direction:column;gap:3px}
-.pc-meta{display:flex;gap:8px;align-items:baseline;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.pc-meta{display:flex;gap:8px;align-items:baseline;font-family:var(--body);font-size:12px;letter-spacing:0;color:var(--ink-3)}
 .pc-meta b{font-family:var(--display);font-size:14px;color:var(--amber);letter-spacing:.04em}
 .pc-name{font-family:var(--display);font-weight:600;font-size:15px;line-height:1.2;color:var(--ink)}
 .pc-what{font-size:13px;line-height:1.4;color:var(--ink-2)}
 .pc-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
-.pc-tags i{font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);
+.pc-tags i{font-style:normal;font-family:var(--body);font-size:12px;letter-spacing:0;color:var(--ink-2);
   border:1px solid var(--line-hot);padding:2px 6px;border-radius:99px}
 /* wide screens: the cards sit over the grandstands either side of the track, see-through so the crowd shows */
 @media (min-width:1040px){
@@ -267,7 +267,7 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 
 /* software projects: their own row under the hardware grid, centred rather than on either side */
 .sw{margin-top:26px}
-.sw-head{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.sw-head{display:flex;align-items:center;gap:12px;font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--ink-3)}
 .sw-head b{font-weight:500;color:var(--amber)}
 .sw-head::before,.sw-head::after{content:"";flex:1;height:1px;background:var(--line)}
 .sw-head::before{flex:0 0 22px}
@@ -295,7 +295,7 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 /* hero: latest project link */
 .latest{display:inline-flex;align-items:center;gap:12px;max-width:100%;margin-top:22px;padding:9px 14px;border:1px solid var(--line-hot);border-radius:var(--r);
   background:var(--panel);color:var(--ink-2);font-size:14.5px;line-height:1.35;transition:border-color .18s,color .18s}
-.latest b{flex:none;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.latest b{flex:none;font-family:var(--body);font-size:12.5px;font-weight:500;letter-spacing:0;color:var(--amber)}
 .latest i{font-style:normal;color:var(--amber);transition:transform .18s}
 .latest:hover{border-color:var(--amber);color:var(--ink)}
 .latest:hover i{transform:translateX(3px)}
@@ -305,17 +305,17 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 .edu{display:grid;grid-template-columns:1fr auto;gap:22px 36px;align-items:center;margin-top:20px;padding:20px 22px;background:var(--panel);
   border:1px solid var(--line);border-left:2px solid var(--maroon-hot);border-radius:var(--r)}
 .edu h3{font-size:19px;font-weight:600}
-.edu .org{font-family:var(--mono);font-size:12.5px;color:var(--maroon-hot);margin:6px 0 12px;letter-spacing:.04em}
+.edu .org{font-family:var(--body);font-size:12.5px;color:var(--maroon-hot);margin:6px 0 12px;letter-spacing:0}
 .edu-rows{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0}
-.edu-rows dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding-top:3px}
+.edu-rows dt{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--ink-3);padding-top:3px}
 .edu-rows dd{margin:0;font-size:14.5px;color:var(--ink-2)}
 .edu-stats{list-style:none;margin:0;padding:0;display:flex;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
 .edu-stats li{background:var(--panel-2);padding:12px 16px;min-width:118px;display:flex;flex-direction:column;gap:3px}
 .edu-stats b{font-family:var(--display);font-size:22px;font-weight:700;line-height:1.1;color:var(--ink)}
 .edu-stats b small{font-size:.55em;color:var(--ink-3);font-weight:600;margin-left:2px}
-.edu-stats span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.edu-stats span{font-family:var(--body);font-size:12px;letter-spacing:0;color:var(--ink-3)}
 @media (max-width:900px){.edu{grid-template-columns:1fr}}
-.edu h3 .edu-loc{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-left:10px;white-space:nowrap}
+.edu h3 .edu-loc{font-family:var(--body);font-size:12.5px;font-weight:400;letter-spacing:0;color:var(--ink-3);margin-left:10px;white-space:nowrap}
 @media (max-width:520px){
   .edu{padding:16px}
   .edu h3 .edu-loc{display:block;margin:4px 0 0}
@@ -378,7 +378,7 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 .langs li svg{width:26px;height:26px;display:block}
 .langs li:hover,.langs li:focus-visible{border-color:var(--amber);transform:translateY(-2px)}
 .langs li::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%) translateY(4px);width:max-content;max-width:240px;
-  padding:6px 9px;border-radius:4px;background:#05070A;border:1px solid var(--line-hot);color:var(--ink);font-family:var(--mono);font-size:11px;line-height:1.35;
+  padding:6px 9px;border-radius:4px;background:#05070A;border:1px solid var(--line-hot);color:var(--ink);font-family:var(--body);font-size:11px;line-height:1.35;
   text-align:center;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:5}
 .langs li:hover::after,.langs li:focus-visible::after{opacity:1;transform:translateX(-50%) translateY(0)}
 .sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -397,8 +397,8 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 .lap.open .lap-more{grid-template-rows:1fr}
 .lap.open .lap-more-in{visibility:visible;transition:visibility 0s}
 .lap .lap-more ul{margin:8px 0 0}
-.lap-toggle{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--ink-3);transition:color .18s}
+.lap-toggle{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-family:var(--body);font-size:12.5px;letter-spacing:0;
+  ;color:var(--ink-3);transition:color .18s}
 .lap-toggle span{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border:1px solid var(--line-hot);border-radius:99px;font-size:10px;letter-spacing:0;color:var(--ink-2)}
 .lap-toggle::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s}
 .lap.open .lap-toggle::after{transform:translateY(1px) rotate(-135deg)}
@@ -423,7 +423,7 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
   .f-grid figure.feature a.zoom{position:relative;flex:1;min-height:220px}
   .f-grid figure.feature img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto}
 }
-.f-grid .src{position:absolute;top:7px;left:7px;z-index:1;pointer-events:none;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+.f-grid .src{position:absolute;top:7px;left:7px;z-index:1;pointer-events:none;font-family:var(--body);font-size:12px;letter-spacing:0;
   color:#E8EDF2;background:rgba(5,7,10,.82);border:1px solid rgba(255,255,255,.14);padding:3px 7px;border-radius:2px}
 
 /* pit board: three headline numbers, like a timing screen, in the car's colour */
@@ -431,29 +431,29 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
   border-left:3px solid rgb(var(--car-rgb,214,33,95));border-radius:var(--r);overflow:hidden}
 .pit-stats div{background:var(--panel-2);padding:10px 12px;min-width:0}
 .pit-stats b{display:block;font-family:var(--display);font-size:clamp(17px,4.4vw,22px);font-weight:700;line-height:1.1;color:var(--ink);overflow-wrap:anywhere}
-.pit-stats span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:5px;line-height:1.35}
+.pit-stats span{display:block;font-family:var(--body);font-size:12px;letter-spacing:0;color:var(--ink-3);margin-top:5px;line-height:1.35}
 /* race control log: one entry per fault, limit then before -> after, then the fix */
 .race-log{margin:0 0 22px}
-.race-log h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);font-weight:500;margin:0 0 8px}
+.race-log h4{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--amber);font-weight:500;margin:0 0 8px}
 .race-log ol{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
 .race-log li{padding:10px 12px;border-top:1px solid var(--line);background:var(--panel-2)}
 .race-log li:first-child{border-top:0}
 .rc-top{display:flex;align-items:baseline;gap:10px}
 .rc-n{font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
 .rc-top b{flex:1;font-weight:600;font-size:14px;color:var(--ink)}
-.rc-res{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#36C27A;border:1px solid rgba(54,194,122,.45);border-radius:99px;padding:1px 8px}
+.rc-res{font-family:var(--body);font-size:12px;letter-spacing:0;color:#36C27A;border:1px solid rgba(54,194,122,.45);border-radius:99px;padding:1px 8px}
 .rc-val{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:6px 0 4px 26px;font-family:var(--mono);font-size:13px;color:var(--ink-2)}
 .rc-val i{font-style:normal;color:var(--ink-3)}
 .rc-val .rc-after{color:var(--ink)}
 .rc-val .rc-lim{font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);border:1px solid var(--line-hot);border-radius:3px;padding:1px 6px;margin-right:4px}
 .rc-fix{margin-left:26px;font-size:13px;color:var(--ink-2);line-height:1.45}
-.rc-fix span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-right:8px}
+.rc-fix span{font-family:var(--body);font-size:12px;letter-spacing:0;color:var(--ink-3);margin-right:8px}
 
 /* filter chips: matching cards light up and pulse gently, the rest dim */
 .grid-filter{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 0}
-.gf-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-right:2px}
+.gf-lbl{font-family:var(--body);font-size:12px;letter-spacing:0;color:var(--ink-3);margin-right:2px}
 .gf{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border:1px solid var(--line-hot);border-radius:99px;
-  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-2);transition:color .18s,border-color .18s,background .18s}
+  font-family:var(--body);font-size:11px;letter-spacing:0;color:var(--ink-2);transition:color .18s,border-color .18s,background .18s}
 .gf i{font-style:normal;font-size:10px;color:var(--ink-3)}
 .gf:hover{color:var(--ink);border-color:var(--ink-3)}
 .gf.on{color:var(--asphalt);background:var(--amber);border-color:var(--amber)}
@@ -478,7 +478,7 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 .gtag,.leaders g{transition:opacity .3s}
 
 /* plain section names first, the F1 name after as a subtitle */
-.sec-head h2 .f1,.finish h2 .f1{font-family:var(--mono);font-size:.4em;font-weight:500;letter-spacing:.14em;color:var(--amber);vertical-align:.32em;margin-left:.5em;white-space:nowrap}
+.sec-head h2 .f1,.finish h2 .f1{font-family:var(--body);font-size:.4em;font-weight:500;letter-spacing:0;color:var(--amber);vertical-align:.32em;margin-left:.5em;white-space:nowrap}
 @media (max-width:520px){.sec-head h2 .f1,.finish h2 .f1{display:block;margin:6px 0 0;vertical-align:0;font-size:11px}}
 
 /* the radar clip: a short muted loop at the top of its pit board */
@@ -495,7 +495,7 @@ section{position:relative;z-index:1;padding-block:clamp(23px,3.25vw,37px);scroll
 .gal .fit img,.f-grid .fit img{object-fit:contain;background:#0C0F13}
 .f-grid .fit img[src*="/ad3-"]{object-fit:cover}
 figcaption{font-size:12.5px;color:var(--ink-3);margin-top:6px;line-height:1.45}
-figcaption .ext{display:inline-block;margin-left:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--coolant)}
+figcaption .ext{display:inline-block;margin-left:6px;font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--coolant)}
 a.zoom{display:block;cursor:zoom-in;border-radius:3px}
 a.zoom:hover img{border-color:var(--line-hot)}
 #pitDetail code,.pit-notes code{font-family:var(--mono);font-size:.88em;color:var(--ink)}
@@ -509,8 +509,8 @@ a.zoom:hover img{border-color:var(--line-hot)}
 @media (min-width:560px){.f-grid figure.feature{grid-column:span 2}}
 /* project files row: under the summary, above the photos */
 .pit-files{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:-6px 0 20px}
-.pit-files span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-right:4px}
-.pit-files a{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink);
+.pit-files span{font-family:var(--body);font-size:12px;letter-spacing:0;color:var(--ink-3);margin-right:4px}
+.pit-files a{display:inline-flex;align-items:center;gap:6px;font-family:var(--body);font-size:11.5px;letter-spacing:0;color:var(--ink);
   padding:6px 10px;border:1px solid var(--line-hot);border-radius:var(--r);background:var(--panel-2);transition:border-color .18s,color .18s}
 .pit-files a i{font-style:normal;color:var(--amber)}
 .pit-files a:hover{border-color:var(--amber);color:#fff}
@@ -537,8 +537,8 @@ a.zoom:hover img{border-color:var(--line-hot)}
 .folder{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:flex;flex-direction:column;
   padding:16px 16px 16px;background:var(--panel);border:1px solid var(--line);border-radius:0 6px 6px 6px;transition:border-color .18s,background .18s}
 .f-tab{position:absolute;left:-1px;bottom:100%;max-width:calc(100% + 2px);padding:6px 14px 5px 12px;background:var(--panel);
-  border:1px solid var(--line);border-bottom:0;border-radius:6px 12px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--amber);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:border-color .18s,background .18s}
+  border:1px solid var(--line);border-bottom:0;border-radius:6px 12px 0 0;font-family:var(--body);font-size:12.5px;letter-spacing:0;
+  ;color:var(--amber);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:border-color .18s,background .18s}
 .folder:hover,.folder:focus-visible,.folder[aria-expanded="true"]{border-color:var(--amber);background:var(--panel-2)}
 .folder:hover .f-tab,.folder:focus-visible .f-tab,.folder[aria-expanded="true"] .f-tab{border-color:var(--amber);background:var(--panel-2)}
 .folder:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
@@ -550,7 +550,7 @@ a.zoom:hover img{border-color:var(--line-hot)}
 .f-stack img:nth-child(3){transform:translateX(12%) rotate(7deg)}
 .folder:hover .f-stack img:nth-child(1){transform:translateX(-122%) translateY(-4px) rotate(-11deg)}
 .folder:hover .f-stack img:nth-child(3){transform:translateX(22%) translateY(-4px) rotate(10deg)}
-.f-count{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.f-count{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--ink-3)}
 .f-short{font-size:14px;color:var(--ink-2);margin-top:6px;line-height:1.45}
 .f-open{margin-top:22px;border:1px solid var(--line-hot);border-top:2px solid var(--amber);border-radius:0 0 6px 6px;background:var(--panel);padding:20px}
 .f-open[hidden]{display:none}
@@ -562,11 +562,11 @@ a.zoom:hover img{border-color:var(--line-hot)}
 .f-uses li:first-child{padding-top:0}
 .f-uses b{font-weight:600}
 .f-uses em{font-style:normal;color:var(--ink-3);font-size:13px}
-.f-uses span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--maroon-hot);margin-top:3px}
+.f-uses span{display:block;font-family:var(--body);font-size:11px;letter-spacing:0;color:var(--maroon-hot);margin-top:3px}
 .f-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
 .kit{margin-top:34px;border-top:1px solid var(--line)}
 .kit-row{display:grid;grid-template-columns:190px 1fr;gap:20px;padding:15px 0;border-bottom:1px solid var(--line)}
-.kit-row h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:3px 0 0}
+.kit-row h3{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--ink-3);font-weight:500;margin:3px 0 0}
 .kit-row ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 20px}
 .kit-row li{font-size:14.5px;color:var(--ink)}
 .kit-row li span{color:var(--ink-3);font-size:13px}
@@ -587,14 +587,14 @@ nav.links a.nav-cv:hover{background:var(--maroon-hot);border-color:var(--maroon-
 .laps{display:flex;flex-direction:column}
 .lap{display:grid;grid-template-columns:150px 1fr;gap:26px;padding:24px 0;border-top:1px solid var(--line)}
 .lap:last-child{border-bottom:1px solid var(--line)}
-.lap .when{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.06em;padding-top:3px}
+.lap .when{font-family:var(--body);font-size:11.5px;color:var(--ink-3);letter-spacing:0;padding-top:3px}
 .status{display:flex;align-items:center;gap:8px;color:var(--amber);margin-bottom:6px}
 .status.done{color:var(--ink-2)}
 .tyre-ic{width:18px;height:18px;border-radius:50%;background:#0B0C0E;box-shadow:inset 0 0 0 2.5px currentColor,inset 0 0 0 5px #0B0C0E,inset 0 0 0 6px rgba(255,255,255,.14);flex:0 0 auto}
 .status.live .tyre-ic{animation:spin 2.8s linear infinite;background:conic-gradient(from 0deg,#0B0C0E 0 85%,rgba(255,255,255,.22) 85% 90%,#0B0C0E 90%)}
 @keyframes spin{to{transform:rotate(360deg)}}
 .lap h3{font-size:19px;font-weight:600}
-.lap .org{font-family:var(--mono);font-size:12.5px;color:var(--maroon-hot);margin:6px 0 12px;letter-spacing:.04em}
+.lap .org{font-family:var(--body);font-size:12.5px;color:var(--maroon-hot);margin:6px 0 12px;letter-spacing:0}
 .lap ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:14.5px}
 .lap ul li{margin-bottom:6px}
 
@@ -610,11 +610,11 @@ nav.links a.nav-cv:hover{background:var(--maroon-hot);border-color:var(--maroon-
 .cover-fb{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:11px 10px 9px 12px;
   border-left:3px solid var(--maroon)}
 .cover-fb b{font-family:var(--display);font-weight:600;font-size:12px;line-height:1.2;color:var(--ink)}
-.cover-fb small{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.cover-fb small{font-family:var(--body);font-size:12px;letter-spacing:0;color:var(--ink-3)}
 .book:hover .cover{transform:translateY(-3px) rotate(-1deg)}
 .book-t{min-width:0;padding-top:2px}
 .book-t h3{font-size:17px;font-weight:600;line-height:1.25}
-.book-t .by{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.03em;margin:6px 0 10px}
+.book-t .by{font-family:var(--body);font-size:11.5px;color:var(--ink-3);letter-spacing:0;margin:6px 0 10px}
 .book-t p{margin:0;color:var(--ink-2);font-size:14.5px;max-width:46ch}
 
 /* ---------- off track ---------- */
@@ -624,22 +624,22 @@ nav.links a.nav-cv:hover{background:var(--maroon-hot);border-color:var(--maroon-
 .dash{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
 .dash .row{display:flex;justify-content:space-between;gap:16px;padding:13px 17px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px}
 .dash .row:last-child{border-bottom:0}
-.dash .row span:first-child{color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;font-size:10.5px;padding-top:2px}
+.dash .row span:first-child{color:var(--ink-3);letter-spacing:0;font-size:12.5px;padding-top:2px}
 .dash .row span:last-child{color:var(--ink);text-align:right}
 
 /* ---------- contact ---------- */
 .finish{border:1px solid var(--line);border-radius:var(--r);padding:clamp(26px,5vw,44px);position:relative;overflow:hidden;background:var(--panel)}
 .finish::before{content:"";position:absolute;right:-40px;top:-40px;width:260px;height:260px;opacity:.12;
   background:repeating-conic-gradient(#fff 0 25%,transparent 0 50%) 0 0/26px 26px;transform:rotate(12deg)}
-.radio{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.radio{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--amber);display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .bars{display:flex;gap:3px;align-items:flex-end;height:14px}
 .bars i{width:3px;background:var(--amber);height:30%;animation:eq 1.1s ease-in-out infinite}
 .bars i:nth-child(2){animation-delay:.15s}.bars i:nth-child(3){animation-delay:.3s}.bars i:nth-child(4){animation-delay:.45s}
 @keyframes eq{0%,100%{height:25%}50%{height:100%}}
-.finish h2{font-size:clamp(26px,5vw,44px);text-transform:uppercase;margin-bottom:12px;position:relative}
+.finish h2{font-size:clamp(26px,5vw,44px);margin-bottom:12px;position:relative}
 .finish p{color:var(--ink-2);max-width:54ch;margin:0 0 24px;position:relative}
 footer{border-top:1px solid var(--line);padding-block:26px;margin-top:8px}
-.foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.08em}
+.foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--body);font-size:11px;color:var(--ink-3);letter-spacing:0}
 
 /* ---------- track map ---------- */
 #track{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;background:rgba(14,18,23,.9);
@@ -774,7 +774,7 @@ nav.links a.nav-cv{display:inline-block}
 .hero.h2 h1{font-size:clamp(40px,11vw,64px)}
 .hero.h2 .thin{font-size:clamp(16px,1.6vw,19px);margin-top:10px;max-width:46ch}
 .facts{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-wrap:wrap;gap:6px 22px;font-size:14.5px;color:var(--ink)}
-.facts b{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-right:8px}
+.facts b{font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:0;color:var(--amber);margin-right:8px}
 .hero.h2 .cta{margin-top:0;align-items:center}
 .h-links{display:inline-flex;gap:8px;margin-left:4px}
 .h-links a{display:grid;place-items:center;width:42px;height:42px;color:var(--ink-2);border:1px solid var(--line-hot);border-radius:var(--r);background:var(--panel);
@@ -829,10 +829,10 @@ nav.links a.nav-cv{display:inline-block}
 /* telemetry: the radar test's distance data, plotted live */
 .gal figure.tele{grid-column:1 / -1;border:1px solid var(--line);border-radius:var(--r);background:var(--panel-2);padding:12px 12px 10px}
 .tele-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;margin-bottom:6px}
-.tele-ttl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.tele-ttl{font-family:var(--body);font-size:12.5px;letter-spacing:0;color:var(--amber)}
 .tele-tog{display:flex;gap:6px}
 .tele-tog button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:4px 10px;border:1px solid var(--line-hot);border-radius:99px;
-  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink);transition:opacity .18s,border-color .18s}
+  font-family:var(--body);font-size:11px;letter-spacing:0;color:var(--ink);transition:opacity .18s,border-color .18s}
 .tele-tog button i{width:10px;height:10px;border-radius:50%;background:var(--sw)}
 .tele-tog button[data-run="before"]{--sw:#DD4F4B}
 .tele-tog button[data-run="after"]{--sw:#1BA3B8}
@@ -848,7 +848,7 @@ nav.links a.nav-cv{display:inline-block}
 .tele-read b{color:var(--ink);font-weight:500}
 .tele-read i{display:inline-block;width:8px;height:8px;border-radius:50%;margin:0 5px 0 10px}
 .tele-tbl{margin-top:4px}
-.tele-tbl summary{cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.tele-tbl summary{cursor:pointer;font-family:var(--body);font-size:12px;letter-spacing:0;color:var(--ink-3)}
 .tele-tbl table{border-collapse:collapse;margin-top:8px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
 .tele-tbl th,.tele-tbl td{padding:3px 12px 3px 0;text-align:right;border-bottom:1px solid var(--line)}
 .tele-tbl th{font-weight:500;color:var(--ink-3)}
@@ -904,6 +904,19 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
   .edu-stats b{font-size:19px}
   .edu-stats span{font-size:9.5px}
 }
+/* round 15: type */
+body{font-feature-settings:"kern","liga"}
+h1,h2,h3{letter-spacing:-.005em}
+h1{letter-spacing:-.02em;line-height:.98}
+.marque{font-family:var(--body);font-weight:600;font-size:15px;letter-spacing:0}
+nav.links a{font-size:14px;font-weight:500}
+.btn{font-size:14.5px;font-weight:600}
+.sec-head h2{font-weight:700}
+.sec-head h2 .f1,.finish h2 .f1{font-family:var(--body);font-weight:400;font-size:.5em;letter-spacing:0;vertical-align:.18em;color:var(--ink-3)}
+@media (max-width:520px){.sec-head h2 .f1,.finish h2 .f1{font-size:14px}}
+.sec-head .tag{color:var(--ink-3)}
+.pc-name,.lap-body h3{letter-spacing:0}
+.lap .when,.edu-stats b,.pit-stats b,.rc-val{font-variant-numeric:tabular-nums}
 </style>
 
 </head>
@@ -964,7 +977,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
 <section id="grid">
   <div class="wrap">
     <div class="sec-head sx">
-      <h2>Projects<span class="f1"> // Starting Grid</span></h2>
+      <h2>Projects<span class="f1">Starting grid</span></h2>
     </div>
     <div class="grid-filter" role="group" aria-label="Filter projects by skill">
       <span class="gf-lbl">Filter</span>
@@ -1002,7 +1015,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
           <p class="pit-sum">A continuation of <a href="#grid" class="pit-jump" data-pit="1">P2, the ESP32 Ultrasonic Radar</a>. I treated the finished radar as a device under test and characterized it across six tests, with limits set before measuring and before/after data for every fix.</p>
           <div class="pit-files" aria-label="Project files"><span>Files</span><a href="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/blob/main/TEST_REPORT.md" target="_blank" rel="noopener">Test report<i aria-hidden="true">↗</i></a><a href="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/tree/main/test/data" target="_blank" rel="noopener">Raw data<i aria-hidden="true">↗</i></a><a href="https://github.com/Burnitt/ESP32-Ultrasonic-Radar/tree/main/test" target="_blank" rel="noopener">Test scripts<i aria-hidden="true">↗</i></a></div>
           <div class="race-log"><h4>Race control log</h4><ol><li><div class="rc-top"><span class="rc-n">01</span><b>ECHO overdrove a 3.3 V GPIO</b><span class="rc-res">Fixed</span></div><div class="rc-val"><span class="rc-lim">Limit ≤ 3.6 V</span><span>5.05 V</span><i aria-hidden="true">→</i><span class="rc-after">3.41 V</span></div><div class="rc-fix"><span>Fix</span>Resistor divider between ECHO and GPIO 14</div></li><li><div class="rc-top"><span class="rc-n">02</span><b>Distance read short at range</b><span class="rc-res">Fixed</span></div><div class="rc-val"><span class="rc-lim">Limit ±1 cm</span><span>0.92 cm</span><i aria-hidden="true">→</i><span class="rc-after">0.63 cm RMS</span></div><div class="rc-fix"><span>Fix</span>Speed of sound 0.034 → 0.0343 cm/µs (error was growing with distance)</div></li><li><div class="rc-top"><span class="rc-n">03</span><b>Loop stalled with nothing in range</b><span class="rc-res">Fixed</span></div><div class="rc-val"><span class="rc-lim">Limit Minimize</span><span>~106 ms</span><i aria-hidden="true">→</i><span class="rc-after">~86 ms</span></div><div class="rc-fix"><span>Fix</span>30 ms timeout on <code>pulseIn()</code>, which was waiting out a 48 ms echo</div></li><li><div class="rc-top"><span class="rc-n">04</span><b>Readings looked stuck (test rig)</b><span class="rc-res">Fixed</span></div><div class="rc-val"><span>Stale data</span><i aria-hidden="true">→</i><span class="rc-after">Fresh each move</span></div><div class="rc-fix"><span>Fix</span>3-probe capture proved the sensor fine; the script now discards 1.5 s of serial data after each move</div></li></ol></div>
-          <div class="gal" data-gallery><figure class="tele" data-tele><div class="tele-top"><span class="tele-ttl">Telemetry // distance error</span><div class="tele-tog" role="group" aria-label="Runs shown"><button type="button" data-run="before" aria-pressed="true"><i></i>Before</button><button type="button" data-run="after" aria-pressed="true"><i></i>After</button></div></div><div class="tele-plot"></div><p class="tele-read" aria-live="polite"></p><details class="tele-tbl"><summary>Data table</summary><div class="tele-tbl-in"></div></details><figcaption>Plotted live from the 320 logged readings (20 per distance, before and after the firmware fix). Lines are the mean error at each distance; dots are single readings. RMS error 0.92 → 0.63 cm; worst case −1.91 → −1.05 cm.</figcaption></figure><figure class="fit"><a class="zoom" href="img/echo-before.webp"><img src="img/echo-before.webp" alt="Scope capture of ECHO peaking at 5.05 volts" width="1600" height="877" loading="lazy" decoding="async"></a><figcaption>ECHO into the ESP32’s 3.3 V GPIO before the fix: 5.05 V peak.</figcaption></figure><figure class="fit"><a class="zoom" href="img/echo-after.webp"><img src="img/echo-after.webp" alt="Scope capture of ECHO peaking at 3.41 volts" width="1600" height="780" loading="lazy" decoding="async"></a><figcaption>After adding a resistor divider: 3.41 V peak.</figcaption></figure><figure class="fit wide"><a class="zoom" href="img/loop-before.webp"><img src="img/loop-before-band.webp" alt="Logic analyzer capture of TRIG, ECHO and GPIO 14 with no target in range, before the fix" width="1600" height="170" loading="lazy" decoding="async"></a><figcaption>Nothing in range: the sensor holds ECHO ~48 ms and the loop stretches to ~106 ms.</figcaption></figure><figure class="fit wide"><a class="zoom" href="img/loop-after.webp"><img src="img/loop-after-band.webp" alt="Logic analyzer capture of the same no-target case after the fix" width="1600" height="169" loading="lazy" decoding="async"></a><figcaption>With a 30 ms <code>pulseIn</code> timeout, the same case runs at ~86 ms.</figcaption></figure><figure class="fit"><a class="zoom" href="img/rail-dip.webp"><img src="img/rail-dip.webp" alt="Scope capture of the 5 V rail dipping after a servo pulse" width="1600" height="804" loading="lazy" decoding="async"></a><figcaption>5 V rail dips to 4.93 V for ~1.5 ms after each servo pulse, inside USB tolerance.</figcaption></figure></div>
+          <div class="gal" data-gallery><figure class="tele" data-tele><div class="tele-top"><span class="tele-ttl">Telemetry: distance error</span><div class="tele-tog" role="group" aria-label="Runs shown"><button type="button" data-run="before" aria-pressed="true"><i></i>Before</button><button type="button" data-run="after" aria-pressed="true"><i></i>After</button></div></div><div class="tele-plot"></div><p class="tele-read" aria-live="polite"></p><details class="tele-tbl"><summary>Data table</summary><div class="tele-tbl-in"></div></details><figcaption>Plotted live from the 320 logged readings (20 per distance, before and after the firmware fix). Lines are the mean error at each distance; dots are single readings. RMS error 0.92 → 0.63 cm; worst case −1.91 → −1.05 cm.</figcaption></figure><figure class="fit"><a class="zoom" href="img/echo-before.webp"><img src="img/echo-before.webp" alt="Scope capture of ECHO peaking at 5.05 volts" width="1600" height="877" loading="lazy" decoding="async"></a><figcaption>ECHO into the ESP32’s 3.3 V GPIO before the fix: 5.05 V peak.</figcaption></figure><figure class="fit"><a class="zoom" href="img/echo-after.webp"><img src="img/echo-after.webp" alt="Scope capture of ECHO peaking at 3.41 volts" width="1600" height="780" loading="lazy" decoding="async"></a><figcaption>After adding a resistor divider: 3.41 V peak.</figcaption></figure><figure class="fit wide"><a class="zoom" href="img/loop-before.webp"><img src="img/loop-before-band.webp" alt="Logic analyzer capture of TRIG, ECHO and GPIO 14 with no target in range, before the fix" width="1600" height="170" loading="lazy" decoding="async"></a><figcaption>Nothing in range: the sensor holds ECHO ~48 ms and the loop stretches to ~106 ms.</figcaption></figure><figure class="fit wide"><a class="zoom" href="img/loop-after.webp"><img src="img/loop-after-band.webp" alt="Logic analyzer capture of the same no-target case after the fix" width="1600" height="169" loading="lazy" decoding="async"></a><figcaption>With a 30 ms <code>pulseIn</code> timeout, the same case runs at ~86 ms.</figcaption></figure><figure class="fit"><a class="zoom" href="img/rail-dip.webp"><img src="img/rail-dip.webp" alt="Scope capture of the 5 V rail dipping after a servo pulse" width="1600" height="804" loading="lazy" decoding="async"></a><figcaption>5 V rail dips to 4.93 V for ~1.5 ms after each servo pulse, inside USB tolerance.</figcaption></figure></div>
           <dl class="pit-specs"><dt>Stack</dt><dd>AD3 · WaveForms · Python (dwfpy, pyserial, matplotlib)</dd><dt>Tests</dt><dd>Signal level, distance accuracy, echo timing, loop timing, servo PWM, rail droop</dd><dt>Hard part</dt><dd>Stale serial buffers and auto-reset on port open</dd></dl>
           <div class="pit-notes"><h4>Engineer's notes</h4><ul><li>Measured the HC-SR04 ECHO at 5.05 V going into a 3.3 V GPIO; added a resistor divider and re-measured at 3.41 V.</li><li>Distance error grew with range; traced it to a speed-of-sound constant about 1% low. Fix moved the fit slope from 0.961 to 0.990.</li><li>With nothing in range, <code>pulseIn</code> waited out a 48 ms echo every ping. A 30 ms timeout cut the loop from 106 to 86 ms.</li><li>Readings that seemed stuck turned out to be stale serial data. Proved the sensor was fine with a three-probe logic capture and minimal sketches, then fixed the test script.</li><li>Found readings jumping by exactly one 40 kHz wavelength (0.43 cm): the sensor detecting a weak echo a cycle late.</li></ul></div>
         </div>
@@ -1122,7 +1135,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
 <section id="history">
   <div class="wrap">
     <div class="sec-head sx">
-      <h2>Experience<span class="f1"> // Race History</span></h2>
+      <h2>Experience<span class="f1">Race history</span></h2>
       <div class="tag">2025 – present <button class="mini" id="lapsAll" type="button" aria-pressed="false">Expand all</button></div>
     </div>
     <div class="laps">
@@ -1226,14 +1239,14 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
 <section id="setup">
   <div class="wrap">
     <div class="sec-head sx">
-      <h2>Skills<span class="f1"> // Setup Sheet</span></h2>
+      <h2>Skills<span class="f1">Setup sheet</span></h2>
       <div class="tag">Tools, and where I've used them</div>
     </div>
     <div class="folders">
       <button class="folder sx" type="button" aria-expanded="false" aria-controls="f-test">
         <span class="f-tab">Test &amp; Measurement</span>
         <span class="f-stack" aria-hidden="true"><img src="img/ad3-xy-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"><img src="img/radar-test-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"><img src="img/scope-cursor-sq.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span>
-        <span class="f-count">7 photos and captures</span>
+        <span class="f-count">10 photos and captures</span>
         <span class="f-short">Analog Discovery 3 · logic analyzer · Keysight bench scope · Python test automation</span>
       </button>
       <button class="folder sx" type="button" aria-expanded="false" aria-controls="f-logic">
@@ -1259,7 +1272,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
       <div class="f-head"><h3>Test &amp; Measurement</h3><button class="mini f-close" type="button">Close folder</button></div>
       <div class="f-body">
         <ul class="f-uses" aria-label="Where I used each tool"><li><b>Analog Discovery 3</b> <em>scope, waveform generator, voltmeter, XY and math channels</em><span>Circuit Analysis labs (ELECENG 2CI4), ESP32 radar characterization</span></li><li><b>Logic analyzer</b><span>radar TRIG/ECHO timing, three-probe fault isolation</span></li><li><b>Test automation</b><span>Python (pyserial, dwfpy, matplotlib), radar test scripts</span></li><li><b>Keysight DSOX2002A</b> <em>two-channel bench scope, time cursors</em><span>Logic Design lab (COMPENG 2DI4)</span></li><li><b>Multimeter</b><span>ESP32 radar bring-up</span></li><li><b>Serial logging</b><span>ESP32 radar: tracked down the I²C remap and strapping-pin faults</span></li><li><b>Breadboarding</b><span>every build on this page</span></li></ul>
-        <div class="f-grid" data-gallery><figure class="feature"><span class="src">Radar test</span><a class="zoom" href="img/radar-bench.webp"><img src="img/radar-bench.webp" alt="ESP32 radar on a breadboard with Analog Discovery 3 probe wires clipped on" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>The radar as a device under test: AD3 probes clipped on for the servo PWM measurements, with the resistor divider on the ECHO line.</figcaption></figure><figure class="fit"><span class="src">Radar test</span><a class="zoom" href="img/echo-after.webp"><img src="img/echo-after.webp" alt="Scope capture of the radar's ECHO at the ESP32 pin" width="1600" height="780" loading="lazy" decoding="async"></a><figcaption>HC-SR04 ECHO at the ESP32 pin: 5.05 V before a resistor divider, 3.41 V after, under the 3.6 V limit.</figcaption></figure><figure class="fit"><span class="src">Radar test</span><a class="zoom" href="img/rail-dip.webp"><img src="img/rail-dip.webp" alt="Scope capture of the 5 V rail under servo load" width="1600" height="804" loading="lazy" decoding="async"></a><figcaption>5 V rail under servo load: 5.12 V average, 4.93 V minimum, against a 4.75 V USB limit.</figcaption></figure><figure class="fit"><span class="src">Radar test</span><a class="zoom" href="img/servo-pwm-90.webp"><img src="img/servo-pwm-90.webp" alt="Scope capture of the servo PWM signal at 90 degrees" width="1600" height="800" loading="lazy" decoding="async"></a><figcaption>Servo PWM at 90°: 1445 µs measured vs. 1450 µs expected, 20.000 ms period.</figcaption></figure><figure class="fit"><span class="src">Circuits lab · 2CI4</span><a class="zoom" href="img/ad3-xy.webp"><img src="img/ad3-xy.webp" alt="XY plot of current against voltage for a resistor" width="906" height="1541" loading="lazy" decoding="async"></a><figcaption>XY plot of resistor current against voltage over a 2.5 to 5 V sweep. The slope gives R ≈ 327 Ω against a 330 Ω part (0.8%).</figcaption></figure><figure><span class="src">Logic lab · 2DI4</span><a class="zoom" href="img/scope-cursor.webp"><img src="img/scope-cursor.webp" alt="Keysight oscilloscope with two waveforms and time cursors" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>Keysight DSOX2002A in the logic lab: two channels timed with cursors (ΔX = 4.90 µs).</figcaption></figure><figure class="fit wide"><span class="src">Radar test</span><a class="zoom" href="img/trig-width.webp"><img src="img/trig-width-band.webp" alt="Logic analyzer capture of the TRIG pulse" width="1600" height="169" loading="lazy" decoding="async"></a><figcaption>AD3 logic analyzer at 1 MHz: TRIG high for ~12.7 µs against the 10 µs datasheet minimum.</figcaption></figure></div>
+        <div class="f-grid" data-gallery><figure class="feature"><span class="src">Radar test</span><a class="zoom" href="img/radar-bench.webp"><img src="img/radar-bench.webp" alt="ESP32 radar on a breadboard with Analog Discovery 3 probe wires clipped on" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>The radar as a device under test: AD3 probes clipped on for the servo PWM measurements, with the resistor divider on the ECHO line.</figcaption></figure><figure class="fit"><span class="src">Radar test</span><a class="zoom" href="img/echo-after.webp"><img src="img/echo-after.webp" alt="Scope capture of the radar's ECHO at the ESP32 pin" width="1600" height="780" loading="lazy" decoding="async"></a><figcaption>HC-SR04 ECHO at the ESP32 pin: 5.05 V before a resistor divider, 3.41 V after, under the 3.6 V limit.</figcaption></figure><figure class="fit"><span class="src">Radar test</span><a class="zoom" href="img/rail-dip.webp"><img src="img/rail-dip.webp" alt="Scope capture of the 5 V rail under servo load" width="1600" height="804" loading="lazy" decoding="async"></a><figcaption>5 V rail under servo load: 5.12 V average, 4.93 V minimum, against a 4.75 V USB limit.</figcaption></figure><figure class="fit"><span class="src">Radar test</span><a class="zoom" href="img/servo-pwm-90.webp"><img src="img/servo-pwm-90.webp" alt="Scope capture of the servo PWM signal at 90 degrees" width="1600" height="800" loading="lazy" decoding="async"></a><figcaption>Servo PWM at 90°: 1445 µs measured vs. 1450 µs expected, 20.000 ms period.</figcaption></figure><figure class="fit"><span class="src">Circuits lab · 2CI4</span><a class="zoom" href="img/ad3-xy.webp"><img src="img/ad3-xy.webp" alt="XY plot of current against voltage for a resistor" width="906" height="1541" loading="lazy" decoding="async"></a><figcaption>XY plot of resistor current against voltage over a 2.5 to 5 V sweep. The slope gives R ≈ 327 Ω against a 330 Ω part (0.8%).</figcaption></figure><figure><span class="src">Logic lab · 2DI4</span><a class="zoom" href="img/scope-cursor.webp"><img src="img/scope-cursor.webp" alt="Keysight oscilloscope with two waveforms and time cursors" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>Keysight DSOX2002A in the logic lab: two channels timed with cursors (ΔX = 4.90 µs).</figcaption></figure><figure class="fit"><span class="src">Circuits lab · 2CI4</span><a class="zoom" href="img/rlc-over.webp"><img src="img/rlc-over.webp" alt="AD3 capture of an overdamped RLC step response" width="1600" height="770" loading="lazy" decoding="async"></a><figcaption>Series RLC (1.5 mH, 10 nF) with R = 3 kΩ, so ζ = 3.87: the capacitor voltage settles in about 150 µs with no overshoot, matching the PSpice prediction.</figcaption></figure><figure class="fit"><span class="src">Circuits lab · 2CI4</span><a class="zoom" href="img/rlc-under.webp"><img src="img/rlc-under.webp" alt="AD3 capture of an underdamped RLC step response ringing around 5 V" width="1600" height="770" loading="lazy" decoding="async"></a><figcaption>Same circuit with R = 100 Ω (ζ = 0.129): it overshoots to about 8 V and rings. The ringing dies out a little faster than in PSpice because the inductor’s winding resistance adds to R.</figcaption></figure><figure class="fit"><span class="src">Circuits lab · 2CI4</span><a class="zoom" href="img/rlc-crit.webp"><img src="img/rlc-crit.webp" alt="AD3 capture of a near-critically damped RLC step response" width="1600" height="770" loading="lazy" decoding="async"></a><figcaption>Critical damping needs R = 774.6 Ω. I built 766.7 Ω from stock parts, (1 k + 1 k) ∥ 1 k + 100 Ω, for ζ ≈ 0.99: the fastest edge with no overshoot, about 30 µs.</figcaption></figure><figure class="fit wide"><span class="src">Radar test</span><a class="zoom" href="img/trig-width.webp"><img src="img/trig-width-band.webp" alt="Logic analyzer capture of the TRIG pulse" width="1600" height="169" loading="lazy" decoding="async"></a><figcaption>AD3 logic analyzer at 1 MHz: TRIG high for ~12.7 µs against the 10 µs datasheet minimum.</figcaption></figure></div>
       </div>
     </div>
     <div class="f-open" id="f-logic" hidden>
@@ -1301,7 +1314,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
 <section id="education">
   <div class="wrap">
     <div class="sec-head sx">
-      <h2>Education<span class="f1"> // Qualifying</span></h2>
+      <h2>Education<span class="f1">Qualifying</span></h2>
       <div class="tag">Sep 2025 – Apr 2029 (expected)</div>
     </div>
     <article class="edu sx">
@@ -1360,7 +1373,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
 <section id="offtrack">
   <div class="wrap">
     <div class="sec-head sx">
-      <h2>About<span class="f1"> // Off Track</span></h2>
+      <h2>About<span class="f1">Off track</span></h2>
       <div class="tag">Driver profile</div>
     </div>
     <div class="two">
@@ -1382,7 +1395,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
 <section id="contact">
   <div class="wrap">
     <div class="sec-head sx">
-      <h2>Contact<span class="f1"> // Team radio</span></h2>
+      <h2>Contact<span class="f1">Team radio</span></h2>
       <div class="tag">Radio the pit wall</div>
     </div>
     <article class="edu contact-card sx">
@@ -1412,7 +1425,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
     <span>© 2026 Gurnit Chopra</span>
     <span>Chassis GC-26</span>
     <span>Built from scratch, no template</span>
-    <span>Last updated <time datetime="2026-11-23">Nov 23, 2026</time></span>
+    <span>Last updated <time datetime="2026-11-25">Nov 25, 2026</time></span>
     <span><a class="foot-x" href="./">Recruiter version →</a></span>
   </div>
 </footer>
@@ -2313,7 +2326,7 @@ a.marque:hover .mq-g{box-shadow:0 0 0 1px var(--amber)}
   var $ = function(id){ return document.getElementById(id); };
   function fillPit(i){
     var c = CARS[i]; current = i;
-    $("pitLbl").textContent = "Pit board  //  car " + (i+1) + " of " + CARS.length;
+    $("pitLbl").textContent = "Pit board · Car " + (i+1) + " of " + CARS.length;
     $("pitPos").textContent = "P" + (i+1);
     $("pitTitle").textContent = c.name;
     $("pitYr").textContent = c.yr;
